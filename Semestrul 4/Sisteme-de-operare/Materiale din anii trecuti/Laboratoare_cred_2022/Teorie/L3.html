@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+
+<body>
+
+    <div class="no-overflow"><span class="filter_mathjaxloader_equation">
+            <h3>Expresii regulate</h3>
+            <p style="text-align: justify;">Expresiile regulate sunt niște șiruri de caractere ce reprezintă șabloane
+                sau tipare (<i>pattern</i> în limba engleză). Ele se construiesc pe baza unei gramatici, la fel ca și un
+                limbaj de programare. Aceste șabloane sunt folosite pentru
+                "recunoașterea" și manipularea unor șiruri de caractere. Analog cu expresiile aritmetice, o expresie
+                regulată este construită prin combinarea unor expresii mai mici cu
+                ajutorul unor operatori.<br></p>
+            <p>O expresie regulată are 3 tipuri de componente principale:</p>
+            <ul>
+                <li>ancore (<i>anchors</i>) - folosite pentru a preciza poziționarea tiparelor relativ la textul
+                    analizat</li>
+                <li>seturi de caractere (character sets) - simboluri ce se potrivesc cu una sau mai multe caractere din
+                    text<br></li>
+                <li>modificatori (modifiers) - permit introducerea de repetiții în tipare<br></li>
+            </ul>
+            <h4><br></h4>
+            <h4>Ancore</h4>
+            <p style="text-align: justify;">Majoritatea comenzilor de procesare de text lucrează la nivelul liniilor.
+                Prin urmare, metode de a referi începutul, respectiv finalul de linie devin utile în cazul expresiilor
+                regulate. Pentru a căuta un anumit tipar la începutul liniei, se poate folosi caracterul <b>'^'</b>.
+                Pentru a căuta anumite informații la finalul liniei, ne putem folosi de simbolul <b>'$'.</b><b> </b><br>
+            </p>
+            <p><b>Exemplul 1:</b></p>
+            <p></p>
+            <pre>^turing$</pre>se va potrivi doar cu șirul "turing" (nu și cu "featuring" sau "turing ").<br>
+            <p></p>
+            <p></p>
+            <p><b>Exemplul 2:</b></p>
+            <pre>^joaca</pre>se va potrivi cu șirul "joaca de copil", dar nu și cu "se joaca" sau "jocuri".<p></p>
+            <p><br></p>
+            <h4>Seturi de caractere<br></h4>
+            <p></p>
+            <p style="text-align: justify;">
+                Punctul (<b>.</b>) se potrivește cu orice caracter, unul singur (mai puțin caracterul <i>newline</i>, de
+                obicei).
+                Să începem cu un exemplu simplu:</p>
+            <pre>a.z</pre>
+            <div style="text-align: justify;">Această expresie regulată se potrivește cu orice șir de caractere ce
+                conține literele 'a' și 'z' între care se găsește
+                orice caracter - dar unul singur (cu excepția caracterului newline,
+                de obicei), cum ar fi: "<i>axz</i>", "<i>aaz</i>", "<i>barza</i>", dar nu "<i>abcz</i>".<br></div>
+            <p></p>
+            <p style="text-align: justify;">Cele mai simple expresii regulate sunt cele care
+                "se potrivesc" cu un singur caracter: majoritatea caracterelor (toate
+                literele și cifrele) se potrivesc cu ele însele. Alte caractere însă au
+                semnificație specială, și dacă dorim ca expresia regulată să se
+                potrivească cu acel caracter, trebuie să îl cităm (<i>quote</i> în limba engleză). Aceasta se poate
+                realiza prin plasarea unui <i>backslash</i>
+                (<b>'\'</b>) în fața caracterului respectiv. Expresiile regulate mai
+                complexe se vor forma fie prin concatenare (scriere una după alta), fie
+                cu ajutorul operatorilor ce vor fi descriși mai jos.</p>
+            <p style="text-align: justify;"><b>Atenție!</b> Prin <b>concatenarea </b>a două expresii regulate rezultă
+                o expresie regulată ce se va potrivi cu șiruri de caractere ce conțin
+                două subșiruri adiacente ce se vor potrivi cu prima respectiv a doua
+                expresie regulată.<br></p>
+            <p></p>
+            <p style="text-align: justify;">
+                O altă construcție care potrivește un singur caracter este o listă de
+                caractere închise între paranteze drepte <b>[ ... ]</b>. Această expresie se va potrivi
+                cu oricare din caracterele din listă. Astfel, expresia regulată:
+            </p>
+            <pre>compl[ei]ment</pre>
+            <p></p>
+            <p style="text-align: justify;">se va potrivi cu oricare din șirurile "<i>complement</i>",
+                "<i>compliment</i>" sau
+                "<i>mulțumesc pentru complimentul dumneavoastră</i>". Dacă o construcție cu
+                paranteze drepte începe cu un <b><b>'</b>^</b><b>'</b>, atunci ea se va potrivi cu orice caracter ce
+                <b>nu</b> este între paranteze. De <b>exemplu</b>:<br></p>
+            <pre>3[^6890] <br></pre>
+            <p style="text-align: justify;">reprezintă o expresie regulată ce se potrivește cu orice șir ce conține
+                cifra 3 și nu conține pe poziția următoare una din cifrele 6, 8, 9 sau 0
+                (<i>atenție</i>: dacă în șirul căruia i se aplică expresia regulată nu conține
+                după 3 nici un alt caracter, expresia nu se va potrivi!). De asemenea
+                se pot specifica intervale întregi (considerând ordinea ASCII a
+                caracterelor) cu ajutorul <b>cratimei </b><b>'-</b><b>'</b>. De <b>exemplu</b>:<br></p>
+            <pre>[A-Za-z] <br></pre>
+            <p>reprezintă orice literă, mică sau mare.<br></p>
+            <p style="text-align: justify;"><b>Atenție!</b> Caracterele care nu se potrivesc cu ele însele și
+                de care aminteam mai sus sunt metacaractere și operatori. O parte dintre
+                ele, printre cele mai des utilizate și implementate în diversele
+                variante de expresii regulate le vom descrie mai jos, alături de alte
+                construcții.<br></p>
+            <p><br></p>
+            <h4>Modificatori<br></h4>
+            <p></p>
+            <p style="text-align: justify;">
+                Sunt definiți o serie de operatori pentru a specifica repetițiile. Ei se
+                aplică în dreapta unei expresii regulate, făcând-o să se potrivească repetitiv:
+            </p>
+            <table>
+                <tbody>
+                    <tr>
+                        <th>Operator</th>
+                        <th>Modificare adusă</th>
+                    </tr>
+                    <tr>
+                        <td><b>*</b></td>
+                        <td>Potrivește de <b>0</b> <i>sau </i><b>mai multe</b> ori</td>
+                    </tr>
+                    <tr>
+                        <td><b>+</b></td>
+                        <td>Potrivește de <b>1</b> <i>sau </i><b>mai multe </b>ori</td>
+                    </tr>
+                    <tr>
+                        <td><b>?</b></td>
+                        <td>Potrivește de<b> 0</b> <i>sau </i><b>1</b> ori</td>
+                    </tr>
+                </tbody>
+            </table><br>
+            <p></p>
+            <p style="text-align: justify;">Parantezele rotunde <b>( ... )</b> se folosesc pentru a grupa expresiile
+                regulate. Astfel, dacă scriem: <br></p>
+            <pre>ab* <br></pre>
+            <p style="text-align: justify;">aceasta semnifică un 'a' urmat de oricâte 'b'-uri (inclusiv nici unul); dar
+                daca scriem</p>
+            <pre>(ab)* <br></pre>
+            <p style="text-align: justify;">operatorul * se aplică grupului, semnificația fiind 0 sau mai multe
+                repetiții ale șirului de caractere "ab". <br></p>
+            <p style="text-align: justify;"><br></p>
+            <p style="text-align: justify;">Acoladele (pentru unele versiuni de interpretoare trebuie să fie precedate
+                de backslash) <b>{ ..., ... }</b> ne permit să specificăm un număr minim, respectiv maxim de repetiții
+                pentru un tipar. De <b>exemplu:</b></p>
+            <p style="text-align: justify;"></p>
+            <div>
+                <div>
+                    <pre>[a-zA-Z]{4,8}</pre>
+                </div>
+            </div>tiparul de mai sus va verifica dacă există cel puțin 4 litere mici sau mari, dar maxim 8 astfel de
+            caractere. Din tipar poate lipsi limita minimă sau cea maximă; nu este obligatoriu să se specifice
+            ambele.<br>
+            <p></p>
+            <p><br></p>
+            <p style="text-align: justify;">
+                Un alt operator util este <b><b>'</b>|<b>'</b></b>, operatorul de <b>alternare</b>. Rezultatul lui este
+                că se va potrivi fie expresia regulata din stânga, fie cea din dreapta:
+            </p>
+            <pre>ion (pozitiv|negativ)</pre>
+            se va potrivi fie cu "ion pozitiv" fie cu "ion negativ".
+            <p><br>
+            </p>
+            <p style="text-align: justify;">Pentru mai multe detalii, consultați paginile de manual <b>grep(1)</b> și
+                <b>perlre(1)</b>.
+                Ultima prezintă expresiile regulate implementate în limbajul perl, și
+                nu vor fi întotdeauna compatibile cu comenzi precum grep și sed. În
+                schimb găsiți acolo o descriere mai amănunțită.
+
+                Expresiile regulate pot fi folosite și din limbaje de programare precum
+                C, vedeți <b>regex(3)</b> și <b>regex(7)</b>.
+
+            </p><br>
+            <h3>Filtre</h3>
+            <p style="text-align: justify;">Filtrele sunt comenzi care citesc rând cu rând
+                fișierul standard de intrare și afișează la ieșirea standard integral sau doar în parte rândurile
+                citite, modificate sau nu, în funcție de semantica lor. Operația
+                continuă până la întâlnirea marcajului de sfârșit de fișier. Aceste
+                comenzi se înlănțuie des cu ajutorul pipe-urilor, pentru a le conjuga
+                efectul. În sistemele UNIX există o serie de comenzi care se comportă ca
+                filtre, multe dintre ele făcând parte din <i>standardul POSIX</i>. Majoritatea
+                filtrelor pot însă citi date și din fișiere specificate în linia de
+                comandă. <br></p>
+            <p style="text-align: justify;">În continuare vom da o scurtă descriere pentru câteva filtre mai des
+                folosite: <br></p>
+            <ul>
+                <li><b><i>cat</i></b><br>
+                    <div style="text-align: justify;">
+                        scrie fiecare linie de la intrarea standard (sau din fișiere ale căror
+                        nume sunt date ca argumente) la ieșirea standard, fără modificări.</div>
+                </li>
+                <li><b><i>head</i></b><br>
+                    <div style="text-align: justify;"> scrie primele maxim 10 linii (10 este
+                        implicit; se poate specifica numărul de linii cu argumentul <i>-n</i>, sau se
+                        poate preciza un număr de octeți cu argumentul <i>-c</i>) de la intrare către
+                        ieșirea standard.
+                    </div>
+                </li>
+                <li><b><i>tail</i></b><br>
+                    similară cu comanda <b><i>head</i></b>, scrie ultimele 10 linii.
+                    <br>
+                    <div style="text-align: justify;"><b>Observație: </b>Această comandă este obligată să citească
+                        întreg
+                        fișierul înainte de a scrie ceva la ieșire, astfel fiind un impediment în pipeline-izare. Se
+                        recomandă să fie folosită ultima, dacă este
+                        posibil, într-un lanț de comenzi.
+                    </div>
+                </li>
+                <li><b><i>sort</i></b><br>
+                    <div style="text-align: justify;">
+                        afișează liniile citite în mod ordonat lexicografic, <i>implicit </i>ordinea
+                        fiind <i>crescătoare</i>. Comanda are o serie de argumente utile. Citiți pagina
+                        de manual <b>sort(1)</b>!
+                    </div>
+                </li>
+                <li><b><i>uniq</i></b><br>
+                    <div style="text-align: justify;">
+                        elimină liniile succesive identice dintre cele de la intrarea standard.
+                        <b>Atenție</b>: două linii identice, dar care nu sunt citite una după alta nu
+                        vor fi depistate!
+                    </div>
+                </li>
+                <li><b><i>cut</i></b><br>
+                    <div style="text-align: justify;">
+                        tipărește porțiuni din liniile citite. Aceste secțiuni pot fi intervale
+                        de octeți, caractere sau câmpuri, în funcție de unul din argumentele <i>-b</i>, <i>-c</i>
+                        respectiv <i>-f</i>. În ultimul caz se vor tipări acele câmpuri delimitate de
+                        un caracter (<i>implicit TAB</i>, se poate preciza cu argumentul <i>-d</i>) care sunt
+                        specificate folosind argumentul -f în forma<i>: lista[,lista]....</i> O <i>listă</i>
+                        poate fi un simplu număr reprezentând câmpul dorit, sau poate fi de
+                        forma <i>N-M</i>, unde <i>N </i>și <i>M </i>sunt numere reprezentând primul, respectiv ultimul
+                        câmp ce trebuie afișat. Sau N sau M poate lipsi, în locul lor
+                        subînțelegându-se primul, respectiv ultimul câmp din linie. Aceeași
+                        notație folosită cu <i>-b</i> sau <i>-c</i> seminifică intervalul de octeți sau
+                        caractere ce se vor afișa. <b>Exemplu:
+                        </b></div>
+                    <pre>ls -l | cut -f 1 -d ' '
+            </pre>
+                    va tipari doar lista de permisiuni a fișierelor din directorul curent.
+
+                </li>
+                <li><b><i>tr</i></b><br>
+                    <div style="text-align: justify;">
+                        traduce (<i>translate</i>) sau șterge caractere. <b><i>tr</i></b> implicit
+                        traduce, caz în care trebuie date ca argumente două șiruri de
+                        caractere reprezentând două seturi. Caracterele din primul set vor fi
+                        traduse în caracterele din al doilea. Dacă numărul de caractere din
+                        seturile date nu este același, caracterele excedentare dintr-al doilea se
+                        ignoră dacă acesta e mai lung, sau se repetă ultimul caracter din al
+                        doilea set (dacă acesta e mai scurt) până la lungimea primului set. În
+                        cazul argumentului <i>-d</i> se dă un singur set de caractere, care vor fi eliminate la scrierea
+                        la ieșirea standard. Argumentul <i>-s</i>
+                        (<i>squeeze</i>) realizează "contracția" caracterelor din setul dat ca
+                        parametru: în cazul în care la intrare filtrul citește două sau mai
+                        multe caractere identice, din set, va fi tipărit la ieșire doar unul
+                        singur. <b>Exemplu</b><b>:
+                        </b></div>
+                    <pre>ps -x | tr -s ' ' | cut -f 2,6 -d ' '
+            </pre>
+                    <div style="text-align: justify;">
+                        Comanda <i>ps -x</i> afișează lista proceselor utilizatorului care o invocă. Cu ajutorul lui
+                        <i>tr -s ' '</i> se șterg spațiile dintre coloanele afișate, iar <i>cut -f 2,6 -d ' '</i>
+                        face să apară la ieșire doar coloana corespunzătoare identificatorilor
+                        de proces (coloana 2) și cea a numelui comenzii corespunzătoare
+                        procesului (coloana 6).
+
+                    </div>
+                </li>
+                <li><b><i>grep</i></b><br>
+                    <div style="text-align: justify;">
+                        este un filtru mai complex. Are cel puțin un parametru, care va fi
+                        interpretat ca expresie regulată. Liniile citite de la intrarea standard
+                        (sau din fișierele date ca parametri) care se potrivesc cu expresia
+                        regulată dată vor fi afișate. Există o serie de opțiuni care modifică modul de afișare. O parte
+                        le gaăsiți în lista de mai jos:
+                    </div>
+                    <ul>
+                        <li style="text-align: justify;"><i>-i</i> face comanda insensibila la diferențele dintre
+                            literele mari și cele mici
+                        </li>
+                        <li style="text-align: justify;"><i>-v</i> tipărește liniile cu care tiparul dat <i>nu</i> se
+                            potrivește
+                        </li>
+                        <li style="text-align: justify;"><i>-n</i> tipărește numărul liniei urmat de caracterul <b>:</b>
+                            urmat de linia în sine
+                        </li>
+                        <li style="text-align: justify;"><i>-E</i> forțează folosirea expresiilor regulate extinse (în
+                            mod normal se folosesc niște expresii regulate cu sintaxa foarte
+                            simplă); există comanda <b>egrep</b> care e echivalentă cu <b>grep -E</b>
+                        </li>
+                        <li><i>-x</i> tipărește doar liniile pentru care tiparul dat se potrivește cu întreaga linie, nu
+                            cu un subșir din aceasta
+                        </li>
+                        <li><i>-c</i> tipărește doar numărul de linii ce s-ar fi afișat în mod normal
+                        </li>
+                    </ul><b>
+
+                        Exemplu:
+                    </b>
+                    <pre>ps -x | grep lab9</pre>
+                    <div style="text-align: justify;">
+                        Comenzile afișeaza liniile generate de <b>ps</b> corespunzătoare proceselor ce conțin în numele
+                        lor (sau în parametri) șirul "lab9".
+
+                    </div>
+                </li>
+                <li><b><i>tee</i></b><br>
+                    <div style="text-align: justify;">
+                        scrie la ieșirea standard ceea ce citește de la intrarea standard, în
+                        plus scrie și în fișierele ale căror nume sunt date ca parametri.
+
+                    </div>
+                </li>
+                <li><b><i>wc</i></b><br>
+                    <div style="text-align: justify;">
+                        afișează numărul de caractere (parametrul <i>-m</i>), de octeți (<i>-c</i>), de linii
+                        (<i>-l</i>) sau de cuvinte (<i>-w</i>), sau lungimea celei mai lungi linii întâlnite (parametrul
+                        <i>-L</i>). De <b>exemplu:
+                        </b></div>
+                    <pre>cat /etc/passwd | wc -l</pre>
+                    va afișa numărul de intrări (linii) din fișierul de parole.
+
+                </li>
+                <li><b><i>xargs</i></b><br>
+                    <div style="text-align: justify;">
+                        citește argumente de la intrarea standard, separate prin spații sau caractere <i>newline</i> și
+                        execută comanda dată ca parametru (sau <b>echo</b>
+                        implicit) cu o listă de argumente specificate ca parametri urmate de
+                        argumentele citite de la intrare. Liniile goale vor fi ignorate.
+                        Parametrul <i>-i</i><i> șir</i> va modifica comportamentul lui xargs astfel încât
+                        comanda dată se va executa cu argumentele precizate ca parametri în care
+                        se înlocuiește șirul <i>șir</i> cu argumentele citite de la intrarea standard. <b>Exemplu:
+                        </b></div>
+                    <pre>echo "1 2 3" | xargs mkdir -v
+            </pre>
+                    <div style="text-align: justify;">
+                        va lansa de trei ori comanda mkdir, cu parametrii -v și câte una din cifrele 1, 2 și 3.
+
+                    </div>
+                </li>
+            </ul>
+            <p><br></p>
+            <h3>Comanda sed<br></h3>
+            <div style="text-align: justify;">Comanda <b>sed</b> derivă din editorul <b>ed</b>
+                care este orientat pe linie (spre deosebire de chiar cele mai simple
+                editoare actuale care sunt orientate pe ecran). Spre deosebire de acesta
+                din urmă, sed nu este interactiv, ci aplică tuturor sau unui grup de
+                linii din fișierul prelucrat (care poate fi intrarea standard dacă nu se
+                specifică un nume de fișier ca parametru) o anumită comandă. Sintaxa
+                (simplificată) este:<br></div>
+            <div style="text-align: justify;"><br></div>
+            <div style="text-align: justify;">
+                <pre>sed [-n] [-e script] [-f script-file] [script-if-no-other-script] [file...] </pre>
+            </div>
+            <div style="text-align: justify;">
+                <p>
+
+                    Optiunile <i>-e</i> (după care urmează o comandă) și <i>-f</i> (dupa
+                    care urmează un nume de fișier care conține câte o comandă pe fiecare
+                    rând) adaugă comenzi în lista celor ce vor fi aplicate asupra liniilor
+                    de text. Dacă nici -e și nici -f nu sunt găsite, primul parametru care
+                    nu este opțiune (nu începe cu cratima) este considerat comandă. Dacă după ce s-au prelucrat
+                    parametrii așa cum am descris mai rămân și alți
+                    parametri în linia de comandă, aceștia se vor considera ca nume de
+                    fișiere care trebuie procesate (în care caz sed nu se mai comportă ca
+                    filtru).</p>
+                <p></p>
+                <p>
+                    Sintaxa comenzilor <b>sed</b> este destul de complexă. Descrierea
+                    completă o găsiți în pagina <i>texinfo </i>a comenzii sed (în pagina de manual
+                    descrierea nu este foarte clară) pe care o puteți citi cu comanda <b>info sed</b>. În general o
+                    comandă <b>sed</b>
+                    este compusă dintr-o adresă sau interval de adrese de linii, urmat de un
+                    caracter ce reprezintă o acțiune de efectuat, urmat eventual de un șir
+                    de caractere a cărui semnificație depinde de acțiune.
+                </p>
+                <p>
+                    Intervalele de adrese se specifică sub forma a doua adrese despărțite
+                    prin virgulă. O adresă poate fi un număr și atunci reprezintă numărul
+                    liniei, sau o expresie regulată încadrată de caractere<b> '/'</b>, caz în care
+                    reprezintă prima linie (începând cu linia curentă) ce corespunde (se
+                    potrivește) expresiei regulate. O adresă mai poate fi și caracterul <b>$</b>,
+                    care semnifică "ultima linie a ultimului fișier de intrare".
+                </p>
+                <p><br>
+                </p>
+                <p>Acțiunile corespunzătoare comenzilor nu se vor aplica, în cazul în care
+                    avem adrese, decât liniilor corespunzătoare adresei, respectiv liniilor
+                    cuprinse în intervalul dat.
+
+                    Cea mai des folosită acțiune (sau comanda) este cea de <b>substituție</b>. Ea
+                    are forma:
+                </p>
+                <pre>s/regexp/replacement/flags
+            </pre>
+                unde <i>regexp</i> este o expresie regulată, <i>replacement</i> este un șir de caractere cu care se va
+                înlocui acea parte a liniei prelucrate care corespunde expresiei regulate, iar <i>flags</i> este o listă
+                de zero sau mai multe caractere dintre următoarele:
+                <ul>
+                    <li><i>g</i> - înlocuiește toate porțiunile care se potrivesc cu <i>regexp</i>, nu doar prima astfel
+                        de porțiune.
+                    </li>
+                    <li><i>p</i> - dacă substituția a fost făcută, tipărește linia corespunzător modificată (utilă cu
+                        argumentul <i>-n</i>).
+                    </li>
+                    <li><i>numărul N</i> - înlocuieste doar a N-a potrivire a expresiei regulate.
+                    </li>
+                </ul>De <b>exemplu:</b>
+                <p></p>
+                <pre>sed 's/abc/def/g' &lt;fisier.intrare &gt;fisier.iesire</pre>
+                <p>va prelua informațiile din fișierul <i>fisier.intrare, </i>va înlocui fiecare apariție a secvenței de
+                    caractere "abc", cu "def", iar la final va scrie rezultatele în fișierul <i>fisier.iesire</i>.<br>
+                </p>
+            </div>
+            <div style="text-align: justify;">
+                <p><b><br></b></p>
+                <p><b>Atenție!</b> Forwardslash-ul <b>'/' </b>are o semnificație specială, prin urmare dacă trebuie
+                    introdus în construcția lui sed avem 2 alternative: îl precedăm cu un backslash sau recurgem la o a
+                    doua formă a lui sed pentru subtituții. De <b>exemplu</b>, dacă dorim să filtrăm după
+                    <i>/usr/local</i> pe o listă de path-uri și să înlocuim <i>prima</i> apariție cu<i> /bin</i> putem
+                    folosi:</p>
+                <pre>sed 's<b>/</b><span class="" style="color: rgb(125, 159, 211);">\/usr\/local</span><b><span class="" style="color: rgb(51, 51, 51);">/</span></b><span class="" style="color: rgb(152, 202, 62);">\/bin</span><b>/</b>' &lt;fisier.intrare &gt;fisier.iesire<br></pre>
+            </div>
+            <p>sau apelăm la a doua formă, având ca și separator '<b>|</b>':</p>
+            <p></p>
+            <p></p>
+            <pre>sed 's<b>|</b><span class="" style="color: rgb(125, 159, 211);">/usr/local</span><b>|</b><span class="" style="color: rgb(152, 202, 62);">/bin</span><b>|</b>' &lt;fisier.intrare &gt;fisier.iesire</pre>
+            <p><br></p>
+            <p>Simbolul <b>'&amp;'</b> ne permite să <i>referim </i>porțiunea de text ce s-a potrivit cu expresia
+                regulată din câmpul 2. De <b>exemplu</b>, dacă dorim să găsim un prenume pe o linie și să îi adăugam un
+                ! la final, putem să folosim:</p>
+            <p></p>
+            <div>
+                <div>
+                    <pre>sed 's/<span class="" style="color: rgb(125, 159, 211);">[A-Z][a-z]*</span>/<span class="" style="color: rgb(152, 202, 62);">&amp;!</span>/' &lt;fisier.intrare &gt;fisier.iesire</pre>
+                </div>
+            </div>
+            <p></p>
+            <p><br></p>
+            <p><b>Atenție! </b>Pentru a putea folosi operatorii de regex din setul <i>extins</i>, este nevoie să
+                specificăm <i>opțiunea -r </i>imediat după cuvântul cheie <i>sed</i>.</p>
+            <p><br></p>
+            <p>Dacă dorim să ținem minte mai multe porțiuni de text ce se potrivesc cu anumite tipare, putem include
+                tiparele între <b><span class="nolink"><span class="MathJax_Preview"
+                            style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-1-Frame"
+                            tabindex="0" style="position: relative;"
+                            data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mo>&amp;lt;</mo><mrow class=&quot;MJX-TeXAtom-ORD&quot;><mo>/</mo></mrow><mi>b</mi><mo>&amp;gt;</mo><mrow class=&quot;MJX-TeXAtom-ORD&quot;><mo>&amp;#x219;</mo></mrow><mi>i</mi><mo>&amp;lt;</mo><mi>b</mi><mo>&amp;gt;</mo></math>"
+                            role="presentation">
+                            <nobr aria-hidden="true"><span class="math" id="MathJax-Span-1"
+                                    style="width: 7.94em; display: inline-block;"><span
+                                        style="display: inline-block; position: relative; width: 6.889em; height: 0px; font-size: 115%;"><span
+                                            style="position: absolute; clip: rect(1.345em, 1006.83em, 2.746em, -999.997em); top: -2.331em; left: 0em;"><span
+                                                class="mrow" id="MathJax-Span-2"><span class="mo" id="MathJax-Span-3"
+                                                    style="font-family: MathJax_Main;">&lt;</span><span class="texatom"
+                                                    id="MathJax-Span-4" style="padding-left: 0.295em;"><span
+                                                        class="mrow" id="MathJax-Span-5"><span class="mo"
+                                                            id="MathJax-Span-6"
+                                                            style="font-family: MathJax_Main;">/</span></span></span><span
+                                                    class="mi" id="MathJax-Span-7"
+                                                    style="font-family: MathJax_Math-italic;">b</span><span class="mo"
+                                                    id="MathJax-Span-8"
+                                                    style="font-family: MathJax_Main; padding-left: 0.295em;">&gt;</span><span
+                                                    class="texatom" id="MathJax-Span-9"
+                                                    style="padding-left: 0.295em;"><span class="mrow"
+                                                        id="MathJax-Span-10"><span class="mo" id="MathJax-Span-11"><span
+                                                                style="font-family: STIXGeneral, &quot;Arial Unicode MS&quot;, serif; font-size: 87%; font-style: normal; font-weight: normal;">ș</span></span></span></span><span
+                                                    class="mi" id="MathJax-Span-12"
+                                                    style="font-family: MathJax_Math-italic;">i</span><span class="mo"
+                                                    id="MathJax-Span-13"
+                                                    style="font-family: MathJax_Main; padding-left: 0.295em;">&lt;</span><span
+                                                    class="mi" id="MathJax-Span-14"
+                                                    style="font-family: MathJax_Math-italic; padding-left: 0.295em;">b</span><span
+                                                    class="mo" id="MathJax-Span-15"
+                                                    style="font-family: MathJax_Main; padding-left: 0.295em;">&gt;</span></span><span
+                                                style="display: inline-block; width: 0px; height: 2.337em;"></span></span></span><span
+                                        style="display: inline-block; overflow: hidden; vertical-align: -0.332em; border-left: 0px solid; width: 0px; height: 1.346em;"></span></span>
+                            </nobr><span class="MJX_Assistive_MathML" role="presentation"><math
+                                    xmlns="http://www.w3.org/1998/Math/MathML">
+                                    <mo>&lt;</mo>
+                                    <mrow class="MJX-TeXAtom-ORD">
+                                        <mo>/</mo>
+                                    </mrow>
+                                    <mi>b</mi>
+                                    <mo>&gt;</mo>
+                                    <mrow class="MJX-TeXAtom-ORD">
+                                        <mo>ș</mo>
+                                    </mrow>
+                                    <mi>i</mi>
+                                    <mo>&lt;</mo>
+                                    <mi>b</mi>
+                                    <mo>&gt;</mo>
+                                </math></span>
+                        </span>
+                        <script type="math/tex" id="MathJax-Element-1"></b> și <b></script></span></b> în câmpul 2, și
+                să le referim în câmpul 3 folosind <b>\1</b>, <b>\2</b>, <b>\3</b>, etc. în ordinea în care apar. De
+                <b>exemplu</b>, dacă dorim să inversăm 2 cuvinte, putem folosi:</p>
+            <p></p>
+            <div>
+                <div>
+                    <pre>echo "lorem ipsum" | sed 's<b>/</b><span class="" style="color: rgb(125, 159, 211);"><span class="nolink"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-2-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mo stretchy=&quot;false&quot;>[</mo><mi>a</mi><mo>&amp;#x2212;</mo><mi>z</mi><mo stretchy=&quot;false&quot;>]</mo><mo>&amp;#x2217;</mo></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-16" style="width: 3.779em; display: inline-block;"><span style="display: inline-block; position: relative; width: 3.307em; height: 0px; font-size: 113%;"><span style="position: absolute; clip: rect(1.242em, 1003.25em, 2.599em, -999.997em); top: -2.18em; left: 0em;"><span class="mrow" id="MathJax-Span-17"><span class="mo" id="MathJax-Span-18" style="font-family: MathJax_Main;">[</span><span class="mi" id="MathJax-Span-19" style="font-family: MathJax_Math-italic;">a</span><span class="mo" id="MathJax-Span-20" style="font-family: MathJax_Main; padding-left: 0.239em;">−</span><span class="mi" id="MathJax-Span-21" style="font-family: MathJax_Math-italic; padding-left: 0.239em;">z<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span><span class="mo" id="MathJax-Span-22" style="font-family: MathJax_Main;">]</span><span class="mo" id="MathJax-Span-23" style="font-family: MathJax_Main;">∗</span></span><span style="display: inline-block; width: 0px; height: 2.186em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.33em; border-left: 0px solid; width: 0px; height: 1.27em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo stretchy="false">[</mo><mi>a</mi><mo>−</mo><mi>z</mi><mo stretchy="false">]</mo><mo>∗</mo></math></span></span><script type="math/tex" id="MathJax-Element-2">[a-z]*</script></span></span> <span class="" style="color: rgb(125, 159, 211);"><span class="nolink"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-3-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mo stretchy=&quot;false&quot;>[</mo><mi>a</mi><mo>&amp;#x2212;</mo><mi>z</mi><mo stretchy=&quot;false&quot;>]</mo><mo>&amp;#x2217;</mo></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-24" style="width: 3.779em; display: inline-block;"><span style="display: inline-block; position: relative; width: 3.307em; height: 0px; font-size: 113%;"><span style="position: absolute; clip: rect(1.242em, 1003.25em, 2.599em, -999.997em); top: -2.18em; left: 0em;"><span class="mrow" id="MathJax-Span-25"><span class="mo" id="MathJax-Span-26" style="font-family: MathJax_Main;">[</span><span class="mi" id="MathJax-Span-27" style="font-family: MathJax_Math-italic;">a</span><span class="mo" id="MathJax-Span-28" style="font-family: MathJax_Main; padding-left: 0.239em;">−</span><span class="mi" id="MathJax-Span-29" style="font-family: MathJax_Math-italic; padding-left: 0.239em;">z<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span><span class="mo" id="MathJax-Span-30" style="font-family: MathJax_Main;">]</span><span class="mo" id="MathJax-Span-31" style="font-family: MathJax_Main;">∗</span></span><span style="display: inline-block; width: 0px; height: 2.186em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.33em; border-left: 0px solid; width: 0px; height: 1.27em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo stretchy="false">[</mo><mi>a</mi><mo>−</mo><mi>z</mi><mo stretchy="false">]</mo><mo>∗</mo></math></span></span><script type="math/tex" id="MathJax-Element-3">[a-z]*</script></span></span><b>/</b><span class="" style="color: rgb(152, 202, 62);">\2</span> <span class="" style="color: rgb(152, 202, 62);">\1</span><b>/</b>'</pre>
+                </div>
+                <div>
+                    <p>Sau dacă dorim să păstrăm ultimul cuvânt dintr-o propoziție, putem folosi:</p>
+                </div>
+                <div>
+                    <div>
+                        <div>
+                            <pre><div><div><div><div>echo "Lorem ipsum dolor sit amet." | sed 's<b>/</b><span class="" style="color: rgb(125, 159, 211);">[A-Za-z ]* <span class="nolink"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-4-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mo stretchy=&quot;false&quot;>[</mo><mi>a</mi><mo>&amp;#x2212;</mo><mi>z</mi><mo stretchy=&quot;false&quot;>]</mo><mo>&amp;#x2217;</mo></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-32" style="width: 3.779em; display: inline-block;"><span style="display: inline-block; position: relative; width: 3.307em; height: 0px; font-size: 113%;"><span style="position: absolute; clip: rect(1.242em, 1003.25em, 2.599em, -999.997em); top: -2.18em; left: 0em;"><span class="mrow" id="MathJax-Span-33"><span class="mo" id="MathJax-Span-34" style="font-family: MathJax_Main;">[</span><span class="mi" id="MathJax-Span-35" style="font-family: MathJax_Math-italic;">a</span><span class="mo" id="MathJax-Span-36" style="font-family: MathJax_Main; padding-left: 0.239em;">−</span><span class="mi" id="MathJax-Span-37" style="font-family: MathJax_Math-italic; padding-left: 0.239em;">z<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span><span class="mo" id="MathJax-Span-38" style="font-family: MathJax_Main;">]</span><span class="mo" id="MathJax-Span-39" style="font-family: MathJax_Main;">∗</span></span><span style="display: inline-block; width: 0px; height: 2.186em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.33em; border-left: 0px solid; width: 0px; height: 1.27em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo stretchy="false">[</mo><mi>a</mi><mo>−</mo><mi>z</mi><mo stretchy="false">]</mo><mo>∗</mo></math></span></span><script type="math/tex" id="MathJax-Element-4">[a-z]*</script></span>\.</span><b>/</b><span class="" style="color: rgb(152, 202, 62);">\1</span><b>/</b>'</div></div></div></div></pre>
+                        </div>
+                    </div><br>
+                </div>
+                <div><br></div>
+            </div><br>
+            <p></p>
+            <p></p>
+        </span> </div>
+</body>
+
+</html>

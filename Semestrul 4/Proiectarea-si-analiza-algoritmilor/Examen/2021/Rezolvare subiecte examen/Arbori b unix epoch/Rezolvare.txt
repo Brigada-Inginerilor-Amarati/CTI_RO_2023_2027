@@ -1,0 +1,18 @@
+void afisare(Pagina *arbore, int nivel, int vall)
+{
+    int i;
+
+    if (!arbore)
+        return;
+    if(arbore->e[1].cheie>=vall)
+    afisare(arbore->p0, nivel + 1, vall);
+    for (i = 1; i < arbore->m; i++)
+        if(arbore->e[i+1].cheie>=vall)
+        afisare(arbore->e[i].p, nivel + 1,vall);
+    afisare(arbore->e[i].p, nivel + 1,vall);
+
+    for (i = 1; i <= arbore->m; i++)
+        if(arbore->e[i].cheie>vall)
+        printf("%d ", arbore->e[i].cheie);
+    
+}

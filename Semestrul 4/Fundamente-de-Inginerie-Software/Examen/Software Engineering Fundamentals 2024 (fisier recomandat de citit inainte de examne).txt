@@ -1,0 +1,507 @@
+# Rezolvari Examen FIS
+
+### CURS 1
+
+1. Forma reala a curbei ratei defectarii software-ului este datorata faptului ca cerintele nu sunt intelese clar de la bun inceput, ceea ce duce la necesitatea de schimbari continue asupra sistemului.   `9/C1 P36`
+
+    - **FALS.** 
+      Curba reala difera de cea ideala din cauza aparitiei schimbarilor repetate in soft. Schimbarile apar atunci cand se efectueaza lucrari de mentenanta asupra softului sau modificari asupra acestuia.
+      Schimbarile pot aparea chiar daca au fost intelese cerintele perfect initial, deoarece pe parcurs se pot schimba din cerinte, astfel modificandu-se software-ul.
+
+
+2. 50% din timp si costuri ar trebui alocate testarii, dar in multe cazuri procentajul alocat testarii este mai mic. `11/C1 P43`
+   - **ADEVARAT.** 
+     Conform regulilor lui Brooks, testarea ar trebui sa reprezinte 50% din costuri si timp(1/4 alocat testarii componentelor si 1/4 alocat testarii sistemului).
+     In realitate, chiar si acest procent de 50% ajunge sa fie depasit, fiind necesara tot mai multa testare odata cu cresterea complexitatii proiectului.
+     Cu toate acestea, pentru testare de multe ori nu se aloca 50% de la inceput, dar oricum se ajunge eventual sa se utilizeze peste acest procentaj. 
+
+3. Curba reala a evolutiei in timp a ratei de defecte (Failure Rate) diferta fata de cea ideala in principal din cauza lipsei de experienta a programatorilor. `9/C1 P36`
+   - **FALS.** 
+     Curba reala difera de cea ideala din cauza schimbarilor repetate in software.
+      Schimbarile apar fie atunci cand se efectueaza lucrari de mentenanta, fie atunci cand se schimba cerintele, determinand modificari in soft. 
+     Astfel, lipsa de experienta a programatorilor nu este un motiv principal pentru aparitia erorilor in soft.
+
+4. Legile lui Lehman ale evolutiei software-ului nu se aplica la sisteme ale caror cerinte sunt intelese perfect de la bun inceput, pentru ca astfel de sisteme nu au niciun motiv sa evolueze. `10/C1 P38`
+   - **FALS.** 
+     Legile evolutiei software se aplica oricarui sistem, indiferent daca sunt intelese cerintele perfect de la inceput sau nu. 
+     Sistemele software evolueaza datorita schimbarilor care le sunt aduse, determinate fie de mentenanta sau de schimbarea cerintelor.
+
+5. Legile evolutiei software-ului enuntate de Lehman ne spun ca nu exista nicio modalitate de a incetini declinul calitatii software-ului. `10/C1 P38`
+   - **FALS.** 
+     The Law of Declining Quality ne spune ca va scadea calitatea sistemelor, atat timp cat software-ul nu este mentinut si adaptat schimbarilor.
+     Din cele 4 legi rezulta ca putem incetini declinul calitatii software-ului, prin mentenanta continua si adaugare de feature-uri noi pentru a mentine satisfactia userilor.
+
+6. Printr-o proiectare riguroasa, implementarea software-ului poate fi transformata intr-o activitate aproape perfect partitionata. `13/C1 P49`
+   - **FALS.**
+     O proiectare riguroasa ajuta intr-adevar la partitionarea implementarii soft-ului, dar nu poate garanta o partitionare perfecta. 
+     Dezvoltarea unui proiect software in esenta nu este un task care poate fi perfect partitionat, necesitand comunicare si relatii complexe.
+
+7. Curba defectelor poate fi facuta sa tinda in timp spre 0, daca cerintele sunt bine intelese de la inceput si daca se aplica sistematic metodele de testare eficiente. `9/C1 P36`
+   - **FALS.**
+     Chiar daca sunt bine intelese cerintele de la inceput, si se aplica metodele eficiente de testare, din cauza modificarilor repetate, tot vor aparea defecte care trebuiesc rezolvate. 
+     Singurul mod in care curba defectelor ar putea sa tinda spre 0 este un sistem care nu ar mai primi nicio imbunatatire si nu mai sufera nicio schimbare. 
+
+8. Utilizarea eficienta a instrumentelor CASE dedicate programarii poate reduce semnificativ costurile totale ale proiectului, avand in vedere ca, intr-un proiect software, o parte semnificative a costurilor este legata de activitatea de codare. `12/C1 P47`, `7/C1 P28`
+
+   - **FALS.**
+
+     Utilizarea eficienta CASE reduce costurile, dar aceste unelte nu se folosesc exclusiv pentru partea de codare, ci si pentru etapele de specificatii, design, testare si debugging. 
+     De asemenea, o mare parte din costuri se duc pe partea de testare si planificare, nu doar pe partea de codare.
+     Conform Brooks, codarea reprezinta doar 1/6 din intreg procesul de dezvoltare al unui proiect software.
+
+9. Criza software din anii '60 a fost cauzata de hardware-ul insuficient de puternic fata de complexitatea excesiva a software-ului din acel moment. `6/C1 P17`
+   - **FALS.**
+     In anii 60, puterea de procesare a crescut semnificativ si odata cu ea si complexitatea proiectelor software.
+     Asadar, a devenit tot mai greu sa se scrie software care sa fie corect, si verificabil. 
+     Practic, atunci cand computerele nu erau asa puternice, gestionarea programarii lor nu era atat de grea. Odata cu progresul hardware-ului, complexitatea gestionarii proiectelor software a crescut semnificativ.
+     Din aceste motive a fost nevoie de a dezvolta procese pentru a gestiona software-ul. Altfel, programele ar fi devenit tot mai scumpe, ineficiente si pline de erori.
+
+10. Cunoasterea perfecta a limbajului de programare in care se va implementa un proiect de mari dimensiuni este o conditie necesara si suficienta pentru terminarea cu succes a proiectului. `7/C1 P26`
+    - **FALS.**
+      Indiferent de cat de bine stiut este limbajul de programare, acest lucru nu asigura finalizarea cu succes a proiectului. 
+      Exista foarte multe alte elemente care sunt absolut necesare in dezvoltarea unui proiect software, precum planificarea, realizarea designului, testarea riguroasa, etc..
+      Dupa spusele lui Brooks, codarea in sine reprezinta doar 1/6 din procesul de dezvoltarea a unui soft, asadar, desi cunoasterea limbajului este importanta pentru eficienta si viteza, nu este deloc suficienta pentru a aduce proiectul la un bun sfarsit.
+
+11. Intr-un sistem cu o modularitate foarte buna, legea lui Brooks nu se aplica, deoarece construirea sistemului e o activitate perfect partitionata.
+    - **FALS.**
+      Legea lui Brooks ne spune ca nu este eficient sa adaugam mai multi oameni la un proiect aflat in intarziere, deoarece acest lucru va intarzia doar mai mult tot procesul. 
+      Construirea sistemului software nu este o activitate perfect partitionata, fiind necesara comunicarea intre membrii echipei si relatii complexe de management.
+      Acest aspect este atins si in Mythical Man-Month, care ne demonstreaza ca nu putem cuantiza liniar munca intr-un proiect software.
+
+12. Testarea ocupa 25% din costul total al dezvoltarii unui sistem software.
+
+    - **FALS.**
+
+      Conform regulilor lui Brooks de impartire a programului, testarii ar trebui sa i se aloce 50% din costul total alocat dezvoltarii unui proiect software (1/4 se duce pe testarea componentelor si 1/4 pe testarea sistemului). 
+      De multe ori, nu este alocat initial 50% catre testare, ci mai putin, dar ulterior oricum se ajunge sa necesite chiar si peste acest procentaj din resurse.
+
+----
+
+### CURS 2
+
+1. Conceptul de time boxing spune ca sarcinile alocate intr-o anumita iteratie trebuiesc terminate in cadrul iteratiei in cauza.
+   - **FALS.**
+     Conceptul de time boxing presupune alocarea unei perioade fixe pentru fiecare iteratie. 
+     Acest concept aloca un timp pentru fiecare task, dar nu obliga terminarea tuturor task-urilor, daca acest lucru ar determina modificarea deadline-ului.
+     Daca un task nu poate fi terminat in timpul alocat pentru iteratia curenta, acesta va fi mutat in urmatoarea iteratie, iar deadline-ul ramane neschimbat.
+
+2. Daca lucram cu procese de dezvoltare agile, asta inseamna ca nu trebuie sa intelegem clar cerintele sistemului.
+   - **FALS.**
+     Indiferent de proces de dezvoltare utilizat, cerintele sistemului trebuiesc intelese pentru a finaliza proiectul.
+     Totusi, in cadrul unui proces de dezvoltare agile, cerintele unui sistem se pot modifica de la o iteratie la alta. Acest lucru inseamna ca este nevoie de o intelegere chiar mai clara a cerintelor, pentru a le putea modifica pe parcursul procesului de dezvoltare.
+
+3. In procesul de dezvoltare SCRUM, Burndown Chart-ul ne arata evolutia efortului de-a lungul intregii istorii a proiectului, mai exact ofera informatii despre Sprint-urile deja incheiate, precum si numarul de task-uri finalizate pana in prezent in intregul proiect.
+   - **FALS.**
+     Burndown Chart-ul ne arata evolutia efortului si numarul de task-uri finalizate/de finalizat pentru sprint-ul curent, adica perioada in care se realizeaza un increment dintr-un proiect.
+     Astfel, Burndown Chart-ul nu arata evolutia efortului pe intregul proiect, ci doar pe un sprint, pentru a putea evalua progresul pe acea iteratie.
+
+4. O problema importanta a proceselor de dezvoltare iterative este aceea ca adesea trebuie modificat codul care a fost scris intr-o iteratie anterioara si uneori anumite portiuni de cod trebuie chiar sterse, ceea ce reprezinta o pierdere/risipa.
+   - **FALS.**
+     Chiar daca prin stergerea unei bucati de cod putem considera ca avem o risipa de timp, este mai eficient sa rescriem acea bucata de cod de la zero pentru a lua in considerare nativ noile cerinte, decat sa patch-uim bucatile de cod deja existente incat sa le suporte (probabil nu in mod optim).
+
+5. Procesul de dezvoltare Extreme Programming/Agile spune ca majoritatea efortului trebuie investit in programare si mai putin in alte activitati conexe, cum ar fi captarea cerintelor sau testare, intrucat, pana la urma, produsul software propriu-zis este creat prin programare.
+   - **FALS.**
+     Extreme Programming/Agile nu spune ca majoritatea efortului ar trebui investit in programare in sine. Ba chiar, conform metodologiei Agile, mai mult efort ar trebui investit in planificare(1/3) si testare(1/2) decat in programare(1/6). 
+     Intr-un proiect Agile, se pune mult accent pe o organizare eficienta a muncii, prin sprint-uri, care sunt incremente facute pe proiect. Practic ideea este de a veni cu imbunatatiri mici, mai des, printr-un proces dinamic care raspunde mult mai bine la schimbarile de cerinte, care sunt inevitabile intr-un proiect software. 
+
+6. Desi in procesele de dezvoltare iterative si incrementale trebuie uneori schimbate sau chiar rescrise complet fragmente semnificative de cod ce au fost scrise in iteratiile anterioare, acestea nu reprezinta o pierdere, intrucat schimbarile sunt inevitabile.
+   - **ADEVARAT.**
+     Chiar daca prin stergerea unui fragment de cod putem spune ca vom avea o risipa de timp, este mai putin costisitor din punct de vedere al timpului sa il scriem de la 0 decat sa il modificam pana ajungem la rezultatul dorit.
+     Totodata, calitatea codului este mai mare, deoarece in loc sa patch-uim un cod vechi incat sa suporte modificarile, cream un cod nou care sa respecte 100% noile cerinte.
+
+7. In procesul de dezvoltare Waterfall, se face doar un singur tip de activitate la un moment dat, spre deosebire de cele iterative, unde intr-o iteratie trebuie efectuate toate tipurile de activitati.
+   - **ADEVARAT.**
+     Procesul Waterfall imparte proiectul in mai multe activitati, care sunt efectuate pe rand. 
+     Astfel, la inceput se face definirea si analiza cerintelor, apoi se realizeaza design-ul, iar apoi fiecare parte din sistem este construita "dintr-o bucata".
+
+8. In procesul Rational Unified Process(RUP), desi este permisa efectuarea mai multor tipuri de activitati in interiorul unei faze, se recomanda ca numarul de activitati desfasurate in paralel sa fie limitat.
+   - **FALS.**
+     In procesul RUP, intr-adevar, putem sa efectuam mai multe activitati simultan in interiorul unei faze, dar nu exista nicio limitare cu privire la numarul maxim de activitati care se pot desfasura in paralel.
+     RUP nu impune o limita stricta, fiind un proces iterativ si incremental, adica este flexibil si adaptabil, permitand echipei sa se concentreze pe multiple activitati simultan.
+
+9. Procesele de dezvoltare Agile se numesc asa pentru ca atunci cand le folosim, dezvoltarea intregului sistem dureaza garantat mai putin decat daca folosim alte procese.
+   - **FALS.**
+     Desi procesul Agile, fiind iterativ, produce satisfactie clientilor prin iterarea frecventa(de exemplu saptamanala) a proiectului, numele acestuia nu are legatura cu durata procesului de dezvoltare in comparatie cu altele.
+     Principiile Agile nu au ca scop un proces de dezvoltare mai scurt, ci un raspuns mai bun(mai agil) la modificarea cerintelor, si o comunicare mult mai buna cu clientii.
+
+10. In procesele de dezvoltare iterative se stabileste pentru fiecare iteratie un set de functionalitati care trebuiesc adaugate, iar daca se constata ca timpul prevazut pentru iteratie nu este suficient pentru implementarea intregului set de functionalitati, se prelungeste corespunzator durata iteratiei si se creste preventiv si durata urmatoarei iteratii.
+    - **FALS.**
+      Intr-adevar, in procesele iterative se stabileste pentru fiecare iteratie un set de functionalitati care trebuiesc adaugate, dar chiar si daca nu se termina toate implementarile in timpul alocat iteratiei, timpul alocat acesteia nu se modifica niciodata.
+      Task-urile care nu au fost terminate in iteratia curenta se intorc in backlog si cel mai probabil(dar nu obligatoriu) vor fi tratate in iteratia urmatoare. 
+      Avand in vedere ca adaugarea task-urilor intr-o iteratie se face in functie de prioritatea acestora, este posibil ca task-urile ramase neterminate in iteratia anterioara sa nu mai fie la momentul curent suficient de importante incat sa fie adaugate in iteratia urmatoare.
+
+11. In procesul de dezvoltare SCRUM, daca functionalitatile prevazute pentru un Sprint nu pot fi terminate intr-un timp alocat, Sprint-ul poate fi prelungit, dar nu mai mult de cateva zile.
+    - **FALS.**
+      In cadrul procesului de dezvoltare SCRUM, care este un proces Agile, iteratiile se numesc Sprint-uri si au o perioada de timp alocata, fixa. 
+      In fiecare Sprint sunt adaugate task-uri din backlog, in functie de prioritatea acestora, luand in considerare aproximarile de timp, incat sa poata fi teoretic rezolvate in timpul alocat Sprintului.
+      Daca unul sau mai multe task-uri nu sunt terminate pana la sfarsitul Sprintului, acesta nu se prelungeste sub nicio forma. In schimb, acele task-uri neterminate se intorc in backlog si sunt disponibile sa fie adaugate in urmatorul Sprint, asta daca in continuare sunt suficient de prioritate(de cele mai multe ori acesta este cazul).
+
+12. You have to develop a student management system for a university. The university is chaotic, with very radical, frequent and fast changes with respect to the student organisation policies. In this context, the best idea is to use a Waterfall development system to build the required system.
+    - **FALS.**
+      Avand in vedere faptul ca exista schimbari frecvente si majore in cerintele clientului, procesul de dezvoltare potrivit pentru acest proiect software este Agile.
+      Astfel, desi cerintele se schimba, echipa este capabila sa raspunda rapid la schimbari si sa ofere frecvent un release care corespunde cerintelor actuale ale clientului.
+      Procesul Waterfall este foarte nepotrivit, deoarece acesta nu ofera posibilitatea de a raspunde la schimbari mari si dese, fiind potrivit doar pentru sisteme foarte bine definite, in care cerintele se schimba minimal.
+
+13. Procesele de dezvoltare Agile sunt recomandate in cazul in care proiectele la care lucreaza echipele de programatori sunt distribuite geografic.
+    - **FALS.**
+      Procesele de dezvoltare Agile au la baza comunicarea intre membrii echipei, lucru care este puternic impiedicat de distributia geografica, atat din punct de vedere al distantei fizice, dar si din punctul de vedere al fusului orar.
+      Intr-un proces Agila bazat pe Extreme Programming, eficienta poate scadea chiar si daca echipa de programatori este impartita pe mai multe etaje din aceeasi cladire.
+
+14. Procesul de dezvoltare Waterfall este recomandat in majoritatea proiectelor, intrucat, datorita structurii sale rigide, poate constrange clientul sa descopere, inca de la inceput, toate posibilele cauze de schimbare din sistem.
+    - **FALS.**
+      Procesul Waterfall este recomandat in foarte putine cazuri, tocmai din cauza structurii sale rigide, care impiedica adaptabilitatea rapida in cazul schimbarilor de cerinte.
+      In majoritatea proiectelor software, multe schimbari de cerinte sunt absolut impredictibile, asa ca este necesar sa utilizam un proces de dezvoltare care faciliteaza raspunsul la aceste schimbari.
+      Indiferent de efortul depus de client, cerintele initiale nu vor fi cele finale. Rigiditatea procesului Waterfall nu va fi de ajutor in majoritatea proiectelor software, ci va fi un obstacol.
+
+15. Ce ati alege dintre Waterfall si Extreme Programming/Agile?
+    - CAZ 1:
+      - Trebuie sa implementam de la 0 un sistem complex(cca. 1 milion de linii de cod) pentru gestionarea personalului si a salariilor, care sa inlocuiasca sistemul existent in prezent, fara nicio modificare de cerinte.
+        - **WATERFALL**
+          Cerintele sunt bine cunoscute de la inceput(fiind vorba despre reimplementare) si bine intelese, si nu exista riscul de a aparea schimbari in aceste cerinte. Astfel, procesul Waterfall se poate derula fara probleme, nefiind nevoie de capacitatea de a raspunde rapid la schimbari.
+    - CAZ 2:
+      - Aveti de construit un sistem pentru plata taxelor si impozitelor pentru tara imaginara Ainamor cu o legislatie haotica si in permanenta modificare.
+        - **AGILE/Extreme Programming**
+          Este vorba de implementarea unui proiect cu cerinte care sunt in continua schimbare, asa ca trebuie sa folosim un proces de dezvoltare capabil sa raspunda rapid la schimbari dese.
+          Agile, fiind un proces iterativ, poate sa raspunda rapid la schimbari, iar faptul ca este incremental inseamna ca aceste raspunsuri ajung la client in timp scurt.
+
+---
+
+### CURS 3
+
+1. Un sistem nu poate fi actor pentru un alt sistem, pentru ca acest lucru ar implica accesul la informatiile sistemului mare, ceva ce implica incalcarea incapsularii.
+   - **FALS.**
+     Un sistem poate fi actor pentru un alt sistem, atat timp cat acesta este extern sistemului, deoarece acesta interactioneaza cu interfata si nu are access la codul acestuia in sine. 
+     Astfel, nu se incalca principiul incapsularii.
+
+2. In diagramele UML de use case-uri, relatiile `<<extends>>` si `<<include>>` sunt foarte asemanatoare si pot fi folosite interschimbabil, intrucat ambele sunt folosite pentrui a da "factor comun" in cadrul unei anumite functionalitati.
+   - **FALS.**
+     Cele doua relatii nu sunt asemanatoare si clar nu pot fi folosite interschimbabil. 
+     Intr-adevar, `<<include>>` este folosit pentru a da factor comun unei functionalitati comune intre mai multe use cases, evitand reutilizarea.  
+     In schimb, `<<extends>>` este folosit pentru a trata un caz exceptional care poate aparea in cadrul unui use case.
+
+3. Doi sau mai multi actori nu pot interactiona/nu pot fi asociati cu acelasi use case, pentru ca ar insemna ca sunt redundanti.
+   - **FALS.**
+     Doi sau mai multi actori pot fi asociati cu acelasi use case, atat timp cat interactiunea lor cu sistemul este diferita in ansamblu(adica nu au in comun toate functionalitatile - abia atunci ar fi redundanti).
+     Un exemplu pentru aceasta situatie ar fi cazul in care doi actori sunt asociati aceluiasi use case initial, dar fiecare acceseaza un `<<extends>>` diferit. Astfel, ei de fapt acceseaza functionalitati diferite.
+
+4. Use case-urile de tip Fish Level se folosesc atunci cand vrem sa detaliem fiecare actiune principala din cadrul unui use case de tip Sea Level.
+   - **ADEVARAT.**
+     Use case-urile de tip Sea Level reprezinta o interactiune majora cu sistemul, care sunt de cel mai mare interes pentru useri.
+     Use case-urile Fish Level prezinta interactiuni detaliate, fie mai tehnice sau mai triviale, care au legatura cu functionarea sistemului in sine, si nu sunt de mare interes din punct de vedere al interactiunii pentru user. 
+     Astfel, use case-urile Fish Level pot fi folosite pentru a detalia o actiune principala/functionalitate din cadrul unui use case Sea Level. 
+
+5. Stim ca am descoperit toate use case-urile din sistem atunci cand toate cerintele functionale sunt acoperite de use case-uri Sea Level, fiecare dintre acestea trebuind sa fie conectate cu cel putin 1 actor.
+   - **ADEVARAT.**
+     Use case-urile de tip Sea Level reprezinta interactiuni majore cu sistemul, avand un scop precis. Astfel, atunci cand toate cerintele functionale sunt acoperite de use case-uri Sea Level, inseamna ca am identificat toate use case-urile din sistem. La randul lor, functionalitatile comune si alte detalii pot fi acoperite de use case-uri Fish Level.
+     Totodata, avand in vedere ca tipul Sea Level reprezinta interactiuni de folosire a sistemului, fiecare trebuie sa fie conectata cu un actor.
+
+6. Use case-ul "Retrage bani de la ATM" este intr-o relatie de tip `<<include>>` cu use case-ul "Retrage bani de la ATM ramas fara cash" pentru ca primul e mai cuprinzator.
+   - **FALS.**
+     Avand in vedere contextul, putem deduce ca al doilea use case este de fapt un caz exceptional al primului(se incearca retragerea de bani, dar ATM-ul nu mai are cash). 
+     Asadar, relatia dintre cele doua este de tip `<<extends>>`.
+
+7. In tehnica FAST de analiza a cerintelor, fiecare participant trebuie sa construiasca cate 4 liste, independent de ceilalti si fara presiunea ca listele sa fie complete.
+   - **ADEVARAT.**
+     In tehnica FAST, intr-adevar, fiecare participant vine la intalnire cu 4 liste: obiecte, servicii, constrangeri si criterii de performanta. Aceste liste nu trebuie sa fie exhaustive. Scopul lor este acela de a lua in considerare cat mai multe puncte de vedere.
+     Ulterior, luand in considerare toate listele, se vor crea liste combinate pe fiecare topic, care sunt mai concrete si fara reduntanta.
+
+8. It is possible for a person(from the real world) to have the role of more than one actor of the system.
+   - **ADEVARAT.**
+     Intr-adevar, daca o persoana indeplineste mai multe roluri, atunci fiecare rol va reprezenta un actor, dar combinatia rolurilor nu va fi un actor. 
+     De exemplu, o persoana poate fi atat administratorul unui magazin, cat si client.
+
+9. An `<<extends>>` relation like in the picture means that B use case inherits all the interactions from the B use case and, additionally, B adds some supplementary interaction steps to the inherited one.
+   - **ADEVARAT.** `lipseste poza`
+
+---
+
+### CURS 4
+
+1. Pentru a evita problema proliferarii datelor, ar trebui sa implementam clasa Family ca mai jos.
+
+   ![Screenshot 2023-06-18 at 15.31.42](/Users/faur/Library/Application Support/typora-user-images/Screenshot 2023-06-18 at 15.31.42.png)
+
+   - **ADEVARAT.**
+     La modul cel mai abstract, o familie este formata din doua persoane ca si parinti si o lista de alte persoane ca si copii. 
+     In cazul de fata, daca difera functionalitatea parintilor versus copii, prin polimorfism s-ar putea ca parintii sa fie clase separate, mostenitoare ale `Person`, analog si pentru copii.
+     Implementarea aceasta mai generala permite si un arbore genealogic mai complex, avand in vedere ca unii copii la randul lor pot fi parinti.
+
+2. Daca avem diagrama de clasa UML explicita pentru un sistem, putem deduce diagramele de secventa pentru acel sistem, adica toate interactiunile posibile dintre obiecte.
+   - **FALS.**
+     Diagramele de clasa reprezinta structura sistemului, atributele si metodele fiecarei clase.
+     Diagrama de secventa reprezinta comportamentul din cadrul unui scenariu. Acestea sunt construite luand in considerare codul sursa, reprezentand functionarea acestuia in sine raportata la timp.
+     Astfel, daca avem doar diagrama de clasa UML, nu putem deduce diagrama de secventa pentru sistem fara sa avem codul sursa scris sau macar proiectat.
+
+3. Diagramele UML de secventa sunt folosite ca punct de plecare pentru sesiunile de CRC Cards, in urma carora se construiesc diagramele de clasa.
+   - **FALS.**
+     Sesiunile de CRC Cards sunt Use-Case driven si nu folosesc diagramele de secventa ca punct de plecare.
+     Modelarea CRC este o tehnica folosita pentru identificarea claselor necesare si a le indica responsabilitatile si colaboratorii.
+     Este nevoie de diagrama de clasa pentru a dezvolta structura codului, iar abia apoi se poate dezvolta diagrama de secventa.
+
+4. Intr-o diagrama de secventa UML, toate obiectele care sunt instante ale aceleiasi clase trebuiesc "comasate" intr-un singur dreptunghi, adica nu este admis sau recomandat sa reprezentam fiecare obiect ca un dreptunghi separat, pentru ca s-ar incarca prea mult diagrama.
+   - **FALS.**
+     Toate obiectele unei clase trebuiesc reprezentate in dreptunghiuri separate, deoarece fiecare obiect poate avea un comportament diferit, chiar daca sunt instante ale aceleiasi clase.
+
+5. Relatia de mai jos modeleaza cazul unui telefon dual-sim cu cartele care pot fi oricand utilizate in alt telefon.
+   ```mermaid
+   classDiagram 
+   	Telefon *-- Cartela : 0..2
+   ```
+
+   - **FALS.**
+     Diamantul plin reprezinta compozitie, care inseamna ca acele componente, Cartelele, nu pot exista fara agregat, adica fara Telefon. Astfel, cele doua cartele nu ar putea fi utilizate in alt telefon.
+
+6. Pentru a evita problema proliferarii claselor prin modelarea ca si clase a entitatilor externe sistemului, trebuie sa tinem cont ca sunt clase doar acele entitati care apeleaza alte entitati(clase) din sistem.
+   - **FALS.**
+     Clasele sunt acelea care primesc mesaje(sunt apelate), nu cele care transmit mesaje(apeleaza). 
+     Pentru a evita problema proliferarii claselor, este important sa nu transformam inutil operatiile in clase. 
+     Informatia si comportamentul asociat ar trebui sa fie localizate in aceeasi clasa, respectiv informatiile despre un lucru, la fel, ar trebui sa se afle in aceeasi clasa.
+
+7. In tehnica CRC, clasele sunt identificate pornind de la substantivele din descrierea use case-urilor, iar responsabilitatea se identifica prin verbele folosite in cadrul descrierii scenariilor.
+   - **ADEVARAT.**
+     Intr-adevar, responsabilitatile clasei sunt identificate prin verbele din cadrul descrierii de use case, deoarece operatiunile in sine sunt verbe.
+     La fel, clasele, respectiv colaboratorii sunt identificate pornind de la substantivele din descrierea use case-urilor.
+     Scopul intr-un proces de modelare CRC al claselor este sa ajungem in punctu in care putem sa "recream" intreaga descriere de use-case utilizand responsabilitatile si colaboratorii notati pe cardurile CRC.
+
+8. Relatia de compozitie este un caz special de agregare(relatie parte-intreg) in care indicam ca distrugerea clasei "intreg" atrage dupa sine si distrugerea obiectelor "parte" continute de clasa "intreg".
+   - **FALS.**
+     Relatia de compozitie, notata cu un diamant plin, este un caz puternic de agregare, in care componentele nu pot exista fara intreg.
+     Distrugerea obiectului duce la distrugerea partilor, nu distrugerea clasei in sine. Asadar, implicit prin distrugerea obiectului "intreg" se vor distruge si "partile.
+
+9. Se da urmatoarea diagrama de clasa. Explicati:
+   ```mermaid
+   classDiagram
+   	Tren o-- Vagon : 1..*
+   ```
+
+   - Relatia descrisa se numeste agregare si se reprezinta printr-un romb/diamant gol. 
+     Relatia dintre tren si vagon este de tipul "HAS-A", adica un obiect Tren este compus din unul sau mai multe obiecte Vagon, care pot fi refolosite in relatie cu diferite obiecte tren(existenta lor nu depinde strict de existenta "parintelui" Tren, cum ar fi in cazul compozitiei).
+
+10. Ar trebui modelate in sistem doar clasele care transmit mesaje, nu si cele care primesc mesaje.
+    - **FALS.**
+      Conform rezolvarilor pentru Problema Proliferarii Claselor, clasele sunt acelea care primesc mesaje(sunt apelate), nu cele care transmit mesaje. 
+
+11. Relatia se interpreteaza astfel: clasa Car contine clasa Engine, mai precis cand se distruge clasa Car, se distruge si clasa Engine.
+    ```mermaid
+    classDiagram
+    	Car *-- Engine : 1
+    ```
+
+    - **FALS.**
+      In diagrama de clasa de mai sus este reprezentata relatia de compozitie, semnificata printr-un romb/diamant plin. Aceasta este o relatie de tip "PART-OF", conform careia obiectele "parte" pot fi folosite de un singur obiect de tip "intreg", si se distrug atunci cand este distrus "intregul".
+      Cu toate acestea, afirmatia este falsa, deoarece nu se distruge clasa in sine, ci obiectul, o instanta a acesteia.
+      Astfel, cand se distruge un obiect Car, se distruge si obiectul Engine care se afla in relatie de compozitie cu acesta.
+
+12. Scenariile aferente use case-urilor si diagramelor de secventa UML sunt doua modalitati alternative de modelare a interactiunii intre clase. Cu alte cuvinte, daca dorim sa observam cum colaboreaza clasele, putem folosi fie use case-uri, fie diagrame de secventa.
+    - **FALS.**
+      Scenariile aferente use case-urilor surprind interactiunile dintre actori si sistem, insa pe baza lor nu se poate observa comportamentul claselor, asadar nu putem spune ca sunt o metoda de a modela interactiunea intre clase.
+      Diagramele de secventa UML descriu obiectele si interactiunile dintre ele, si cum se apeleaza metodele, fiind potrivite daca vrem sa observam cum colaboreaza clasele.
+
+13. Un actor nu poate introduce informatii in sistemul modelat, ci poate doar extrage.
+    - **FALS.**
+      Actorul reprezinta rolul jucat de un user in cadrul interactiunii cu sistemul. Acesta poate atat sa extraga informatii din sistem, dar si sa introduca informatii in acesta. 
+      Un exemplu este adaugarea unui task nou intr-o aplicatie de tip "TO-DO List". 
+
+14. In modelarea cerintelor se poate aplica urmatoarea regula: aproape orice substantiv este un actor si aproape orice verb este un use case.
+    - **FALS.**
+      Orice verb reprezinta o responsabilitate/operatie, dar nu un use case. Use case-urile includ atat substantive, cat si verbe.
+      Actorul reprezinta rolul jucat de un user in cadrul interactiunii sale cu sistemul, dar nu orice substantiv intalnit in cerinte este obligatoriu un actor. 
+      Substantivele pot face referire si la clase/instante ale acestora, atribute, etc..
+
+15. The CRC Cards model of a system helps us to start building class diagrams and sequence diagrams for that system.
+    - **ADEVARAT.**
+      Utilizand modelul CRC, obtinem clasele, responsabilitatile acestora, si colaborarile acestora.
+      Din aceste informatii, putem incepe sa construim diagramele de secventa si de clasa. 
+      Folosind card-urile claselor si colaboratorii acestora putem determina clasele si relatiile dintre acestea, iar folosind si responsabilitatile, putem determina campurile si operatiile/metodele din clase. Avand aceste informatii, putem incepe sa construim atat diagrama de clasa UML, cat si diagrama de secventa UML.
+
+---
+
+### CURS 5
+
+1. Stilul arhitectural Pipes&Filters este avantajos din punct de vedere al timpului.
+   - **FALS.**
+     Acest stil este format din filtre, care sunt independente unul fata de celalalt, fiecare avand stare separata. 
+     Abstractizand, tot ce face un filtru este sa transforme datele de intrare in date de iesire, dupa un anumit criteriu. Acest lucru face mentenanta si schimbarile foarte eficiente, deoarece trebuie doar schimbate sau adaugate filtre.
+     Pe de alta parte, aceste filtre trebuiesc sa parseze datele, lucru care rezulta in overhead, asa ca nu putem spune ca Pipes&Filters este un stil arhitectural avantajos din punct de vedere al timpului.
+
+2. Folosirea constantelor globable incalca criteriul de modularitate al continuitatii.
+   - **FALS.**
+     Folosirea constantelor globale chiar faciliteaza continuitatea unui program, deoarece in momentul in care trebuie efectuata o schimbare in cod, de exemplu modificarea dimensiunii unui array care apare in mai multe locuri in cod, schimbarea trebuie efectuata intr-un singur loc, nu peste tot unde e definit un array cu dimensiunea respectiva. 
+
+3. Un sistem care respecta criteriul de modularitate al decompozabilitatii il va respecta aproape sigur si pe cel al compozabilitatii, deoarece acesta din urma de refera la posibilitatea compunerii unui sistem din module.
+
+   - **FALS.**
+     Desi cele doua criterii sunt apropiate, acestea prezinta niste diferente foarte relevante.
+
+     Decompozabilitatea se refera la abilitatea de a imparti un sistem in mai multe module, fiecare cu o responsabilitate specifica. Ideea este ca asa fiecare modul poate fi inteles, dezvoltat si testat in izolare, chiar si de catre echipe diferite. Acest lucru ajuta la gestionarea complexitatii.
+     Compozabilitatea, pe de alta parte, se refera la abilitatea de a asambla aceste componente/module mai mici in componente mai mari, si chiar intr-un sistem mai mare, functional. Acest lucru implica faptul ca aceste module mici sunt proiectate astfel incat sa poata lucra impreuna, cu interfete clare. Compozabilitatea permite refolosirea componentelor si flexibilitate in design.
+     Asadar, un sistem poate fi decompozabil, adica poate fi "spart" in mai multe parti componente, dar nu avem garantia ca aceste componente pot fi usr reasamblate sau folosite in orice alt context.
+
+4. Un avantaj principal al stilului arhitectural stratificat (Layered Architecture) este asigurarea criteriului de modularitate al protectiei.
+   - **FALS.**
+     Layered Architecture imparte aplicatia in "straturi logice" diferite. Fiecare strat are un rol specific si interactioneaza numar cu straturile care sunt imediat deasupra sau dedesubt. Acest fapt poate contribui la respectarea criteriului de modularitate al protectiei, dar nu o asigura automat.
+     Criteriul se refera la ideea ca fiecare modul software ar trebui sa aiba cat mai putine privilegii posibile. Acesta este un principiu important de securitate, deoarece reduce suprafata de atac si limiteaza impactul potential al unui modul compromis.
+     Asadar, stilul arhitectural stratificat nu asigura respectarea principiului de modularitate al protectiei, deoarece acest lucru depinde de modul in care straturile sunt implementate.
+
+5. Un corp de mobila modular care vine impachetat pe bucati si care trebuie asamblat(gen IKEA) a fost proiectat urmarit in special criteriul de modularitate al compozabilitatii.
+   - **FALS.**
+     Un corp de mobila modular este proiectat in asa fel incat sa se poata realiza din acele piese doar acel anumit corp, ceea ce inseamna ca a fost urmarit criteriul de modularitate al decompozabilitatii.
+     Principiul compozabilitatii ar implica sa puteam compune oricate sisteme modulare diferite din piesele respective, lucru care nu este valabil pentru un corp de mobila.
+
+6. Importanta criteriilor si regulilor de modularitate este cu atat mai mare cu cat anvergura sistemului software proiectat este mai mare, cu alte cuvinte: importanta modularizarii este proportionala cu dimensiunea sistemului software.
+   - **ADEVARAT.**
+     Intr-adevar, criteriile de modularitate ajuta mult in gestionarea complexitatii unui proiect software, care inherent este mai mare in cazul unui sistem de anvergura mai mare. Respectand criteriile, schimbarile pot fi efectuate mai eficient, nefiind necesara modificari majore in intreg sistemul pentru o singura modificare.
+     Pe de alta parte, poate fi adus si argumentul ca este importanta respectarea criteriilor de modularitate chiar si in cazul unui sistem software de anvergura mai mica, pentru a asigura scalabilitatea pe viitor. Implicit, proiectele software sunt supuse multor schimbari prin definitie si trebuie sa fie proiectate astfel incat sa suporte eficient scalarea.
+
+7. Intre specificatorul de acces `protected` si criteriul de modularitate al protectiei exista o legatura stransa.
+   - **FALS.**
+     Specificatorul `protected` permite ca atributele si metodele care il aplica sa fie vizibile doar de clasele care mostenesc clasa respectiva.
+     Criteriul de modularitate al protectiei spune ca daca apare o eroare de executie, adica daca un modul este compromis, aceasta eroare va afecta doar un numar limitat de module. Asadar, nu exista neaparat o legatura stransa intre cele doua, desi `protected` poate facilita implementarea criteriului, impreuna cu `private` si `package`.
+
+8. In stilul arhitectural Repository, diferitele componente care proceseaza date sunt total independente unele de altele, cu exceptia faptului ca folosesc acelasi model de date.
+   - **ADEVARAT.**
+     Stilul arhitectural Repository este un mod eficient de a distribui cantitati mari de date, in care producatorii si consumatorii de date sunt complet independenti. 
+     Pe de alta parte, marele compromis este faptul ca toti folosest acelasi model de date.
+
+9. The modularity criterion named continuity states that we have to continously search for new requirements for a system due to a software evolution law.
+   - **FALS.**
+     Criteriul continuitatii spune ca o schimbare mica in cerinte trebuie sa rezulte in schimbari in doar cateva module, care nu afecteaza arhitectura intregului proiect.
+
+10. Arhitectura unui sistem software se refera la detaliile de proiectare, deci arhitectura nu are legatura directa cu cerintele sistemului.
+    - **FALS.**
+      Cerintele sistemului exprima ceea ce trebuie sa poata face sistemul in sine, iar proiectul detaliaza cum poate face acest lucru. 
+      Implicit, cerintele si arhitectura proiectul in sine sunt inseparabile, iar multe decizii de design se iau luand in considerare cerintele.
+      De exemplu, cu siguranta nu vom alege stilul arhitectural Pipes&Filters pentru o aplicatie interactiva, avand in vedere limitarile acestuia cu privire la timpul de raspuns, unidirectionalitate si lipsa starii.
+
+11. Un avantaj principal al Pipes&Filters este ca se asigura un factor comun intre diferitele filtre implicate.
+    - **FALS.**
+      Prin definitie, filtrele sunt complet independente si nu depind una de alta, nici prin functionalitate dar nici prin stare comuna. Ideea acestui stil in sine este compunerea comportamentului filtrelor individuale pentru a obtine sistemul dorit, iar filtrele pot fi reutilizate fara conflicte. 
+      Asadar, nu se asigura un factor comun intre diferitele filtre implicate. Acest argument ar putea fi adus doar pentru faptul ca este necesar un format de date comun, dar acesta e un dezavantaj pentru majoritatea sistemelor, nu un avantaj.
+
+12. Conceptele "ascunderea informatiei" si "abstractizare" sunt sinonime, intrucat se refera la aceeasi actiune.
+
+    - **FALS.**
+      Conceptul de "ascunderea informatiei" se refera la faptul ca deciziile de design care sunt susceptibile la schimbare trebuie "ascunse" in interfete abstracte bine-definite. Astfel, chiar daca are loc o schimbare, componentele client ar trebui sa fie afectate minimal, respectand principiul continuitatii.
+
+      Conceptul de "abstractizare" se axeaza pe reducerea complexitatii prin concentrarea pe aspectele esentiale, ascunzand detalii irelevante in contextul respectiv. 
+
+13. Precizati ce stil arhitectural s-ar asocia cel mai bine cu:
+    1. O ceapa:
+       - **Layered Architecture:** deoarece acesta are o structura stratificata, in mijloc aflandu-se nucleul, care este cea mai importanta parte.
+    2. O linie de productie:
+       - **Pipes&Filters:** Formatul de date este produsul in sine, care este procesat in mod repetat in cadrul filtelor, care reprezinta masinariile de pe linia de productie. Pipe-urile reprezinta benzile rulante care doar transporta produsul spre urmatorul filtru.
+    3. IDE:
+       - **Repository:** Un IDE contine componente diferite precum editorul, compilatorul, debugger, linter, care trebuie sa interactioneze in mod eficient si sa impartaseasca date precum codul sursa, rezultate de compilare, erori, etc.. 
+         Totodata, o modificare in codul sursa trebuie sa fie vizibila in timp real pentru alte componente. 
+         De asemenea, se asigura o izolare/decuplare avansata. Componentele unui IDE au un rol specific si nu trebuie sa ia in considerare cum functioneaza celelalte componente. Cu un depozit central, componentele pot ramane izolate si implicit pot fi dezvoltate, testate si imbunatatite independent.
+
+14. Daca intr-un sistem ar trebui favorizata performanta de timp, ati opta pentru stilul arhitectural Layered?
+
+    - **NU:** Deoarece in stilul Layered, fiecare strat comunica doar cu straturile adiacente, asa ca nu este disponibila o comunicare foarte rapida. Daca stratul cel mai din exterior trebuie sa comunice cu nucleul, informatia va trece de 2 ori prin toate straturile(odata pentru a trimite mesajul, si odata pentru a primi raspunsul).
+
+    Dar daca ar trebui favorizata securitatea?
+
+    - **DA:** Daca trebuie favorizata securitatea, Layered Architecture este un stil potrivit, deoarece chiar daca un strat este compromis, atacatorul nu are acces la intregul sistem. Suprafata de atac in sine este semnificativ redusa.
+      Totodata, abordarea de Layered Security ne spune ca mai multe masuri de securitate, luate pe fiecare strat al sistemului, sunt mai puternice decat masurile luate la nivelul intregului sistem.
+
+---
+
+### CURS 6
+
+1. Principalul dezavantaj al testarii Top Down este crearea de drivere si stub-uri.
+   - **FALS.**
+     In cazul testarii Top Down, se creeaza doar stub-uri care imita comportamentul modulelor apelate care inca nu sunt implementate sau testate. 
+     Driverele sunt create la testarea de tip Bottom Up si reprezinta un program principal simplu care apeleaza modulul aflat sub testare.
+
+2. Ideea de baza in testarea White Box este aceea de a ne asigura ca cel putin privita individual, o functie nu are niciun bug in nicio instructiune, intrucat toate instructiunile sunt verificate cu cate cel putin un test.
+   - **FALS.**
+     Dupa cum ne spune Dijkstra, testarea ne poate arata doar prezenta erorilor, nu si absenta. 
+     Intr-adevar, testarea White Box are ca scop sa se asigure ca toate statement-urile si conditiile au fost executate cel putin odata. 
+     Functia, privita si testata individual, este posibil sa nu aiba niciun bug, dar asta poate fi si din cauza unor teste care nu trateaza cazurile corecte. 
+
+3. Partitiile echivalente se folosesc la sisteme cu foarte multe functii lungi si complexe si reprezinta grupuri de functii care sunt asemanatoare din punct de vedere al testarii. Astfel, din fiecare grup/partitie se vor alege una sau mai multe functii pentru care sa se scrie suite de teste black box.
+   - **FALS.**
+     Partitiile echivalente reprezinta domenii de date(intrare sau iesire) in care programul aflat sub testate are un comportament echivalent. Asadar, pentru a scrie teste cat mai cuprinzatoare, trebuie sa alegem test cases din toate partitiile.
+     De exemplu, daca testam o functie care are ca date de intrare un array de maxim 100 de elemente, vom testa cu:
+     - un array gol
+     - un array cu un element
+     - un array cu 50 elemente
+     - un array cu 99 elemente
+     - un array cu 100 elemente
+
+4. Daca dorim sa verificam cat mai timpuriu principalele puncte de control si decizie din sistem, vom alege testarea Bottom-Up.
+   - **FALS.**
+     Testarea de tip Bottom-Up testeaza timpuriu functionarea corecta a componentelor de nivel scazut, care de exemplu proceseaza date. Partea de program care "ia deciziile" este inlocuita cu un driver.
+     Pentru a testa timpuriu principalele puncte de control si decizie, ar trebui folosita testatea Top-Down, care inlocuieste modulele de nivel scazut cu stub-uri, dar in schimb testeaza functionalitatea modulelor de nivel inalt, care de cele mai multe ori se ocupa de principalele puncte de control si decizie din sistem.
+
+5. Principalul motiv pentru care testarea de integrare de tip Big-Bang nu este recomandata este acela ca, spre deosebire de alte tehnici de testare de integrare, aceasta identifica mai putine defecte.
+   - **FALS.**
+     Testarea de integrare de tip Big-Bang combina in avans toate componentele sistemului si testeaza intreg programul deodata. 
+     Problema acestei abordari nu este ca identifica mai putine defecte, ci faptul ca identifica mai multe defecte, dar izolarea cauzelor acestora este foarte complicata. 
+     Odata ce niste erori sunt rezolvate, apar mai multe.
+
+6. Testarea ciclurilor pentru o functie cu doua cicluri imbricate(nested) implica scrierea a doua cazuri de test: unul sa parcurca instructiunile din ciclul interior si unul sa le parcurga pe cele din ciclul exterior.
+   - **FALS.**
+     Testarea functiilor cu cicluri implicare incepe cu testarea buclei interioare ca si o bucla simpla, pastrand iteratorul buclei exterioare la valoarea minima.
+     Dupa aceasta, se trece la testarea celei de-a doua bucla, tot ca pe o bucla simpla, iar valoarea iteratorului din bucla interioara(deja testata) este setat la o valoare tipica.
+
+7. Un program care nu are cicluri(for, while) are numarul ciclomatic=1. 
+   - **FALS.**
+     Numarul ciclomatic este influentat de numarul deciziilor simple din cadrul unui program, nu de structurile repetitive in sine.
+     Intr-adevar, for si while contin o clauza if care verifica o conditie, asadar exista o decizie simpla care influenteaza numarul ciclomatic.
+     In general, numarul ciclomatic este egal cu numarul de decizii simple + 1.
+
+8. Valoarea complexitatii ciclomatice a unei functii nu este influentata de numarul de instructiuni de ciclare(for, while), deoarece singurele instructiuni care incrementeaza valoarea complexitatii ciclomatice sunt cele de decizie de tip if..else.
+   - **FALS.**
+     Valoarea complexitatii ciclomatice este intr-adevar influentata de instructiunile simple de decizie de tip if..else, dar instructiunile de ciclare(for, while) contin si ele o instructiune de decizie if..else pentru a verifica daca este indeplinita conditia, asa ca implicit si ele influenteaza complexitatea ciclomatica a unei functii.
+
+9. La testarea Blackbox avem nevoie si de cod pentru a verifica daca datele de test acopera toate caile din program.
+
+   - **FALS.**
+     Testarea Blackbox prin definitie nu necesita cunoasterea codului, deoarece acestea introduc un input si observa output-ul general de sistemul aflat sub testare. 
+
+     Acest tip de testare ia in considerare specificatiile datelor de input si output si pentru un coverage cat mai mare efectueaza testarea partitiilor.
+
+10. Testele Whitebox nu pot garanta ca toate erorile dintr-o functie vor fi gasite, dar daca sunt dublate de teste Blackbox, se poate garanta ca vor fi gasite toate erorile din acea functie.
+    - **FALS.**
+      Dupa cum ne spune si Dijkstra, nicio forma de testare nu poate arata absenta erorilor, ci doar prezenta lor.
+      Erorile aparute depinde de modul in care sunt scrise testele, asa ca daca un anumit test case nu este luat in considerare din diferite motive, acea eroare nu va aparea in teste, dar poate aparea in production.
+      Evident, combinarea mai multor tehnici de testare asigura un procent mai mare de erori detectate, dar nicio combinatie nu ne poate garanta descoperirea tuturor erorilor dintr-un sistem software.
+
+11. Testarea de regresie este bazata pe ideea ca atunci cand se opereaza schimbari intr-un modul, imediat dupa modificare, eforturile de testare trebuie concentrate asupra acelui modul.
+    - **FALS.**
+      Ideea de baza a testarii de regresie este reluarea unui subset de teste care au fost rulate anterior. Bineinteles ca aceste teste au legatura cu modulul modificat, dar nu testeaza exclusiv acel modul. 
+      In testele de regresie se reiau 3 clase de teste:
+      - Cateva teste care testeaza toate functiile software
+      - Teste aditionale pe functii care ar putea fi afectate de schimbarea efectuata
+      - Teste focusate pe componentele software care au fost modificate in sine
+
+12. Daca avem la dispozitie codul, nu este suficient sa scriem teste Whitebox, chiar daca fiecare instructiune a fost exersata de catre un test.
+    - **ADEVARAT.**
+      Chiar daca fiecare instructiune a fost executata macar de un test, este nevoie si de alte teste pentru a detecta si alte erori care pot aparea. 
+      De exemplu, este nevoie de testarea intr-un mod special al ciclurilor imbricate, pornind de la cel mai interior ciclu, si setand iteratorul celor externe pe cea mai mica valoarea. Apoi se merge "in sus", setand ciclurile interne pe un iterator tipic, iar cele externe tot pe cel mai mic iterator.
+      De asemenea, este nevoie si de testare Blackbox, pentru a testa diferitele partitii in care pot fi cuprinse datele.
+
+13. Smoke Testing se refera la testarea detaliata a anumitor module, pentru a detecta erori subtile strecurate in implementare.
+    - **FALS.**
+      Smoke Testing se refera la testarea intregului software, compilat, concentrate pe a detecta erori care pot incurca sistemul din a isi executa functia. 
+      Scopul principal este de a detecta erori "show stopper", care au cea mai mare sansa de a intarzia proiectul.
+      Intreg produsul este Smoke Tested zilnic, oferind echipei o idee realista despre progresul Integration Testing.
+
+14. Metoda de testare de integrare Big-Bang este mai rapida decat testarea de integrare Top-Down sau Bottom-Up, pentru ca permite integrarea simultana a tuturor modulelor.
+    - **FALS.**
+      Intr-adevar, testarea Big-Bang permite integrarea simultana a tuturor modulelor, dar acest lucru creaza mai multe dezavantaje decat avantaje, deoarece erorile detectate nu pot fi localizate clar. 
+      Totodata, in urma rezolvarii unei erori, de multe ori apar altele, ducand la o "bucla infinita" de rezolvare a unor erori si aparitia altora.
+
+15. For the basis/independent path testing approach, we can compute directly based on the total function code, the exact number of tests that have to be written.
+    - **FALS.**
+      Trebuie sa efectuam un control flow graph, si sa observam complexitatea ciclomatica a functiei. Abia apoi putem sti cate teste trebuie sa scriem.
+
+16. When doing Blackbox testing on a function having as an input a list of elements, there are some special test cases that have to be designed for that.
+    - **ADEVARAT.**
+      In cazul unei liste de elemente testam:
+      - O lista goala.
+      - O lista cu un element.
+      - Liste cu numar diferit de elemente.
+      - Accesul la primul, ultimul element.
+      - Accesul la elementul din mijloc.

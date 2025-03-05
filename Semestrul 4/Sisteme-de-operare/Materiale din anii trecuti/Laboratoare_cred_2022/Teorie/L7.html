@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+
+<body>
+
+    <div class="box py-3 generalbox center clearfix">
+        <div class="no-overflow">
+            <h3>Concepte de baza<br></h3>
+            <p>Semnalele sunt o modalitate de exprimare a evenimentelor care apar asincron in sistem. Un proces oarecare
+                poate atat sa genereze, cat si sa primeasca semnale. In cazul in care un proces primeste un semnal, el
+                poate alege sa reactioneze la semnalul respectiv
+                intr-unul din urmatoarele trei moduri:
+
+            </p>
+            <ul>
+                <li>Sa le capteze, executand o actiune oarecare, prin intermediul unei <b>functii de tratare a
+                        semnalului</b> (<b>signal handler</b>)
+                </li>
+                <li>Sa le ignore
+                </li>
+                <li>Sa execute actiunea implicita la primirea unui semnal, care poate fi, dupa caz, terminarea
+                    procesului sau ignorarea semnalului respectiv.
+                </li>
+            </ul>
+            <p>
+
+                Semnalele pot fi de mai multe tipuri, care corespund in general unor actiuni specifice. Fiecare semnal
+                are asociat un numar, iar acestor numere le corespund unele constante simbolice definite in bibliotecile
+                sistemului de operare. Standardul POSIX.1 defineste
+                cateva semnale care trebuie sa existe in orice sistem UNIX.Cele mai importante si mai folosite semnale
+                ar fi urmatoarele:</p>
+            <p><br></p>
+            <table>
+                <caption></caption>
+                <thead>
+                    <tr>
+                        <th scope="col" style="border-width: 1px; border-style: solid;">Semnal</th>
+                        <th scope="col" style="border-width: 1px; border-style: solid;">ID semnal<br></th>
+                        <th scope="col" style="border-width: 1px; border-style: solid;">Descriere</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="border-width: 1px; border-style: solid;">SIGHUP</td>
+                        <td style="border-width: 1px; border-style: solid; text-align: center;">1</td>
+                        <td style="border-width: 1px; border-style: solid;">Hangup - terminalul folosit de proces a fost
+                            inchis<br></td>
+                    </tr>
+                    <tr>
+                        <td style="border-width: 1px; border-style: solid;">SIGINT</td>
+                        <td style="border-width: 1px; border-style: solid; text-align: center;">2</td>
+                        <td style="border-width: 1px; border-style: solid;">Interrupt - intrerupere de la tastatura (in
+                            general prin CTRL+C)<br></td>
+                    </tr>
+                    <tr>
+                        <td style="border-width: 1px; border-style: solid;">SIGQUIT</td>
+                        <td style="border-width: 1px; border-style: solid; text-align: center;">3</td>
+                        <td style="border-width: 1px; border-style: solid;">Quit - cerere de iesire din program de la
+                            tastatura (CTRL+\)<br></td>
+                    </tr>
+                    <tr>
+                        <td style="border-width: 1px; border-style: solid;">SIGILL</td>
+                        <td style="border-width: 1px; border-style: solid; text-align: center;">4</td>
+                        <td style="border-width: 1px; border-style: solid;">Illegal Instruction - se genereaza atunci
+                            cand procesul a executat o instructiune al carei <i>opcode</i> nu are corespondent in setul
+                            de instructiuni sau pentru care nu exista privilegii suficiente<br></td>
+                    </tr>
+                    <tr>
+                        <td style="border-width: 1px; border-style: solid;">SIGABRT</td>
+                        <td style="border-width: 1px; border-style: solid; text-align: center;">6</td>
+                        <td style="border-width: 1px; border-style: solid;">Abort - semnal de terminare anormala a
+                            procesului generat de functia <i>abort</i>.<br></td>
+                    </tr>
+                    <tr>
+                        <td style="border-width: 1px; border-style: solid;">SIGFPE</td>
+                        <td style="border-width: 1px; border-style: solid; text-align: center;">8</td>
+                        <td style="border-width: 1px; border-style: solid;">Floating Point Exception - semnal generat
+                            atunci cand in executia procesului a aparut o eroare la o operatie in virtual flotanta (ex.
+                            impartire la 0)<br></td>
+                    </tr>
+                    <tr>
+                        <td style="border-width: 1px; border-style: solid;">SIGKILL</td>
+                        <td style="border-width: 1px; border-style: solid; text-align: center;">9</td>
+                        <td style="border-width: 1px; border-style: solid;">Kill - Semnalul are ca efect distrugerea
+                            imediata a procesului. Acest semnal nu poate fi ignorat.<br></td>
+                    </tr>
+                    <tr>
+                        <td style="border-width: 1px; border-style: solid;">SIGUSR1</td>
+                        <td style="border-width: 1px; border-style: solid; text-align: center;">10</td>
+                        <td style="border-width: 1px; border-style: solid;">User defined 1 - Semnal fara semnificatie
+                            lasat pentru a putea fi folosit de catre utilizator<br></td>
+                    </tr>
+                    <tr>
+                        <td style="border-width: 1px; border-style: solid;">SIGUSR2</td>
+                        <td style="border-width: 1px; border-style: solid; text-align: center;">12</td>
+                        <td style="border-width: 1px; border-style: solid;">User defined 2 - Semnal fara semnificatie
+                            lasat pentru a putea fi folosit de catre utilizator</td>
+                    </tr>
+                    <tr>
+                        <td style="border-width: 1px; border-style: solid;">SIGSEGV</td>
+                        <td style="border-width: 1px; border-style: solid; text-align: center;">11</td>
+                        <td style="border-width: 1px; border-style: solid;">Segmentation fault - Semnalul apare atunci
+                            cand procesul a facut un acces ilegal la memorie<br></td>
+                    </tr>
+                    <tr>
+                        <td style="border-width: 1px; border-style: solid;">SIGPIPE</td>
+                        <td style="border-width: 1px; border-style: solid; text-align: center;">13</td>
+                        <td style="border-width: 1px; border-style: solid;">Broken pipe - se genereaza atunci cand s-a
+                            incercat scrierea intr-un <i>pipe</i> care are descriptorul de la capatul de citire
+                            inchis<br></td>
+                    </tr>
+                    <tr>
+                        <td style="border-width: 1px; border-style: solid;">SIGALRM</td>
+                        <td style="border-width: 1px; border-style: solid; text-align: center;">14</td>
+                        <td style="border-width: 1px; border-style: solid;">Timer alarm - semnal general in urma
+                            expirarii timer-ului setat de apelul <i>alarm</i>.<br></td>
+                    </tr>
+                    <tr>
+                        <td style="border-width: 1px; border-style: solid;">SIGTERM</td>
+                        <td style="border-width: 1px; border-style: solid; text-align: center;">15</td>
+                        <td style="border-width: 1px; border-style: solid;">Terminate - specifica o cerere de terminare
+                            a programului. Utilizatorul poate implementa cum doreste acest semnal (poate fi si
+                            ignorat)<br></td>
+                    </tr>
+                    <tr>
+                        <td style="border-width: 1px; border-style: solid;">SIGCONT</td>
+                        <td style="border-width: 1px; border-style: solid; text-align: center;">18</td>
+                        <td style="border-width: 1px; border-style: solid;">Continue - are ca efect continuarea unui
+                            proces suspendat prin SIGSTOP<br></td>
+                    </tr>
+                    <tr>
+                        <td style="border-width: 1px; border-style: solid;">SIGSTOP</td>
+                        <td style="border-width: 1px; border-style: solid; text-align: center;">19</td>
+                        <td style="border-width: 1px; border-style: solid;">Stop - Are ca rezultat suspendarea executiei
+                            procesului pana cand aceasta va fi reluata prin primirea unui semnal SIGCONT<br></td>
+                    </tr>
+                    <tr>
+                        <td style="border-width: 1px; border-style: solid;">SIGCHLD</td>
+                        <td style="border-width: 1px; border-style: solid; text-align: center;">17</td>
+                        <td style="border-width: 1px; border-style: solid;">Child terminated - Semnalul este primit de
+                            procesul parinte atunci cand un proces fiu si-a terminat executia<br></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p><br></p>
+            <p>Este important de analizat diferenta dintre semnalele SIGKILL si SIGTERM. Semnalul SIGKILL opreste
+                executie procesului destinar si il distruge fortat. Procesul nu poate ignora acest semnal si nici nu
+                poate sa ia vreo masura impotriva acestui comportament. In acest caz procesul se inchide fortat si este
+                posibil ca unele operatiuni prevazute pentru o inchidere normala sa nu se execute. <br></p>
+            <p>Semnalul SIGTERM este un semnal care poate fi ignorat de catre un proces si poate fi dat orice
+                comportament pentru tratarea lui. In general, acest semnal a gandit pentru a fi folosit pentru
+                inchiderea normala a unui proces. In momentul in care se doreste ca un proces sa isi termine executie i
+                se trimite semnalul SIGTERM. La receptia acestui semnal procesul ar trebui sa isi incheie executia
+                intr-un mod corect si normal (sa isi inchida descriptorii utilizati, sa elibereze memoria folosita,
+                etc). Acest comportament nu este obligatoriu dar este recomandat. <br></p>
+            <p>In general, in sistemul de operare Linux, cand se doreste ca un serviciu sau prorgram sa isi termine
+                executia, sistemul ii trimite intai semnalul SIGTERM. Daca procesul respectiv nu isi incheie executia
+                intr-un timp dat atunci sistemul este posibil sa ii trimita un semnal SIGKILL pentru a forta inchiderea
+                acestuia. <br></p>
+            <h3>Gestionarea semnalelor</h3>
+            <h4>Apelul sistem sigaction()</h4>
+            <p>Apelul sistem sigaction() are menirea de a defini comportarea procesului la primirea unui semnal. Acest
+                apel primeste
+                ca parametri numarul semnalului (<u>signum</u>), si doua structuri de tip
+                <i>struct sigaction *</i> (<u>act</u> si <u>oldact</u>). Executia sa va avea ca
+                efect instalarea noii actiuni pentru semnalul specificat din <u>act</u> (daca
+                acest parametru este nenul), si salvarea actiunii curente in <u>oldact</u> (la
+                fel, daca parametrul este nenul).</p>
+            <pre>int sigaction(int signum, const struct sigaction *act, struct sigaction *oldact); <br></pre>
+            <p>Structura de tip <i>struct sigaction</i> este definita in felul urmator:</p>
+            <pre>struct sigaction {<br>	void     (*sa_handler)(int);<br>	void     (*sa_sigaction)(int, siginfo_t *, void *);<br>	sigset_t   sa_mask;<br>	int        sa_flags;<br>	void     (*sa_restorer)(void);<br>};<br></pre>
+            <p>Parametrul <i>sa_handler </i>reprezinta noua rutina de tratare a semnalului
+                specificat. Alternativ, daca in <u>sa_flags</u>
+                este setat indicatorul <b>SA_SIGINFO</b> (prezentat mai jos), se poate defini
+                o rutina care primeste trei parametri in loc de unul singur, si in acest caz
+                ea se specifica prin parametrul <u>sa_sigaction</u>. Pentru mai multe detalii
+                legate de folosirea acestei din urma modalitati, consultati pagina de manual
+                <i>sigaction(2)</i>. In unele cazuri, acesti
+                doi parametri sunt prinsi intr-un <b>union</b>, si deci se recomanda sa se
+                specifice doar unul din ei.<br></p>
+            <p>Parametrul sa_mask va specifica setul de semnale care vor fi blocate in timpul executiei rutinei de
+                tratare a semnalului dat. Acest parametru este de tipul sigset_t, care este de fapt o masca de biti, cu
+                cate un bit pentru fiecare semnal definit in sistem. Operatiile asupra acestui tip de masca se fac
+                folosind functiile din familia sigsetops(3). Sintaxa si functionarea acestor apeluri este foarte simpla,
+                consultati pagina de manual pentru a vedea exact care sunt parametrii lor si modul de functionare.</p>
+            <p></p>
+            <p>
+                Parametrul <i>sa_flags </i>va specifica un set de indicatori care afecteaza
+                comportarea procesului de tratare a semnalelor. Acest parametru se formeaza
+                prin efectuarea unei operatii de SAU logic folosind una sau mai multe din
+                urmatoarele valori:
+
+            </p>
+            <ul>
+                <li>
+                    <b>SA_NOCLDSTOP</b> - daca <u>signum</u> este <b>SIGCHLD</b>, procesul nu
+                    va primi un semnal <b>SIGCHLD</b> atunci cand procesul fiu este suspendat
+                    (de exemplu cu <b>SIGSTOP</b>), ci numai cand acesta isi termina executia;
+                </li>
+                <li>
+                    <b>SA_ONESHOT</b> sau <b>SA_RESETHAND</b> - va avea ca efect resetarea rutinei
+                    de tratare a semnalului la <b>SIG_DFL</b> dupa prima rulare a rutinei,
+                    asemanator cu comportamentul implementarii originale a apelului <tt>
+                        <b>signal()</b></tt>;
+                </li>
+                <li>
+                    <b>SA_ONSTACK</b> - executia rutinei de tratare va avea loc folosind alta
+                    stiva;
+                </li>
+                <li>
+                    <b>SA_RESTART</b> - ofera compatibilitate cu comportamentul semnalelor in
+                    sistemele din familia 4.3BSD;
+                </li>
+                <li>
+                    <b>SA_NOMASK</b> sau <b>SA_NODEFER</b> - semnalul in discutie nu va fi inclus
+                    in mod automat in <i>sa_mask </i>(comportamentul implicit este acela de a
+                    impiedica aparitia unui semnal in timpul executiei rutinei de tratare a
+                    semnalului respectiv);
+                </li>
+                <li>
+                    <b>SA_SIGINFO</b> - se specifica atunci cand se doreste utilizarea lui
+                    <i>sa_siginfo </i>in loc de <i>sa_handler</i>. Pentru mai multe detalii,
+                    consultati pagina de manual <tt><b><span class=""
+                                style="font-family: Arial, Helvetica, sans-serif;">sigaction(2)</span></b><span class=""
+                            style="font-family: Arial, Helvetica, sans-serif;">.</span>
+                    </tt>
+                </li>
+            </ul>
+            <pre>int sigprocmask(int how, const sigset_t *set, sigset_t *oldset); <br></pre>
+            <p>Apelul sigprocmask() este folosit pentru a modifica lista semnalelor care sunt blocate la un moment dat.
+                Acest lucru se face in functie de valoarea parametrului how, in felul urmator: <br></p>
+            <p></p>
+            <ul>
+                <li><b>SIG_BLOCK</b> - adauga la lista semnalelor blocate semnalele din
+                    lista <u>set</u> data ca parametru;</li>
+                <li><b>SIG_UNBLOCK</b> - sterge din lista semnalelor blocate semnalele aflate
+                    in lista <u>set</u>;</li>
+                <li><b>SIG_SETMASK</b> - face ca doar semnalele din lista <i>set </i>sa se
+                    regaseasca in lista semnalelor blocate.</li>
+            </ul>Daca parametrul oldset este nenul, in el se va memora valoarea listei semnalelor blocate anterioara
+            executiei lui sigprocmask().<p></p>
+            <pre>int sigpending(sigset_t *set); <br></pre>
+            <p></p>
+            <p>Apelul sistem sigpending() permite examinarea semnalelor care au aparut in timpul in care ele au fost
+                blocate, prin returnarea acestor semnale in masca set data ca parametru.</p>
+            <pre>int sigsuspend(const sigset_t *mask); <br></pre>
+            <p>Apelul sigsuspend() inlocuieste temporar masca semnalelor blocate a procesului cu cea data in parametrul
+                mask si suspenda procesul pana la primirea unui semnal.</p>
+            <p>Apelurile sigaction(), sigprocmask() si sigpending()() returneaza valoarea 0 in caz de succes si -1 in
+                caz de eroare. Apelul sigsuspend() retruneaza&nbsp; intotdeauna -1, iar in mod normal variabila errno
+                este setata la valoarea EINTR.</p>
+            <p></p>
+            <p>
+                In urma executiei cu eroare a unuia din apelurile de mai sus, variabila
+                <b>errno</b> poate sa ia una din urmatoarele valori:
+
+            </p>
+            <ul>
+                <li><b>EINVAL</b> - atunci cand a fost specificat un semnal invalid, adica
+                    nedefinit in implementarea curenta, sau unul din semnalele <b>SIGKILL</b>
+                    sau <b>SIGSTOP</b>;</li>
+                <li><b>EFAULT</b> - atunci cand una din variabilele date ca parametru indica
+                    spre o zona de memorie care nu face parte din spatiul de adrese al procesului;</li>
+                <li><b>EINTR</b> - atunci cand apelul a fost intrerupt.</li>
+            </ul>Fiind apeluri sistem, toate aceste functii se afla in pagina de manual aferenta din sectiunea 2.<p></p>
+            <h4>Apelul sistem kill()</h4>
+            <pre>int kill(pid_t pid, int sig); <br></pre>
+            <p></p>
+            <p>
+                Acest apel sistem este folosit pentru a trimite un semnal unui anumit proces
+                sau grup de procese. In functie de valoarea parametrului <u>pid</u>, executia
+                apelului va avea unul din urmatoarele efecte:
+
+            </p>
+            <ul>
+                <li>Daca <u>pid</u> &gt; 0, semnalul va fi trimis procesului care are PID-ul
+                    egal cu <u>pid</u>;</li>
+                <li>Daca <u>pid</u> == 0, semnalul va fi trimis tuturor proceselor din
+                    acelasi grup de procese cu procesul curent;</li>
+                <li>Daca <u>pid</u> == -1, semnalul va fi trimis tuturor proceselor care
+                    ruleaza in sistem (de notat faptul ca, in majoritatea implementarilor, nu
+                    se poate trimite in acest fel catre procesul <b>init</b> un semnal pentru care
+                    acesta nu are prevazuta o rutina de tratare, si de asemenea, faptul ca de
+                    obicei in acest fel procesului curent nu i se trimite semnalul respectiv);</li>
+                <li>Daca <u>pid</u> &lt; -1, se va trimite semnalul catre toate procesele
+                    din grupul de procese cu numarul -<u>pid</u>.</li>
+            </ul>
+
+            <p>
+                Daca valoarea lui <u>sig</u> este zero, nu se va trimite nici un semnal,
+                dar apelul va executa verificarile de eroare. Acest lucru este util in cazul
+                in care se doreste sa se stie, de exemplu, daca avem suficiente permisiuni
+                pentru a trimite un semnal catre un proces dat.<br>
+
+            </p>
+            <p>
+                Acest apel returneaza 0 in caz de succes si -1 in caz de eroare, setand
+                variabila <b>errno</b> la una din urmatoarele valori in cazul executiei cu
+                eroare:
+
+            </p>
+            <ul>
+                <li><b>EINVAL</b> - in cazul specificarii unui semnal invalid;</li>
+                <li><b>ESRCH</b> - in cazul in care procesul sau grupul de procese
+                    specificat nu exista;</li>
+                <li><b>EPERM</b> - in cazul in care nu se dispune de permisiuni suficiente
+                    pentru a trimite semnalul respectiv procesului specificat.</li>
+            </ul>
+            <p></p>
+            <h4>Functia raise()</h4>
+            <pre>int raise(int sig); <br></pre>
+            <p>Aceasta functie este folosita pentru a trimite un semnal catre procesul curent. Executia ei este similara
+                cu executia urmatorului apel: <br></p>
+            <pre>kill(getpid(), sig);</pre>
+            <p>Functia returneaza 0 in caz de succes, si o valoare diferita de zero in caz de eroare. <br></p>
+            <h4>Functia abort()</h4>
+            <pre>void abort(void);<br></pre>
+            <p>Aceasta functie are ca efect trimiterea catre procesul curent a unui semnal SIGABRT, care are ca efect
+                terminarea anormala a procesului, mai putin daca semnalul este tratat de o rutina care nu se termina.
+                Daca executia lui abort() are ca efect terminarea procesului, toate fisierele deschise in interiorul
+                acestuia vor fi inchise.Este important de notat ca daca semnalul SIGABRT este ignorat sau blocat,
+                executia acestei functii nu va tine cont de acest lucru si procesul va fi terminat in mod anormal. <br>
+            </p>
+            <h4>Apelul sistem alarm()</h4>
+            <pre>unsigned int alarm(int seconds); <br></pre>
+            <p>Aceasta functie are ca efect faptul ca nucleul instantiaza un timer initializat cu numarul de secunde
+                specificat ca parametru. Dupa expirarea timpului, nucleul trimite procesului apeland un semnal
+                SIGALRM.Daca o alarma a fost deja programata, ea este anulata
+                in momentul executiei ultimului apel, iar daca valoarea lui <i>seconds
+                </i>este zero, nu va fi programata o alarma noua.In urma executiei, se returneaza numarul de secunde
+                ramase din alarma
+                precedenta, sau 0 daca nu era programata nici o alarma.&nbsp;</p>
+            <h4>Functiile sleep() si usleep()</h4>
+            <pre>unsigned int sleep(unsigned int seconds);<br>int usleep(useconds_t usec);<br></pre>
+            <p>Cele 2 functii au ambele rolul de a suspenda executia procesului (sau a thread-ului) apelant pentru o
+                perioada de timp specificata ca parametru. Functia <i>sleep() </i>suspenda executia pentru un numar de
+                secunde iar functia <i>usleep()</i> pentru un numar de microsecunde. Procesul (sau thread-ul) nu va fi
+                suspendat exact cat a fost specificat ci este posibil sa fie suspendat putin mai mult in functie de
+                gradul de incarcare a sistemului si de granularitatea timer-elor din sistem.<br></p>
+            <p></p>
+        </div>
+    </div>
+</body>
+
+</html>

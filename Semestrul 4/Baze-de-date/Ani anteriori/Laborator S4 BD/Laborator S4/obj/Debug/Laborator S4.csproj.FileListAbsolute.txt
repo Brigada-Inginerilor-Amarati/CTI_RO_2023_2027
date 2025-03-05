@@ -1,0 +1,11 @@
+C:\Users\student-b529\Downloads\Laborator S4\Laborator S4\bin\Debug\Laborator S4.exe.config
+C:\Users\student-b529\Downloads\Laborator S4\Laborator S4\bin\Debug\Vanzari.mdf
+C:\Users\student-b529\Downloads\Laborator S4\Laborator S4\bin\Debug\Vanzari_log.ldf
+C:\Users\student-b529\Downloads\Laborator S4\Laborator S4\bin\Debug\Laborator S4.exe
+C:\Users\student-b529\Downloads\Laborator S4\Laborator S4\bin\Debug\Laborator S4.pdb
+C:\Users\student-b529\Downloads\Laborator S4\Laborator S4\obj\Debug\Laborator S4.csprojResolveAssemblyReference.cache
+C:\Users\student-b529\Downloads\Laborator S4\Laborator S4\obj\Debug\Laborator_S4.Form1.resources
+C:\Users\student-b529\Downloads\Laborator S4\Laborator S4\obj\Debug\Laborator_S4.Properties.Resources.resources
+C:\Users\student-b529\Downloads\Laborator S4\Laborator S4\obj\Debug\Laborator S4.csproj.GenerateResource.Cache
+C:\Users\student-b529\Downloads\Laborator S4\Laborator S4\obj\Debug\Laborator S4.exe
+C:\Users\student-b529\Downloads\Laborator S4\Laborator S4\obj\Debug\Laborator S4.pdb

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+
+<body>
+
+    <div class="no-overflow">
+        <h3>Concepte de baza</h3>
+        <p style="text-align: justify;">Orice sistem de calcul modern este capabil sa execute mai multe programe
+            in acelasi timp. Cu toate acestea, in cele mai multe cazuri, unitatea centrala
+            de prelucrare (CPU) nu poate executa la un moment dat decat un singur program.
+            De aceea, sarcina de a rula mai multe programe in acelasi timp revine sistemului
+            de operare, care trebuie sa introduca un model prin intermediul caruia
+            executia programelor, privita din perspectiva utilizatorului, sa se desfasoare
+            in paralel. Se realizeaza, de fapt, un <i>pseudoparalelism</i>, prin care
+            procesorul este alocat pe rand programelor care trebuie rulate, cate o
+            cuanta de timp pentru fiecare, astfel incat din exterior ele par ca ruleaza
+            efectiv in acelasi timp.</p>
+        <p></p>
+        <p style="text-align: justify;"></p>
+        <p style="text-align: justify;">Cel mai raspandit model care introduce paralelismul in executia programelor
+            este modelul bazat pe <b>procese</b>. Acest model este cel adoptat de sistemul
+            de operare Unix si va face obiectul acestei lucrari.
+        </p>
+        <p style="text-align: justify;">Un <i>proces</i> este un program secvential <i>in executie</i>, impreuna
+            cu zona sa de date, stiva si numaratorul de instructiuni (program counter).
+            Trebuie facuta inca de la inceput distinctia dintre <i>proces</i> si <i>program</i>.
+            Un program este, in fond, un sir de instructiuni care trebuie executate
+            de catre calculator, in vreme ce un proces este o abstractizare a programului,
+            specifica sistemelor de operare. Se poate spune ca un proces executa un
+            program si ca sistemul de operare lucreaza cu procese, iar nu cu programe.
+            Procesul include in plus fata de program informatiile de stare legate de
+            executia programului respectiv (stiva, valorile registrilor CPU etc.).
+            De asemenea, este important de subliniat faptul ca un program (ca aplicatie
+            software) poate fi format din <i>mai multe procese</i> care sa ruleze sau
+            nu in paralel. <br></p>
+        <p style="text-align: justify;">Unitatea elementara de executie intr-un proces este thread-ul. Asadar, dupa cum
+            s-a spus anterior, fiecarui thread sistemul de operare ii acorda o cuanta de timp procesor. Componenta din
+            nucleul sistemelor de operare Linux (si nu numai) care acorda aceste cuante de timp thread-urile se numeste
+            planificator (scheduler). In Linux, fiecare thread are asociata o politica de planificare (scheduling
+            policy) si o prioritate statica de planificare (static sched policy) iar in functie de acesti parametri,
+            planificatorul decide, pe baza unor algoritmi cand si cat ii se acorda cuanta de timp procesor fiecarui
+            thread.</p>
+        <p style="text-align: justify;">Politicile de planificare (sau algoritmii de planificare), in functie de
+            constrangerile de timp se pot imparti in:</p>
+        <p></p>
+        <p></p>
+        <ul>
+            <li>hard real-time: aplicatiile din aceasta categorie au conditii stricte de timp si se considera ca daca
+                aplicatia si-a depasit timpul alocat (deadline-ul) atunci consecintele asupra sistemului sunt
+                catastrofale. Exemplu de aplicatii hard real-time: verificarea starii pedalei de frana la masina,
+                verificarea starilor comenzilor la avioane, verificarea parametrilor intr-un reactor nuclear. In oricare
+                din aceste exemple daca o aplicatie si-a depasit deadline-ul si astfel nu si-a indeplinit scopul,
+                urmarile pot duce la dezastre.<br></li>
+            <li>firm real-time: la aplicatiile din aceasta categorie depasirea unui deadline poate fi tolerata dar
+                depasirile repetate ale deadline-ului pot duce la nefunctionarea totala a sistemului. Exemplu: achizitia
+                de semnal audio - daca se pierde un esantion audio foarte rar este aproape insesizabil dar pierderea
+                repetata de esantioane audio poate duce la pierderea totala a informatiei.<br></li>
+            <li>soft real-time: la aplicatiile din aceasta categorie se considera ca depasirea unui deadline poate
+                afecta doar performanta sistemului fara sa-i afecteze functionalitatea de baza. Exemplu: aplicatie de
+                streaming video<br></li>
+            <li>non real-time: la aceasta categorie de aplicatii nu exista nici un fel de constrangeri de timp<br></li>
+        </ul>
+        <p></p>
+        <p style="text-align: justify;"></p>
+        <p style="text-align: justify;">In Linux exista mai multe politici de planificare disponibile:</p>
+        <ul>
+            <li>SCHED_OTHER (SCHED_NORMAL) - aceasta reprezinta politica implicita de planificare a thread-urilor in
+                Linux. Thread-urile vor avea in acest caz toate prioritate 0. Thread-urile vor fi alese pentru a fi
+                executate dintr-o lista avand fiecare drept egal de executie. Exista totusi un mecanism pentru a
+                favoriza sau defavoriza anumite thread-uri, reprezentat printr-o prioritate dinamica numita
+                <i>nice-level</i>. Aceasta prioritate dinamica se aplica doar pentru prioritatea statica 0.</li>
+            <li>SCHED_BATCH - similar ca si SCHED_NORMAL dar in plus planificatorul va considera in algoritmul de
+                planificare aspectul ca un astfel de thread poate folosi procesorul in mod invensiv</li>
+            <li>SCHED_IDLE - politica de planificare folosita pentru thread-uri cu o prioritate extrem de mica</li>
+            <li>SCHED_RR, SCHED_FIFO - aceste 2 politici de planificare sunt considerate soft real-time si se folosesc
+                cu prioritate statica mai mare decat 0. <br></li>
+            <li>SCHED_DEADLINE - aceasta politica de planificare a fost introdusa in nucleul de Linux incepand cu
+                versiunea 3.14 in urma unui proiect desfasurat la Universitatea Scuola Sant’Anna din Pisa si inclus in
+                nucleul de Linux in 2014. Este o politica de schduling hard real-time bazata pe algoritmul de
+                planificare EDF (Earliest Deadline First). Prin aceasta politica de planificare sistemele Linux devin
+                astfel utilizabile si in domenii cu constrangeri stranse de timp</li>
+        </ul>
+        <p style="text-align: justify;">Sistemul de planificare a thread-urile in Linux este preemptiv adica un thread
+            de o anumita prioritate static poate fi oricand intrerupt pentru a lansa in executie in thread de o
+            prioritate mai mare.<br></p>
+        <p style="text-align: justify;">Pentru a se schimba o politica de planificare a unui thread exista apeluri
+            sistem dedicate. Trebuie mentionat doar ca un thread lansat in executie (un program, un proces... etc) fara
+            a se specifica nimic legat de politica de planificare este lansat de catre nucleul folosind politica
+            implicita SCHED_OTHER.</p>
+        <p style="text-align: justify;">Orice proces este executat secvential, iar mai multe procese pot sa
+            ruleze in paralel (intre ele). De cele mai multe ori, executia in paralel
+            se realizeaza alocand pe rand procesorul cate unui proces. Desi la un moment
+            dat se executa un singur proces, in decurs de o secunda, de exemplu,&nbsp;
+            pot fi executate portiuni din mai multe procese. Din aceasta schema rezulta
+            ca un proces se poate gasi, la un moment dat, in una din urmatoarele stari:<br></p>
+        <ul>
+            <li>in executie</li>
+            <li>pregatit pentru executie</li>
+            <li>blocat</li>
+        </ul>
+        <p style="text-align: justify;">Procesul se gaseste <i>in executie</i> atunci cand procesorul ii executa
+            instructiunile. <i>Pregatit de executie</i> este un proces care, desi ar
+            fi gata sa isi continue executia, este lasat in asteptare din cauza ca
+            un alt proces este in executie la momentul respectiv. De asemenea, un proces
+            poate fi <i>blocat</i> din doua motive: el isi suspenda executia in mod voit sau procesul efectueaza o
+            operatie in afara procesorului,
+            mare consumatoare de timp (cum e cazul operatiilor de intrare-iesire -
+            acestea sunt mai lente si intre timp procesorul ar putea executa parti
+            din alte procese).</p>
+        <p style="text-align: justify;">Pentru mai multe informatii despre sistemul de planificare din Linux se
+            recomanda a se citi pagina de manual sched(7): <i>man 7 sched</i>.</p>
+        <h3>Gestionarea proceselor in UNIX<br></h3>
+        <h4>Apelul sistem fork()</h4>
+        <p></p>
+        <p></p>
+        <p>Din perspectiva programatorului, sistemul de operare UNIX pune la dispozitie
+            un mecanism elegant si simplu pentru crearea si utilizarea proceselor.
+        </p>
+        <p>Orice proces trebuie creat de catre un alt proces.Procesul creator este
+            numit <i>proces parinte</i>, iar procesul creat <i>proces fiu</i>. Exista
+            o singura exceptie de la aceasta regula, si anume procesul <i>init</i>,
+            care este procesul initial, creat la pornirea sistemului de operare si
+            care este responsabil pentru crearea urmatoarelor procese. Interpretorul
+            de comenzi, de exemplu, ruleaza si el in interiorul unui proces.
+        </p>
+        <p>Fiecare proces are un identificator numeric, numit <i>identificator
+                de proces (process identifier - PID)</i>. Acest identificator este folosit
+            atunci cand se face referire la procesul respectiv, din interiorul programelor
+            sau prin intermediul interpretorului de comenzi.
+        </p>
+        <p>Un proces trebuie creat folosind apelul sistem fork()</p>
+        <pre>pid_t fork()<br></pre>Prin aceasta functie sistem, procesul apelant (parintele) creeaza un nou
+        proces (fiul) care va fi o <i>copie fidela</i> a parintelui (se copiaza din parinte catre fiu continutul zonelor
+        de memorie - stiva, heap, zona statica - , program counter-ul, descriptorii). Noul proces
+        va avea propria lui zona de date, propria lui stiva, propriul lui cod executabil,
+        toate fiind copiate de la parinte in cele mai mici detalii. Rezulta ca
+        variabilele fiului vor avea <b>valorile </b>variabilelor parintelui in momentul
+        apelului functie <i>fork( )</i>, iar executia fiului va continua cu instructiunile
+        care urmeaza imediat acestui apel, codul fiului fiind identic cu cel al
+        parintelui. Cu toate acestea, in sistem vor exista din acest moment doua
+        procese independente, (desi identice), cu zone de date si stiva distincte.
+        Orice modificare facuta, prin urmare, asupra unei variabile din procesul
+        fiu, va ramane invizibila procesului parinte si invers. Practic intre cele doua procese nu va ma exista nici o
+        legatura, doar cea de parinte-fiu. <br>
+        <p></p>
+        <p></p>
+        <p>Procesul fiu va mosteni de la parinte toti descriptorii de fisier deschisi
+            de catre acesta, asa ca orice prelucrari ulterioare in fisiere vor fi efectuate
+            in punctul in care le-a lasat parintele.
+        </p>
+        <p>Deoarece codul parintelui si codul fiului sunt identice si pentru ca
+            aceste procese vor rula in continuare in paralel, trebuie facuta clar distinctia,
+            in interiorul programului, intre actiunile ce vor fi executate de fiu si
+            cele ale parintelui. Cu alte cuvinte, este nevoie de o metoda care sa indice
+            care este portiunea de cod a parintelui si care a fiului.
+            <br>Acest lucru se poate face simplu, folosind valoarea returnata de functia
+            <i>fork( )</i>. Ea returneaza: <br></p>
+        <p></p>
+        <ul>
+            <li>-1, daca operatia nu s-a putut efectua (eroare) si se seteaza corespunzator valoarea variabilei globale
+                <i>errno</i>.<br></li>
+            <li>0, in codul fiului</li>
+            <li><i>pid</i>, in codul parintelui, unde <i>pid </i>este identificatorul de proces al fiului nou-creat.
+            </li>
+        </ul>
+        <p>Prin urmare, o posibila schema de apelare a functiei <i>fork( )</i> ar
+            fi:</p>
+        <pre>if( ( pid=fork() ) &lt; 0)<br>  {<br>    perror("Eroare");<br>    exit(1);<br>  }<br>if(pid==0)<br>  {<br>    /* codul fiului - doar codul fiului poate ajunge aici (doar in fiu fork() returneaza 0*/<br>    ...<br>    exit(0); // apel necesar pentru a se opri codul fiului astfel incat acesta sa nu execute si codul parintelor<br>  }<br>/* codul parintelui */<br></pre>
+        <p>Principalele cazuri de eroare ce pot fi semnalate de apelul sistem fork, ceea ce reprezinta faptul ca nu se
+            mai pot crea procese noi, pot fi:</p>
+        <ul>
+            <li>memorie insuficienta</li>
+            <li>s-au epuizat toate valorile de PID disponibile (numarul maxim de valori pentru PID la un moment dat este
+                specificat in fisierul special /proc/sys/kernel/pid_max)</li>
+            <li>s-a ajuns la limita maxima de thread-uri ce se pot crea (numarul maxim de thread-uri din sistem se poate
+                afla consultand fisierul special /proc/sys/kernel/threads-max)</li>
+        </ul>
+        <p>Pentru mai multe informatii se recomanda consultarea paginii de manual. Pagina de manual a apelului sistem
+            fork() se afla in sectiunea 2 (man 2 fork).<br></p>
+        <p></p>
+        <p></p>
+        <h4>Apeluri sistem wait() si waitpid()</h4>
+        <p style="text-align: justify;">In momentul in care procesul isi termina executia (in general prin apelul sistem
+            exit() ) el nu este complet sters de catre nucleu ci este trecut intr-o stare de proces terminat sau
+            <i>zombie</i>. In aceasta stare nucleul nu sterge procesul din tabela de procese ci asteapta ca procesul
+            parinte sa ii citeasca starea cu care si-a terminat executia. Cat timp procesul este in starea zombie
+            nucleul nu face nici o modificare asupra lui astfel ca toate componente lui de memorie raman alocate
+            (inclusiv PID-ul rezervat in momentul in care a fost creat). Un proces parinte poate sa obtina starea cu
+            care s-a terminat un proces fiu folosind functiile din famila <i>wait</i>. Abia dupa un apel a acestor
+            functii nucleul sterge complet procesul fiu ramas in starea zombie:</p>
+        <pre>pid_t wait(int *status);<br>pid_t waitpid(pid_t pid, int *status, int flags);<br></pre>
+        <p style="text-align: justify;">Functia <i>wait( )</i> este folosita pentru asteptarea terminarii fiului
+            si preluarea valorii returnate de acesta. Parametrul <i>status</i> este
+            folosit pentru evaluarea valorii returnate, folosind cateva macro-uri definite
+            special (vezi paginile de manual corespunzatoare functiilor <i>wait( )</i>
+            si <i>waitpid( ) </i>). Functia <i>waitpid( )</i> este asemanatoare cu
+            <i>wait( )</i>, dar asteapta terminarea unui anumit proces dat, in vreme
+            ce <i>wait( ) </i>asteapta terminarea oricarui fiu al procesului curent.
+            Este obligatoriu ca starea proceselor sa fie preluata dupa terminarea acestora,
+            astfel ca functiile din aceasta categorie nu sunt optionale. Conform paginii de manual, functiile wait si
+            waitpid returneaza valoarea PID-ului procesului fiu in starea zombie (ce si-a terminat executia) si -1 in
+            caz de eroare. Este important de mentionat ca printre erori se gaseste si situatia in care nu mai exista
+            procese fiu ale procesului parinte apelant care sa se termine, in acest caz functiile <i>wait </i>si
+            <i>waitpid </i>returnand tot -1. Pentru a se face distrinctie intre erori se recomanda si inspectarea
+            valorii <i>errno</i>. Pagina de manual pentru functiile <i>wait </i>si <i>waitpid </i>se gasesc in sectiunea
+            2 (man 2 wait).</p>
+        <h4>Functii din familia exec()</h4>
+        <p>Functia<i> fork( )</i> creeaza un proces identic cu procesul parinte. Pentru
+            a crea un nou proces care sa ruleze un program diferit de cel al parintelui,
+            aceasta functie se va folosi impreuna cu unul din apelurile sistem de tipul
+            <i>exec( )</i>: <i>execl( ), execlp( ), execv( ), execvp( ), execle( ),
+                execve( )</i>.</p>
+        <p>Toate aceste functii primesc ca parametru un nume de fisier care reprezinta
+            un program executabil si realizeaza lansarea in executie a programului.
+            Programul va fi lansat atfel incat se va suprascrie codul, datele si
+            stiva procesului care apeleaza exec( ). Imediat dupa acest
+            apel codul programului initial (a procesului apelant) nu va mai exista in memorie. Procesul va ramane,
+            insa, identificat prin acelasi numar (PID) si va mosteni toate eventualele
+            redirectari facute in prealabil asupra descriptorilor de fisiere (de exemplu
+            intrarea si iesirea standard). De asemenea, el va pastra relatia parinte-fiu
+            cu procesul care a apelat fork( ). Toate functiile din familia <i>exec()</i> in principiu fac acelasi lucru
+            dar pun la dispozitia programatorului mai multe forme de apel. In final toate aceste functii ajung in a face
+            apelul sistem <i>execve().</i> Putem deci considera ca functiile din familia exec() sunt doar niste functii
+            de tip wrapper peste apelul sistem <i>execve()</i>:</p>
+        <p><br></p>
+        <p style="text-align: center;"><img
+                src="data:image/gif;base64,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"
+                alt=""></p>
+        <p></p>
+        <p>Functiile din familia exec() sunt functii de biblioteca si se gasesc astfel in pagina de manual din sectiunea
+            3 (ex. man 3 exec):</p>
+        <pre>int execl(const char *path, const char *arg, ... /* (char  *) NULL */);<br>int execlp(const char *file, const char *arg, ... /* (char  *) NULL */);<br>int execle(const char *path, const char *arg, ... /*, (char *) NULL, char * const envp[] */);<br>int execv(const char *path, char *const argv[]);<br>int execvp(const char *file, char *const argv[]);<br>int execvpe(const char *file, char *const argv[], char *const envp[]);<br></pre>
+        <p>Apelul sistem execve() care sta la baza functiilor de biblioteca din familia exec se afla in pagina de manual
+            din sectiunea 2 (man 2 execve):</p>
+        <pre>int execve(const char *filename, char *const argv[], char *const envp[]);<br></pre>
+        <p>Exemplu de utilizare a unei functii din familia exec():</p>
+        <pre>int main(void)<br>{<br>	int pid;<br>	int status;<br>	if ((pid = fork()) &lt; 0)<br>	{<br>		perror("Eroare la fork");<br>		exit(-1);<br>	}<br>	if (pid == 0)<br>	{<br>		/* cod fiu */<br>		execlp ("ls","ls","-l",NULL); <br>		printf ("Eroare la exec"); // daca codul a ajuns la aceasta linie -&gt; execlp a esuat<br>		exit(0);<br>	}<br>	/* cod parinte */<br>	wait (&amp;status);<br>}<br></pre>
+        <h4>Functia system()<br></h4>
+        <p>O varianta extrem de simplificata a celor expuse in paragraful anterior despre functiile din familia exec()
+            este folosirea functiei system(). Aceasta functie Lanseaza in executie un program de pe disc, folosind in
+            acest scop un apel
+            <i>fork( )</i>, urmat de <i>exec( )</i>, impreuna cu <i>waitpid( )</i>
+            in parinte:</p>
+        <pre>int system(const char *cmd);</pre>
+        <p>Pagina de manual pentru functia system, fiind o functie de biblioteca, se afla in sectiunea 3 (<i>man 3
+                system</i>).</p>
+        <h4>Apelul sistem vfork()</h4>
+        <p style="text-align: justify;">O varianta mai rapida dar si incompleta a apelului sistem fork() este si apelul
+            sistem vfork(). Acesta creeaza un nou proces, la fel ca <i>fork( )</i>, dar nu copiaza in intregime
+            spatiul de adrese al parintelui in fiu. De obicei este folosit in conjunctie cu functiile <i>exec(
+                )</i>, si are avantajul ca nu se mai consuma timpul necesar operatiilor
+            de copiere care oricum ar fi inutile daca imediat dupa aceea se apeleaza
+            <i>exec( )</i> (oricum, procesul fiu va fi supascris cu programul luat
+            de pe disc).</p>
+        <h4 style="text-align: justify;">Alte apeluri sistem pentru gestiunea proceselor</h4>
+        <pre>pid_t getpid();  // returneaza PID-ul procesului curent<br>pid_t getppid(); // returneaza PID-ul parintelui procesului curent<br>uid_t getuid();  // returneaza identificatorul utilizatorului care a lansat procesul curent<br>gid_t getgid();  // returneaza identificatorul grupului utilizatorului care a lansat procesul curent<br></pre>
+        <p>Pentru mai multe detalii despre aceste apeluri sistem se recomanda cautarea lor in pagina de manual aferenta
+            (fiind apeluri sistem se vor gasi in seciunea 2).</p>
+        <h4>Gestionarea proceselor din linia de comanda</h4>
+        <p>Sistemul de operare UNIX are cateva comenzi foarte utile care se refera
+            la procese:</p>
+        <ul>
+            <li>comanda <b>ps</b> - afiseaza informatii despre procesele care ruleaza in mod curent
+                pe sistem. Comanda este foarte utila pentru a afla PID-ul unui proces ce ruleaza deja</li>
+            <li>comanda <b>kill </b>- trimite un semnal catre un proces identificat prin PID: kill -<i>semnal
+                </i><i>pid</i><i>. </i>Semnalul poate fi dat atat ca si numar cat si ca si denumite</li>
+            <li>comanda <b>kilall </b>- trimite un semnal catre un proces identificat prin nume: kill <i>-semnal
+                    nume</i>.<br></li>
+        </ul>
+        <p><br></p>
+        <p><br></p>
+    </div>
+</body>
+
+</html>

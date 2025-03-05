@@ -1,0 +1,11 @@
+Sa se implementeze un program C, folosind apeluri sistem si functii de biblioteca, care se apeleaza sub forma: ./executabil c file1 file2 …
+
+Se va verifica faptul ca exista minim 2 argumente, dintre care primul este un caracter alfanumeric (c), iar celelalte (file1, file2, …) sunt cai catre fisiere obisnuite. In caz de erori la numarul sau tipul argumentelor, se vor afisa mesaje de utilizare corespunzatoare. Argumentele care nu sunt fisiere obisnuite nu vor fi prelucrate.
+
+Se va parcurge lista de argumente (excluzand caracterul dat) si se va crea cate un proces fiu pentru fiecare fisier obisnuit. Fiecare proces fiu va calcula numarul de aparitii ale caracterului c in fisierul asociat si va afisa pe ecran o linie de forma "<nume_fisier>: <numar_aparitii>". Parintele va afisa pe ecran caracterul "." in mod repetat, pana la terminarea tuturor proceselor fiu. La terminarea fiecarui proces fiu, parintele va afisa pe ecran un mesaj de forma "Procesul fiu cu PID-ul <PID> s-a incheiat cu codul <cod>".
+
+Procesele fiu si procesul parinte vor rula obligatoriu in paralel.
+
+Se vor trata cazurile de eroare pentru apelurile sistem folosite.
+
+Functiile de biblioteca permise sunt DOAR pentru formatări (printf) şi verificări de tip de caracter.

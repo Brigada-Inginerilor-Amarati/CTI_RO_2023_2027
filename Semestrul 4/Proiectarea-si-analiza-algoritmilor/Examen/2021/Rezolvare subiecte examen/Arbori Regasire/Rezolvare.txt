@@ -1,0 +1,36 @@
+char ma[100][35];
+int nr;
+void Parcurge(NodArboreDeRegasire *Nod, char cuv[], int niv) //nodul curent, un buffer pentru construirea cuvantului, nivelul curent
+{
+    char c;
+    for (c = 'a'; c <= 'z'; c++)        //pentru toate literele considerate
+    {
+        if (Valoare(Nod, c))            //daca exista legatura in dictionar
+        {
+            cuv[niv] = c;                //adaug litera gasita in buffer
+            Parcurge(Valoare(Nod, c),cuv,niv+1); //avansez
+        }
+    }
+    if (Valoare(Nod, '{'))            //exista terminator=>am gasit un cuvant intreg
+    {
+        cuv[niv] = '\0';
+        strcpy(ma[nr++],cuv);    //prelucrez datele
+    }
+}
+
+
+char cuv[35];
+float medie (NodArboreDeRegasire *Nod)
+
+{
+    float m=0;
+    Parcurge(Nod,cuv,0);
+    for(int i=0; i<nr; i++)
+    {
+        //printf("%s %d ", ma[i], strlen(ma[i]));
+        m=m+strlen(ma[i]);
+    }
+    float nrn=(float)nr;
+    return (m/nrn);
+        
+}

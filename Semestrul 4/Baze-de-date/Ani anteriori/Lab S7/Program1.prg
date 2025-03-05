@@ -1,0 +1,11 @@
+USE Angajat INDEX Angajat
+VNUME = ACCEPT('Nume angajat:')
+FIND &VNUME
+*SEEK VNUME
+IF EOF()
+?'Studentul' + VNUME + 'nu exista'
+RETURN
+ENDIF
+DO WHILE Nume = VNUME AND NOT EOF()
+DISP SKIP
+ENDDO

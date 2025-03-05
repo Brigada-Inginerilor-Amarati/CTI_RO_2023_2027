@@ -1,0 +1,46 @@
+1.reprezentarea unui set de relaţii în diagramele ER este :
+
+R:Diamant.
+
+2.Reprezentarea unui set de entități în diagrame ER este:
+
+R: Dreptunghi
+
+3.Când traducem un model ER într-un model relațional, constrângerea care ar trebui adăugată la cheia externă care leagă o entitate slabă de entitatea proprietară 
+ar trebui să fie:
+
+R:ON DELETE CASCADE
+
+4.Care dintre următoarele modele sunt folosite pentru a analiza și înțelege datele aplicației?
+
+R:Model de date(Data model)
+
+5.Care dintre următoarele afirmații este adevărată cu privire la relația dintre gradul/cardinalitatea relației rezultate și intrările unui produs cartezian?
+
+R:Gradul de relație rezultat va fi mai mare și cardinalitatea va fi mai mare în comparație cu fiecare tabel de intrare.
+
+6.Care dintre următoarele nu este o axiomă Armstrong?
+
+R: Asociativitate
+
+7.Care dintre următoarele afirmații este adevărată despre relația dintre gradul/cardinalitatea relației rezultate și intrările unui operator relațional de proiecție?
+
+R: Gradul de relație rezultat va fi mai mic sau egal și cardinalitatea va fi mai mică sau egală în comparație cu tabelul de intrare
+
+8.Tipul de participare al entității slabe stabilite în relație cu proprietarul în modelul ER este:
+
+R: Participare totală
+
+9.O linie subțire folosită pentru a lega o entitate la o relație denotă:
+R: O constrângere parțială de participare
+
+10.Modul în care datele sunt stocate de un RDBMS pe un suport extern este exprimat prin:
+R: Modelul fizic.
+
+11.Care dintre următoarele afirmații este adevărată cu privire la relația dintre gradul/cardinalitatea relației rezultate și intrările unui produs de unire?
+
+R:???
+
+12.Care dintre următoarele proprietăți nu reprezintă un dezavantaj al unui fișier gestionat de sistemul de fișiere OS (pentru a fi utilizat ca depozit de baze de date)?
+
+R: Acces liniar la un fișier text.

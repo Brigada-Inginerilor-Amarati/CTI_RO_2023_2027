@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+
+<body>
+    <div class="no-overflow">
+        <p><br></p>
+        <h3><span class="" style="font-size: x-large;">Interfețe cu utilizatorul</span></h3>
+        <p style="text-align: justify;">Orice sistem de operare deţine o interfață prin intermediul căreia realizează
+            comunicarea cu operatorul uman. Primele sisteme de operare aveau interfețe foarte simple, formate dintr-un
+            set mic de comenzi de bază.</p>
+        <p style="text-align: justify;">Spre exemplu,
+            <b>CP/M</b>, un sistem destinat microcalculatoarelor cu procesoare pe 8 biţi (de exemplu Z80), avea
+            aproximativ 5 comenzi. Odată cu trecerea timpului, interfeţele dintre sistemele de operare şi utilizator au
+            devenit din ce in ce mai complexe, oferind
+            mai multe facilităţi şi uşurând munca de configurare şi întreţinere a calculatoarelor pe care le deservesc.
+        </p>
+        <p style="text-align: justify;">Pentru a vedea care sunt avantajele şi dezavantajele diferitelor sisteme de
+            operare în ceea ce priveşte interfaţa cu utilizatorul, să încercăm mai întâi să realizăm o clasificare a
+            interfeţelor. În primul rând, trebuie remarcat faptul că <i>interfaţă</i> este orice instrument care permite
+            comunicarea între un sistem de operare şi un operator, indiferent dacă acest instrument este de natură
+            <i>hardware</i> sau <i>software</i>. Din această perspectivă, putem observa următoarele tipuri de interfeţe
+            cu
+            utilizatorul: <br></p>
+        <ul>
+            <li style="text-align: justify;"><b>Interfeţe în linie de comandă (sau interfeţe text).</b>&nbsp; Acestea
+                sunt reprezentate, în general, de un program numit <i>interpretor
+                    de comenzi</i>, care afişează pe ecran un prompter, primeşte comanda introdusă de operator şi o
+                execută. Comenzile se scriu folosind tastatura şi pot fi însoţite de parametri. Aproape toate sistemele
+                de operare includ o interfaţă în linie de comandă,
+                unele foarte bine puse la punct (cazul sistemelor Unix), iar altele destul de primitive (MS-DOS şi
+                Microsoft Windows). În ultimele versiuni ale sistemului de operare Windows (Windows 7, Windows 8,
+                Windows 10, Windows Server 2012, etc) Microsoft
+                a introdus o interfață cu utilizatorul mult mai evoluată: Windows PowerShell.</li>
+
+            <li style="text-align: justify;">
+                <b>Interfeţe grafice.</b> Sunt cele mai populare interfeţe cu utilizatorul şi se prezintă sub forma unui
+                set de obiecte grafice (de regulă suprafeţe rectangulare) prin intermediul cărora operatorul poate
+                comunica cu sistemul de operare, lansând
+                aplicaţii, setând diferite opţiuni contextuale, etc. Dispozitivul cel mai folosit în acest caz este
+                mouse-ul, de aceea acest tip de interfaţă este utilă în primul rând utilizatorilor neexperimentaţi şi
+                neprofesioniştilor.</li><br>
+        </ul>
+        <br>
+        <table>
+            <caption></caption>
+            <thead>
+                <tr>
+                    <th scope="col" style="border-width: 1px; border-style: solid; border-color: rgb(51, 51, 51);"><br>
+                    </th>
+                    <th scope="col">Interfață în linie de comandă<br></th>
+                    <th scope="col">Interfață grafică<br></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row" style="border-width: 1px; border-style: solid; border-color: rgb(51, 51, 51);">
+                        <b>Avantaje</b></th>
+                    <td style="border-width: 1px; border-style: solid; border-color: rgb(51, 51, 51);">
+                        <ul>
+                            <li>Permite scrierea clară şi explicită a comenzilor, cu toţi parametrii bine definiţi</li>
+                            <li>Oferă flexibilitate în utilizare</li>
+                            <li>Comunicarea cu sistemul de operare se face rapid şi eficient<br></li>
+                        </ul>
+                    </td>
+                    <td style="border-width: 1px; border-style: solid; border-color: rgb(51, 51, 51);">
+                        <ul>
+                            <li>Este intuitivă şi uşor de folosit</li>
+                            <li>Poate fi utilizată şi de către neprofesionişti</li>
+                            <li>Creează un mediu de lucru ordonat</li>
+                            <li>Permite crearea şi utilizarea de aplicaţii de complexe, precum şi integrarea acestora în
+                                medii de lucru unitare&nbsp;<br></li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row" style="border-width: 1px; border-style: solid; border-color: rgb(51, 51, 51);">
+                        <b>Dezavantaje<br></b></th>
+                    <td style="border-width: 1px; border-style: solid; border-color: rgb(51, 51, 51);">
+                        <ul>
+                            <li>Operatorul trebuie să cunoască bine comenzile şi efectele lor</li>
+                            <li>Este mai greu de utilizat de către neprofesionişti</li>
+                        </ul>
+                    </td>
+                    <td style="border-width: 1px; border-style: solid; border-color: rgb(51, 51, 51);">
+                        <ul>
+                            <li>Anumite operaţii legate, de exemplu, de configurarea sistemului pot să nu fie accesibile
+                                din meniurile şi ferestrele interfeţei grafice
+                            </li>
+                            <li>Interfaţa ascunde anumite detalii legate de preluarea şi execuţia comenzilor</li>
+                            <li>Foloseşte mai multe resurse şi este mai puţin flexibilă decât interfaţa în linie de
+                                comandă</li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <h3>Sistemul de fișiere UNIX</h3>
+        <p></p>
+
+        <p style="text-align: justify;"><span class="" style="font-family: Arial, Helvetica, sans-serif;">În sistemele
+                UNIX datele sunt organizate pe disc sub formă de fișiere.</span> Acestea sunt simple fluxuri de octeți,
+            nemaiexistând alte forme de organizare a informației. Există totuși
+            posibilitatea de organizare a fișierelor în directoare, dar acestea sunt la rândul lor tot fișiere ce nu pot
+            fi scrise de utilizator. UNIX are un sistem de fişiere arborescent. Spre deosebire de sistemul de fisiere
+            DOS/Windows, separatorul între componentele
+            numelui de fişier (directoare şi numele propriu-zis) este caracterul <tt>/</tt> (slash) şi nu
+            <tt>\</tt> (backslash). De asemenea, numele de fişiere nu conţin un identificator al discului fizic (A:, C:,
+            etc.), ci întreaga ierarhie de fişiere porneşte de la o rădăcină unică, notată cu <tt>'/'<span class=""
+                    style="font-family: Arial, Helvetica, sans-serif;"> (slash)</span>. <span class=""
+                    style="font-family: Arial, Helvetica, sans-serif;">Un exemplu de organizare a sistemului de fisier
+                    UNIX poate fi și următorul (extras de pe un sistem Linux Debian 9.8 - folosind comanda
+                    <i>tree</i>):<br></span></tt></p>
+        <pre
+            style="text-align: justify;"><span class="" style="font-family: Courier New, Courier, mono;">/</span><br><span class="" style="font-family: Courier New, Courier, mono;">|-- bin</span><br><span class="" style="font-family: Courier New, Courier, mono;">|-- boot</span><br><span class="" style="font-family: Courier New, Courier, mono;">|-- dev</span><br><span class="" style="font-family: Courier New, Courier, mono;">|-- etc</span><br><span class="" style="font-family: Courier New, Courier, mono;">|-- home</span><br><span class="" style="font-family: Courier New, Courier, mono;">|   |-- student</span><br><span class="" style="font-family: Courier New, Courier, mono;">|   |-- student1</span><br><span class="" style="font-family: Courier New, Courier, mono;">|-- lib</span><br><span class="" style="font-family: Courier New, Courier, mono;">|-- lib32</span><br><span class="" style="font-family: Courier New, Courier, mono;">|-- lib64</span><br><span class="" style="font-family: Courier New, Courier, mono;">|-- media</span><br><span class="" style="font-family: Courier New, Courier, mono;">|-- mnt</span><br><span class="" style="font-family: Courier New, Courier, mono;">|-- opt</span><br><span class="" style="font-family: Courier New, Courier, mono;">|-- proc</span><br><span class="" style="font-family: Courier New, Courier, mono;">|-- root</span><br><span class="" style="font-family: Courier New, Courier, mono;">|-- run</span><br><span class="" style="font-family: Courier New, Courier, mono;">|-- sbin</span><br><span class="" style="font-family: Courier New, Courier, mono;">|-- srv</span><br><span class="" style="font-family: Courier New, Courier, mono;">|-- sys</span><br><span class="" style="font-family: Courier New, Courier, mono;">|-- tmp</span><br><span class="" style="font-family: Courier New, Courier, mono;">|-- usr</span><br><span class="" style="font-family: Courier New, Courier, mono;">|   |-- bin</span><br><span class="" style="font-family: Courier New, Courier, mono;">|   |-- games</span><br><span class="" style="font-family: Courier New, Courier, mono;">|   |-- include</span><br><span class="" style="font-family: Courier New, Courier, mono;">|   |-- lib</span><br><span class="" style="font-family: Courier New, Courier, mono;">|   |-- lib32</span><br><span class="" style="font-family: Courier New, Courier, mono;">|   |-- local</span><br><span class="" style="font-family: Courier New, Courier, mono;">|   |-- sbin</span><br><span class="" style="font-family: Courier New, Courier, mono;">|   |-- share</span><br><span class="" style="font-family: Courier New, Courier, mono;">|   `-- src</span><br><span class="" style="font-family: Courier New, Courier, mono;">|-- var</span><br><span class="" style="font-family: Courier New, Courier, mono;">|-- initrd.img -&gt; boot/initrd.img-4.9.0-8-amd64</span><br><span class="" style="font-family: Courier New, Courier, mono;">|-- initrd.img.old -&gt; boot/initrd.img-4.9.0-7-amd64</span><br><span class="" style="font-family: Courier New, Courier, mono;">|-- vmlinuz -&gt; boot/vmlinuz-4.9.0-8-amd64</span><br><span class="" style="font-family: Courier New, Courier, mono;">`-- vmlinuz.old -&gt; boot/vmlinuz-4.9.0-7-amd64</span><br><br></pre>
+        <ul>
+            <li style="text-align: justify;">/bin - prescurtarea de la "<i>binaries</i>" - acest director conține unele
+                programe utilitare fundamentale (cum ar fi ls, cp,...)</li>
+            <li style="text-align: justify;">/boot - conține fișierele necesare pentru a porni cu succes un sistem UNIX:
+                fișierul ce reprezintă kernel-ul (nucleul), fișierul initrd (initial ramdisk) ce reprezintă sistemul de
+                fișiere inițial folosit la pornirea kernel-ului, fișierul cu opțiunile
+                de configurare cu care a fost compilat kernel-ul, fisșiere caracteristice bootloader-ului</li>
+            <li style="text-align: justify;">/dev - numele provine de la "<i>devices</i>"; conține fișiere speciale ce
+                reprezintă echipementele hardware ale sistemului (ex: fisierul /dev/mem reprezintă întreaga memorie -
+                spațiu de adrese - a sistemului, /dev/sda - reprezintă primul hard-disk
+                al sistemului)</li>
+            <li style="text-align: justify;">/etc - este un director dedicat stocării fișierelor de configurare ale
+                sistemului și ale programelor și serviciilor ce rulează în sistem</li>
+            <li style="text-align: justify;">/home - conține directoarele "personale" ale utilizatorilor. Fiecare
+                utilizator are asignat un director personal în care are drepturi depline (poate să creeze, să șteargă,
+                să editeze și eventual să execute fișiere), dar nu are dreptul să-și șteargă
+                acest director. Această organizare a fost preluată ulterior de către sistemele Microsoft Windows
+                (Windows 7, Windows 8, Windows 10 ... ) prin directorul C:\Users</li>
+            <li style="text-align: justify;">/lib, /lib32, /lib64 - numele provine de la <i>libraries</i>; conține
+                bibliotecile de bază ale sistemului, în principal cele folosite de programele din /bin. Variantele
+                /lib32, /lib64 sunt prezente pentru a oferi suport pentru arhitecturi diferite.
+                Bibliotecile conținute în acest director sunt de obicei biblioteci link-editate dinamic (shared
+                libraries - cu extensia .so)<br></li>
+            <li style="text-align: justify;">/media - reprezinta un director folosit ca punct de montare implicit al
+                dispozitivelor de stocare temporare (removable devices) precum stick-uri USB, HDD externe, etc.</li>
+            <li style="text-align: justify;">/mnt - numele provine de la <i>mount</i> și reprezinta directorul folosit
+                în mod comun de administratorii sistemului pentru a monta diferite dispozitive de stocare, în principal
+                hard-disk-urile</li>
+            <li style="text-align: justify;">/opt - numele provine de la <i>optional </i>și reprezintă un director
+                folosit pentru a instala unele aplicații.</li>
+            <li style="text-align: justify;">/proc - acest director există pe disc, dar conținutul lui nu reprezintă
+                fișiere propriu-zise. În acest director se montează sistemul de fișiere <i>procfs </i>ce conține, tot
+                sub formă de fișiere, informații despre procesele ce rulează în sistem. Aceste
+                fișiere nu ocupa spațiu efectiv pe disc ci reprezintă doar o interfață</li>
+            <li style="text-align: justify;">/root - directorul de home al utilizatorului <i>root</i>. Acest utilizator
+                are drepturi depline în sistem fiind numit și <i>superuser</i>.</li>
+            <li style="text-align: justify;">/sbin - numele directorului provine de la "<i>system binaries</i>" și
+                conține utilitare fundamentale necesare pornirii sistemului</li>
+            <li style="text-align: justify;">/srv - denumit și "<i>server data</i>"; conține anumite date ale unor
+                servicii ce pot rula în sistem</li>
+            <li style="text-align: justify;">/sys - acest director există pe disc, dar conținutul lui nu reprezintă
+                fișiere propriu-zise (analog cu /proc). În acest director se montează sistemul de fișiere <i>sysfs
+                </i>ce conține fișiere pentru a accesa mai ușor anumite dispozitive din sistem</li>
+            <li style="text-align: justify;">/tmp - director folosit pentru fișiere temporare. Nu este definit dacă
+                fișierele stocate aici rămân și după repornirea sistemului. În majoritatea cazurilor, conținutul acestui
+                director este șters la pornirea sistemului. În principiu, orice utilizator
+                are dreptul să scrie fișiere în acest director, dar nu are voie să execute fișiere din acest director.
+                <br></li>
+            <li style="text-align: justify;">/usr - denumit și "<i>user filesystem</i>" și contine programe (fișiere
+                binare - în /usr/bin), biblioteci statice sau dinamice (/usr/lib), fișiere header (/usr/include) ce nu
+                sunt critice pentru sistem.</li>
+            <li style="text-align: justify;">/var - provine de la cuvântul "<i>variable</i>" și conține fișiere ce se
+                modifică mai des față de restul sistemului. În această categorie pot intra fișiere de log, fișiere
+                temporare create de server-ul de mail, etc.</li>
+        </ul>
+        <p style="text-align: justify;">Este important de mentionat faptul că sistemele UNIX/Linux nu folosesc extensia
+            la fișiere, aceasta fiind folosită doar pentru a facilita utilizarea sistemului. Un fișier poate fi
+            executabil indiferent de extensia lui (poate fi executabil un fișier fără extensie, cu extensia .jpg sau
+            .txt). Extensiile sunt folosite de către utilizator pentru a identifica cu ușurință tipul de fișier. De
+            asemenea, unele programe mai pot folosi extensia pentru a se adapta mai ușor. De exemplu, un editor de texte
+            dacă deschide un fișier .c, .html, .java ar putea activa facilitatea de syntax highlight
+            corespunzătoare.<br></p>
+        <ul>
+        </ul>
+        <h3>Drepturi de acces<br></h3>
+        <p style="text-align: justify;"><span class="" style="font-family: Arial, Helvetica, sans-serif;">Sistemele UNIX
+                sunt administrate folosind utilizatorul root (denumit și superuser). Acest utilizator are directorul de
+                home în /root și nu în /home ca și celalalți utilizatori. Utilizatorul root are drepturi depline în
+                sistemele UNIX și doar el poate crea sau șterge utilizatori. Dat fiind faptul că în sistemele UNIX toate
+                activitățile se rezumă la accese de fișiere, restricționarea drepturilor utilizatorilor la componentele
+                sistemului se realizează prin drepturi de acces la fișiere. Pentru a se putea explica drepturile de
+                acces se va porni de la rezultatul comenzii <i>ls </i>cu argumentul <i>-al</i> (<i>ls -al</i>) rulat pe
+                un director oarecare:</span></p>
+        <pre><span class="" style="font-family: Arial, Helvetica, sans-serif;"><span class="" style="font-family: Courier New, Courier, mono;">drwxr-xr-x  1 valy staffcs        4096 Mar 11 10:10 .<br>drwxr-xr-x  4 root root           4096 Mar 11 09:23 ..<br>-rwxr-xr-x  1 root root            584 Feb 21 10:35 #removeoffender.sh#</span><br><span class="" style="font-family: Courier New, Courier, mono;">-rw-r--r--  1 valy staffcs        1028 Mar 13  2018 99-com.rules</span><br><span class="" style="font-family: Courier New, Courier, mono;">drwxr-xr-x  2 valy staffcs        4096 Oct 25  2016 Desktop</span><br><span class="" style="font-family: Courier New, Courier, mono;">-rwxr-xr-x  1 valy staffcs        7083 Dec 12  2017 a.out</span><br><span class="" style="font-family: Courier New, Courier, mono;">-rwxr-xr--  1 valy staffcs         597 Oct  8 09:14 a.sh</span><br><span class="" style="font-family: Courier New, Courier, mono;">drwxr-xr-x  3 valy staffcs        4096 Jan  3 21:04 apnd</span><br><span class="" style="font-family: Courier New, Courier, mono;">drwxr-xr-x  2 valy staffcs        4096 May 24  2018 apt</span><br><span class="" style="font-family: Courier New, Courier, mono;">drwxr-xr-x  2 valy staffcs        4096 May 24  2018 b</span><br><span class="" style="font-family: Courier New, Courier, mono;">-rw-r--r--  1 valy staffcs         767 Nov 23  2017 big.c</span><br><span class="" style="font-family: Courier New, Courier, mono;">-rw-r--r--  1 valy staffcs         770 Nov 14  2017 process.c</span><br><span class="" style="font-family: Courier New, Courier, mono;">-rw-r--r--  1 valy staffcs         336 Nov 14  2017 process2.c</span><br><span class="" style="font-family: Courier New, Courier, mono;">drwxr-xr-x  6 valy staffcs        4096 Nov  1 11:48 public_html</span><br><span class="" style="font-family: Courier New, Courier, mono;">-rwxr-xr-x  1 valy staffcs         583 Nov 10 11:53 removeoffender.sh</span><br><span class="" style="font-family: Courier New, Courier, mono;">drwxr-xr-x  6 valy staffcs        4096 Jan  8  2017 so</span><br><span class="" style="font-family: Courier New, Courier, mono;">-rw-r--r--  1 valy staffcs        2630 Jul 28  2018 sshd_config_backup</span><br><span class="" style="font-family: Courier New, Courier, mono;">drwxr-xr-x  3 valy staffcs        4096 Dec 12  2017 test3</span><br><span class="" style="font-family: Courier New, Courier, mono;">drwxr-xr-x  2 valy staffcs        4096 Dec  5  2017 test_so</span><br><span class="" style="font-family: Courier New, Courier, mono;">drwxr-xr-x  2 valy staffcs        4096 Nov 10  2017 testpid</span><br><span class="" style="font-family: Courier New, Courier, mono;">drwxr-xr-x  2 valy staffcs        4096 Dec 14  2017 th</span><br></span></pre>
+        <p style="text-align: justify;"><span class="" style="font-family: Arial, Helvetica, sans-serif;"><span>Comanda
+                    "ls" - denumită "list directory contents"</span> are rolul de a printa la ieșirea standard (STDOUT)
+                conținutul unui director. În cazul de față, s-a folosit comanda pe directorul
+                curent al utilizatorului "valy" furnizându-se comenzii parametrul -l pentru a se opta pentru formatul
+                lung. În acest format multicoloană (7 coloane), se printează, pe lângă numele fișierului/directorului
+                reprezentat în ultima coloană, și unele informații
+                suplimentare despre fișierele respective. Vom considera numerotarea coloanelor de la st</span><span
+                class="" style="font-family: Arial, Helvetica, sans-serif;">ânga la dreapta începând cu 1.&nbsp;
+                <span>Vom explica în continuare pe scurt informațiile din coloane, dar nu în ordinea apariției, ci
+                    într-o ordine mai ușor de ințeles</span><br></span>
+        </p>
+        <ul style="text-align: justify;">
+            <li><span class="" style="font-family: Arial, Helvetica, sans-serif;">coloana 7 - reprezintă numele
+                    fișierului/directorului</span></li>
+            <li><span class="" style="font-family: Arial, Helvetica, sans-serif;">coloana 6 - reprezintă data ultimei
+                    modificări a fișierului respectiv</span></li>
+            <li><span class="" style="font-family: Arial, Helvetica, sans-serif;">coloana 5 - reprezintă dimensiunea (în
+                    bytes) a fișierului respecitv</span></li>
+            <li><span class="" style="font-family: Arial, Helvetica, sans-serif;">coloana 2 - reprezintă numărul de
+                    legături hard-link</span></li>
+            <li><span class="" style="font-family: Arial, Helvetica, sans-serif;">coloana 3 - reprezintă utilizatorul
+                    proprietar al acestui fișier (owner)</span></li>
+            <li><span class="" style="font-family: Arial, Helvetica, sans-serif;">coloana 4 - reprezintă grupul din care
+                    face parte acest fișier</span></li>
+            <li><span class="" style="font-family: Arial, Helvetica, sans-serif;">coloana 1 - reprezintă drepturi de
+                    access</span></li>
+        </ul>
+        <p style="text-align: justify;">Formatul de reprezentare a drepturilor de acces este reprezentat prin 10
+            caractere (bytes):</p>
+        <p><br>
+        </p>
+        <table>
+            <caption></caption>
+            <thead>
+                <tr>
+                    <th scope="col" style="border-width: 1px; border-style: solid;"></th>
+                    <th scope="col" style="border-width: 1px; border-style: solid;">tip <br>fișier<br></th>
+                    <th scope="col" style="border-width: 1px; border-style: solid;" colspan="3">drepturi pentru owner
+                    </th>
+                    <th scope="col" style="border-width: 1px; border-style: solid;" colspan="3">drepturi pentru group
+                    </th>
+                    <th scope="col" style="border-width: 1px; border-style: solid;" colspan="3">drepturi pentru others
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="border-width: 1px; border-style: solid;">număr caracter<br></td>
+                    <td style="border-width: 1px; border-style: solid;">1<br></td>
+                    <td style="border-width: 1px; border-style: solid;">2<br></td>
+                    <td style="border-width: 1px; border-style: solid;">3</td>
+                    <td style="border-width: 1px; border-style: solid;">4</td>
+                    <td style="border-width: 1px; border-style: solid;">5</td>
+                    <td style="border-width: 1px; border-style: solid;">6</td>
+                    <td style="border-width: 1px; border-style: solid;">7</td>
+                    <td style="border-width: 1px; border-style: solid;">8</td>
+                    <td style="border-width: 1px; border-style: solid;">9</td>
+                    <td style="border-width: 1px; border-style: solid;">10</td>
+                </tr>
+                <tr>
+                    <td style="border-width: 1px; border-style: solid;">exemplu</td>
+                    <td style="border-width: 1px; border-style: solid;">d</td>
+                    <td style="border-width: 1px; border-style: solid;">r</td>
+                    <td style="border-width: 1px; border-style: solid;">w</td>
+                    <td style="border-width: 1px; border-style: solid;">x</td>
+                    <td style="border-width: 1px; border-style: solid;">r</td>
+                    <td style="border-width: 1px; border-style: solid;">-</td>
+                    <td style="border-width: 1px; border-style: solid;">x</td>
+                    <td style="border-width: 1px; border-style: solid;">r</td>
+                    <td style="border-width: 1px; border-style: solid;">-</td>
+                    <td style="border-width: 1px; border-style: solid;">-</td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <ul>
+            <li style="text-align: justify;">primul byte reprezintă tipul fișierului. Acesta poate fi:<br></li>
+            <ul style="text-align: justify;">
+                <li>caracterul '-' (minus) în cazul în care este un fișier obișnuit (regular file)<br></li>
+                <li>caracterul 'd' în cazul în care fișierul respectiv este director<br></li>
+                <li>caracteru 'l' în cazul în care fișierul reprezintă o legătură simbolică<br></li>
+                <li>caracterul 'c' în cazul în care fișierul este un fișier de tip caracter</li>
+            </ul>
+        </ul>
+        <p style="text-align: justify;">Următorii octeți pot constitui 3 grupe care se referă la drepturile asupra
+            acestui fișier pentru:<br></p>
+        <ul style="text-align: justify;">
+            <li>utilizatorul owner (prima grupă - octeții 2,3,4)</li>
+            <li>utilizatorul care face parte din același grup ca și fișierul (a doua grupă - octeții 5,6,7)</li>
+            <li>ceilalți utilizatori (cei ce nu sunt nici owner și nici nu fac parte din același grup din care face
+                parte fișierul) - a treia grupă - octeții 8,9,10)</li>
+        </ul>
+        <p style="text-align: justify;">Astfel, dacă în oricare din cele 3 grupe, litera corespunzătoare este trecută
+            atunci acel drept este valabil, iar daca litera este înlocuită cu '-' (minus) atunci acel drept nu este
+            valabil.</p>
+        <p>Exemplu:</p>
+        <ul style="text-align: justify;">
+            <li>pentru fișierul <i>a.sh</i> putem spune următoarele: este un fișier obișnuit (primul caracter din prima
+                coloană este -), fișierul aparține utilizatorului "valy" și face parte din grupul "staffcs". Pentru
+                owner (utilizatorul "valy") drepturile de acces sunt "rwx" - utilizatorul "valy" are drept de citire,
+                scriere și execuție a acestui fișier. Pentru grup (utilizatorii ce fac parte din grupul "staffcs")
+                drepturile de acces sunt "r-x" - utilizatorii ce fac parte din grupul "staffcs" vor avea drept de citire
+                și executie, dar nu vor avea drept de scriere peste acest fișier. Pentru "<i>others</i>" adică ceilalți
+                utilizatori (cei ce nu sunt nici utilizatorul "valy" și nici nu fac parte din grupul "staffcs")
+                drepturile de acces sunt "r--" - acești utilizatori vor avea drept de citire pentru acel fișier, dar nu
+                vor avea drept de scriere și execuție</li>
+        </ul>
+        <p>Observație: Pentru un director, dreptul de execuție specifică dacă directorul respctiv este accesibil, adică
+            se poate face <b>change directory</b> în acel director (se poate "intra" în director).</p>
+        <p>Drepturile de acces pot fi oricând modificate, dar numai de către utilizatorul owner sau utilizatorul
+            root.<br></p>
+        <h3>Interfața în linie de comandă UNIX. Comenzi UNIX</h3>
+        <p style="text-align: justify;"><span class="" style="font-family: Arial, Helvetica, sans-serif;">În modul linie
+                de comandă, Unix prezintă mult mai multe facilităţi decât
+                MS-DOS. Interpretorul de comenzi (care porneşte după introducerea numelui
+                utilizatorului şi a parolei) poate fi ales de către utilizator. Există
+                mai multe interpretoare clasice, fiecare răspunzând anumitor cerinţe. Interpretorul
+                "standard" în Unix este </span><b><span class=""
+                    style="font-family: Arial, Helvetica, sans-serif;">sh</span></b><span class=""
+                style="font-family: Arial, Helvetica, sans-serif;">, dar foarte folosite sunt şi </span><b><span
+                    class="" style="font-family: Arial, Helvetica, sans-serif;">bash</span></b><span class=""
+                style="font-family: Arial, Helvetica, sans-serif;">,</span><b><span class=""
+                    style="font-family: Arial, Helvetica, sans-serif;">
+                    tcsh</span></b><span class="" style="font-family: Arial, Helvetica, sans-serif;">, </span><b><span
+                    class="" style="font-family: Arial, Helvetica, sans-serif;">ksh</span></b><span class=""
+                style="font-family: Arial, Helvetica, sans-serif;">, </span><b><span class=""
+                    style="font-family: Arial, Helvetica, sans-serif;">csh</span></b><span class=""
+                style="font-family: Arial, Helvetica, sans-serif;">. În sistemele Linux interpretorul de comenzi cel mai
+                folosit este <b>bash</b>.</span></p>
+        <p style="text-align: justify;"><span class="" style="font-family: Arial, Helvetica, sans-serif;">Comenzile Unix
+                sunt de fapt programe executabile care pot fi găsite
+                în directoarele <b>/bin</b>, <b>/usr/bin</b>. Diferenţele între interpretoarele
+                de comenzi (numite şi <b><i>shell</i></b>-uri) se văd mai ales în contextul
+                fişierelor de comenzi. Practic, aceste interpretoare permit scrierea de
+                adevărate programe, complexe, folosind comenzile Unix şi directivele speciale.</span></p>
+        <ul>
+            <li>comanda <b>man</b><br></li>
+        </ul>
+        <p style="text-align: justify;"><span class="" style="font-family: Arial, Helvetica, sans-serif;"></span>Din
+            punct de vedere didactic, probabil una dintre cele mai importante comenzi este cea care afișează paginile de
+            manual atât pentru comenzi de shell script și programe lansate de interpretorul de comenzi, cât și pentru
+            prototipuri de funcții C. Se va discuta în continuare despre comanda <b>man</b>. Cea mai simplă formă de
+            apel ar fi următoarea:<br></p>
+        <pre style="text-align: justify;">man [opțiuni] [secțiune] comandă<br></pre>
+        <p><span class="" style="font-family: Arial, Helvetica, sans-serif;">Argumentele dintre parantezele drepte [...]
+                sunt opționale. <br></span></p>
+        <p><span class="" style="font-family: Arial, Helvetica, sans-serif;">Paginile de manual se împart pe secțiuni.
+                În momentul de față, în sistemele Linux există 9 secțiuni:</span></p>
+        <ol>
+            <li><span class="" style="font-family: Arial, Helvetica, sans-serif;">Secțiunea 1 - descrie comenzile
+                    standard (programe executabile și comenzi shell script)</span></li>
+            <li><span class="" style="font-family: Arial, Helvetica, sans-serif;">Secțiunea 2 - apeluri sistem UNIX
+                    apelabile în limbajul C</span></li>
+            <li><span class="" style="font-family: Arial, Helvetica, sans-serif;">Secțiunea 3 - funcțiile de bibliotecă
+                    C</span></li>
+            <li><span class="" style="font-family: Arial, Helvetica, sans-serif;">Secțiunea 4 - informații despre
+                    fișierele speciale (în principal cele din /dev)</span></li>
+            <li><span class="" style="font-family: Arial, Helvetica, sans-serif;">Secțiunea 5 - informații despre
+                    convențiile și formatele anumitor fișiere specifice sistemului</span></li>
+            <li><span class="" style="font-family: Arial, Helvetica, sans-serif;">Secțiunea 6 - manuale de la jocurile
+                    din Linux</span></li>
+            <li><span class="" style="font-family: Arial, Helvetica, sans-serif;">Secțiunea 7 - informații despre
+                    diverse teme ce nu pot fi incluse în alte secțiuni (spre exemplu man 7 signal)</span></li>
+            <li><span class="" style="font-family: Arial, Helvetica, sans-serif;">Secțiunea 8 - comenzi de administrare
+                    a sistemului (de obicei doar pentru userul root)</span></li>
+            <li><span class="" style="font-family: Arial, Helvetica, sans-serif;">Secțiunea 9 - rutine kernel</span>
+            </li>
+        </ol>
+        <p style="text-align: justify;">Argumentul <i>secțiune</i> este opțional. Astfel, în situația în care nu se
+            specifică secțiunea pentru comanda/funcția pentru care se cere pagina de manual, programul man va căuta
+            comanda/funcția în secțiuni în ordine crescătoare începând cu secțiunea 1. Programul man va afișa
+            informațiile din prima secțiune în care funcția/comanda a fost găsită. În cazul în care există
+            funcții/comenzi diferite, dar cu același nume și sunt în secțiuni diferite este necesar să se specifice
+            secțiunile, în caz contrar se va furniza doar prima apariție.<br></p>
+        <p>În continuare se vor enumera și explica unele dintre cele mai importante și mai utilizate comenzi UNIX. Este
+            <b>absolut necesară</b> consultarea paginii de manual.<br></p>
+        <ul>
+            <li>comanda <b>pwd</b> - tipărește numele directorului curent</li>
+            <li>comanda <b>cd </b>(change directory) - schimbă directorul curent</li>
+        </ul>
+        <p>Forma de apel pentru această comandă ar fi următoarea:</p>
+        <pre>cd <i>director</i></pre>
+        <p style="text-align: justify;">Argumentul director poate fi atât o cale <i>absolută </i>(cu referință directă
+            către / - exemplu cd /home/student/Desktop ) cât și o cale relativă (exemplu în cazul execuției din
+            /home/student - cd Desktop ). Dacă argumentul lipsește atunci cd va schimba directorul curent în directorul
+            home al utilizatorului autentificat în sistem. <br></p>
+        <p style="text-align: justify;">Pentru această comandă este necesar să se analizeze următoarele apeluri și
+            răspunsuri ale interpretorului de comenzi executate din directorul home al utilizatorului <i>valy</i>:</p>
+        <pre>valy@staff:~$ cd public_html<br>valy@staff:~/public_html$ cd<br><br>valy@staff:~$ cd public_html<br>valy@staff:~/public_html$ cd ..<br><br>valy@staff:~$ cd so/pipe/<br>valy@staff:~/so/pipe$ cd ..<br>valy@staff:~/so$ cd ..<br>valy@staff:~$<br><br></pre>
+        <p>În primul rând este de remarcat prompt-ul și anume, în cazul de față: "valy@staff:~$". <br></p>
+        <p style="text-align: justify;">Prompt-ul are următoarea sintaxă: "user@hostname:path$". În această sintaxă
+            <i>hostname </i>reprezintă numele calculatorului și <i>user </i>numele utilizatorul autentificat. Se poate
+            observa, în toate exemplele de mai sus că în câmpul pentru cale este trecut caracterul '~' (tilda). În
+            Linux, acest caracter reprezintă o scurtătură pentru calea directorului <i>home </i>al utilizatorului
+            autentificat. În cazul de față '~' (tilde) este o scurtătura către "<i>/home/valy</i>". <br></p>
+        <p style="text-align: justify;">În primul exemplu se observă cum schimbarea în directorul "public_html" din
+            rădăcina directorului home al utilizatorului <i>valy </i>duce și la schimbarea promptului indicând că acum
+            directorul curent este "~/public_html" adică "/home/valy/public_html". Același lucru poate fi observat în
+            toate exemplele. Puteți verifica aceste situații folosind comanda <i><b>pwd</b></i>.</p>
+        <p style="text-align: justify;">Pentru întoarcerea în directorul anterior (directorul părinte) s-a folosit forma
+            "cd ..". Este important de analizat această formă. Argumentul ".." nu reprezintă un argument "special".
+            Utilizând și exemplul de apel a comenzii "ls" de mai sus se poate constata că fiecare director are 2
+            subdirectoare implicite: directorul "." și directorul "..". Directorul ".." reprezintă o legătură către
+            directorul părinte al directorului curent, iar directorul "." reprezintă o legătură către însuși directorul
+            curent. <br></p>
+        <ul>
+            <li>comanda <b>ls </b>- afișează conținutul directorului specificat ca și parametru. <br></li>
+            <li>comanda <b>mkdir </b>- creează un director nou<br></li>
+            <li>comanda <b>rmdir </b>- șterge directorul dat ca și parametru dacă acesta este gol</li>
+            <li>comanda <b>cat </b>- afișează la fișierul standard de ieșire (STDOUT) conținutul fișierelor date ca și
+                argument</li>
+            <li>comanda <b>wc </b>- word cound - numără cuvinte, linii și caractere din fișiere (sau de la fișierul
+                standard de intrare STDINT)</li>
+            <li>comanda <b>find </b>- caută în directoarele date şi în subdirectoarele lor fişierele care
+                satisfac condiţiile date ca și argumente</li>
+            <li>comanda <b>od </b>- afişează conţinutul unui fişier în diferite formate: octal, zecimal, hexa,
+                ASCII, etc.</li>
+            <li>comanda <b>rm </b>- șterge fișiere</li>
+            <li>comanda <b>mv </b>- schimbă numele fișierelor sau mută fișiere dintr-un director în altul</li>
+            <li>comanda <b>cp </b>- copiază fișiere</li>
+            <li>comanda <b>ln </b>- creează o legătură între fișiere</li>
+            <li>comanda <b>chmod </b>- schimbă drepturile de acces pentru fișierul dat ca și argument</li>
+            <li>comanda <b>df </b>- afişează informaţii despre un sistem de fişiere (disc, partiţie, etc.): spaţiul
+                total, spaţiul liber şi altele. Sistemul de fişiere poate fi indicat prin
+                directorul în care partiţia sau discul respectiv este montat, adică "rădăcina"
+                sistemului de fişiere</li>
+            <li>comanda <b>du </b>- afișează informaţii privind spaţiul ocupat de fişierele dintr-un director
+                (inclusiv subdirectoarele sale). <b>du .&nbsp;</b> afişează aceste informaţii
+                pentru directorul curent.</li>
+            <li>comanda <b>ps </b>- afişează starea proceselor care rulează pe sistem la momentul curent</li>
+            <li>comanda <b>kill </b>- oprirea unui proces în curs de execuţie</li>
+            <li>comanda <b>date </b>- afişează data şi ora curente</li>
+            <li>comanda <b>who </b>- afişează numele utilizatorilor conectaţi la sistem</li>
+            <li>comanda <b>echo </b>- afișează la ieșirea standard argumentele date ca și parametru</li>
+            <li>comanda <b>touch </b>- creează un fișier nou, gol (de dimensiune 0)&nbsp;</li>
+        </ul>
+        <h3>Editarea de fișiere text</h3>
+        <p style="text-align: justify;">În decursul acestui laborator se încurajează cât mai mult utilizarea sistemului
+            in linie de comandă chiar și cu existența mediului grafic activat. Așadar se va descuraja deschiderea
+            editorului de texte din meniurile interfeței grafice. Nu se vor impune la laborator editoarele de texte,
+            studenții având libertatea să folosească editoarele preferate (dacă sunt instalate). <br></p>
+        <p style="text-align: justify;">Este important de menționat diferența dintre un editor de documente și un editor
+            de text. Editorul de documente nu este un editor de text, acesta salvând informația in fișiere binare (sau
+            arhive, xml, etc). Exemple de editoare de documente: Microsoft Word, Libre Office Writer. <br></p>
+        <p style="text-align: justify;">Un editor de texte va edita fișierul în mod text, iar rezultatul va fi un fișier
+            text fără alte informații adiționale. Exemple de editoare de texte:</p>
+        <ul>
+            <li>Windows: Notepad, Notepad++</li>
+            <li>Linux: Emacs, Gedit, vi, vim, mcedit, kate, etc.</li>
+        </ul>
+        <p>Pentru apelarea corectă a unui editor de texte din linia de comandă în Linux se va folosi următoarea sintaxă:
+        </p>
+        <pre>&lt;editor_de_texte&gt; fișier_text &amp;<br></pre>
+        <p>Exemplu:</p>
+        <pre>emacs fișier.c &amp;</pre>
+        <p style="text-align: justify;">Semnul '&amp;' (ampersant) are rolul de a "trece" editorul de texte invocat din
+            terminal în background-ul acestuia. În această situație, după execuție, terminalul va rămâne "liber" și va
+            mai putea fi folosit fără a se închide editorul de texte. În cazul în care nu se folosește semnul '&amp;'
+            editorul de texte va bloca terminalul respectiv și acesta nu va mai putea fi folosit decât după închiderea
+            editorului. <br></p>
+        <p style="text-align: justify;">Atenție! închiderea terminalului va duce la închiderea forțată a editorului ceea
+            ce poate duce la pierderea datelor (dacă nu s-a salvat fișierul). Această metodă se aplică doar atunci când
+            se folosește un mediu grafic... în mod de text absolut, în Linux, nu se recomandă această utilizare. La
+            laborator se va folosi mediul grafic.<br></p>
+        <p style="text-align: justify;">Pentru afișarea unui fișier text de mici dimensiuni se recomandș folosirea
+            comenzii <b>cat </b>în loc de deschiderea acestuia într-un terminal.<br></p>
+        <p><br></p><br>
+        <p><br></p>
+        <p><br></p>
+        <p><span class="" style="font-family: Arial, Helvetica, sans-serif;"><br></span></p>
+        <p><span class="" style="font-family: Arial, Helvetica, sans-serif;"><br></span></p>
+        <p><span class="" style="font-family: Arial, Helvetica, sans-serif;"><br></span></p>
+        <p><span class="" style="font-family: Arial, Helvetica, sans-serif;"><br></span></p>
+        <p><span class="" style="font-family: Arial, Helvetica, sans-serif;"></span><br></p>
+        <p></p>
+    </div>
+</body>
+
+</html>

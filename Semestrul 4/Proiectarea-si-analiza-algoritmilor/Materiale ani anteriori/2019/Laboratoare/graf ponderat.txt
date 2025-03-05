@@ -1,0 +1,71 @@
+#include <stdlib.h>
+#include <stdio.h>
+
+#define N 100
+
+int gf[N][N], n, id[N], d[N], arb[N], viz[N];
+
+int getIndex (int ID)
+{
+    int i;
+    for (i = 1; i <= n; i++)
+		if (id[i] == ID)
+			return i;
+}
+void prim (int ni, FILE *g)
+{
+    int i, j, pas, mn;
+    for (i = 1; i <= n; i++)
+        for (j = 1; j <= n; j++)
+            if (!gf[i][j] && i != j)
+                gf[i][j] = 9999;
+    for (i = 1; i <= n; i++)
+    {
+        d[i] = gf[ni][i];
+        arb[i] = ni;
+    }
+    viz[ni] = 1;
+    while (1)
+    {
+        mn = 9999;
+        for (i = 1; i <= n; i++)
+            if (mn > d[i] && !viz[i])
+            {
+                mn = d[i];
+                j = i;
+            }
+        if (mn == 9999) break;
+        viz[j] = 1;
+        fprintf (g, "%d %d\n", id[arb[j]], id[j]);
+        for (i = 1; i <= n; i++)
+            if (d[i] > gf[j][i])
+            {
+                d[i] = gf[j][i];
+                arb[i] = j;
+            }
+    }
+}
+int main ()
+{
+    int i, j, x;
+    FILE *f = fopen("citeste.txt", "r");
+    FILE *g = fopen("scrie.txt", "w");
+    fscanf(f, "%d", &n);
+    for (i = 1; i <= n; i++)
+        fscanf(f, "%d", &id[i]);
+    while (!feof(f))
+    {
+        fscanf(f, "%d", &x);
+        i = getIndex(x);
+        fscanf(f, "%d", &x);
+        j = getIndex(x);
+        fscanf(f, " %d", &x);
+        gf[i][j] = x;
+        gf[j][i] = x;
+        printf("CP %d %d %d\n", i, j, x);
+    }
+    prim (1, g);
+    fclose (f);
+    fclose (g);
+    return 0;
+}

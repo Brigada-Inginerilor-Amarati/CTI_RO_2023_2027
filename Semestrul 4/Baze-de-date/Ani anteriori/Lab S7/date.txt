@@ -1,0 +1,5 @@
+0001, Mitrofan Alexandru, Calea Poplacii, 100000, 100
+0002, Motronea Raluca, str. Vasile Aaron, 5000, 5
+0003, Pascu Patrick, str. Lalelelor, 500, 1
+0004, Istihie Batrice, str. Anton Pann, 7500, 4
+0005, Handrea Raluca, Calea Dumbravii, 5650, 3

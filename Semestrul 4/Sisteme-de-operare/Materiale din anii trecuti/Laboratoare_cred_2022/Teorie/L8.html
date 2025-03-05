@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+
+<body>
+    <div class="box py-3 generalbox center clearfix">
+        <div class="no-overflow">
+            <p style="text-align: justify;">O metoda foarte des utilizata in UNIX pentru comunicarea intre procese
+                este folosirea primitivei numita <i>pipe</i> (conducta). "Conducta" este
+                o cale de legatura care poate fi stabilita intre doua procese inrudite
+                (au un stramos comun sau sunt in relatia stramos-urmas). Ea are doua capete,
+                unul prin care se pot scrie date si altul prin care datele pot fi citite,
+                permitand o comunicare intr-o singura directie. In general, sistemul de
+                operare permite conectarea a unuia sau mai multor procese la fiecare din
+                capetele unui <i>pipe</i>, astfel incat, la un moment dat este posibil
+                sa existe mai multe procese care scriu, respectiv mai multe procese care
+                citesc din <i>pipe</i>. Se realizeaza, astfel, comunicarea unidirectionala
+                intre procesele care scriu si procesele care citesc.</p>
+            <h4>Apelul sistem pipe()</h4>
+            <p>Crearea "conductelor de date", pipe-urilor, se face in UNIX folosind apelul sistem <i>pipe(
+                    )</i>:</p>
+            <pre>int pipe(int filedes[2]);<br></pre>
+            <p style="text-align: justify;">Functia creeaza un <i>pipe</i>, precum si o pereche de descriptori de fisier
+                care refera cele doua capete ale acestuia. Descriptorii sunt returnati
+                catre programul apelant completandu-se cele doua pozitii ale tabloului
+                <i>filedes</i>
+                trimis ca parametru apelului sistem. Pe prima pozitie va fi memorat descriptorul
+                care indica extremitatea prin care se pot citi date (capatul de citire),
+                iar pe a doua pozitie va fi memorat descriptorul capatului de scriere in
+                <i>pipe</i>.</p>
+            <p style="text-align: justify;">Cei doi descriptori sunt descriptori de fisier obisnuiti, asemanatori
+                celor returnati de apelul sistem <i>open( )</i>. Mai mult, <i>pipe</i>-ul
+                poate fi folosit in mod similar folosirii fisierelor, adica in el pot fi
+                scrise date folosind functia <i>write( )</i> (aplicata capatului de scriere)
+                si pot fi citite date prin functia <i>read( )</i> (aplicata capatului de
+                citire).<br></p>
+            <p style="text-align: justify;">Fiind implicati descriptori de fisier obisnuiti, daca un <i>pipe</i>
+                este creat intr-un proces parinte, fiii acestuia vor mosteni cei doi descriptori
+                (asa cum, in general, ei mostenesc orice descriptor de fisier deschis de
+                parinte). Prin urmare, atat parintele cat si fiii vor putea scrie sau citi
+                din <i>pipe</i>. In acest mod se justifica afirmatia facuta la inceputul
+                acestui document prin care se spunea ca <i>pipe</i>-urile sunt folosite
+                la comunicarea intre procese <i>inrudite</i>. Pentru ca legatura dintre
+                procese sa se faca corect, fiecare proces trebuie sa declare daca va folosi
+                <i>pipe</i>-ul
+                pentru a scrie in el (transmitand informatii altor procese) sau il va folosi
+                doar pentru citire. In acest scop, fiecare proces trebuie sa inchida capatul
+                <i>pipe</i>-ului
+                pe care nu il foloseste: procesele care scriu in <i>pipe</i> vor inchide
+                capatul de citire, iar procesele care citesc vor inchide capatul de scriere,
+                folosind functia <i>close( )</i>.</p>
+            <p style="text-align: justify;">Functia returneaza 0 daca operatia de creare s-a efectuat cu succes
+                si -1 in caz de eroare setandu-se corspunzator valoarea variabilei errno. Pagina de manual a acestui
+                apel sistem se va gasi in sectiunea 2.<br></p>
+            <p style="text-align: justify;">Primitiva <i>pipe</i> se comporta in mod asemanator cu o structura de date
+                coada: scrierea introduce elemente in coada, iar citirea le extrage pe
+                la capatul opus.<br></p>
+            <p style="text-align: center;"><img src="http://labs.cs.upt.ro/labs/so/html/images/pipe.gif" width="249"
+                    height="154"></p>
+            <p style="text-align: justify;">Cantitatea de date care poate fi scrisa la un moment dat intr-un
+                <i>pipe</i>
+                este limitata. Numarul de octeti pe care un <i>pipe</i> ii poate pastra
+                fara ca ei sa fie extrasi prin citire de catre un proces este dependenta
+                de sistem (de implementare). Standardul POSIX specifica limita minima a
+                capacitatii unui <i>pipe</i>: 512 octeti.</p>
+            <p style="text-align: justify;">Atunci cind un <i>pipe</i> este "plin", operatia <i>write()</i> se va bloca
+                pina cind un alt proces nu citeste suficienti octeti din <i>pipe</i>. Un proces care citeste din pipe va
+                primi valoarea <b>0</b> ca valoare returnata
+                de <i>read( )</i> in momentul in care toate procesele care scriau in <i>pipe</i>
+                au inchis capatul de scriere si nu mai exista date in <i>pipe</i>. In cazul in care un proces vrea sa
+                citeasca dintr-un pipe valid dar nu exista date disponibile in pipe (si exista capete de scriere
+                deschise) atunci apelul read() se blocheaza pana cand un proces va scrie date in pipe. <br></p>
+            <p style="text-align: justify;">Daca pentru un pipe sunt conectate procese doar la capatul de scriere
+                (cele de la capatul opus au inchis toate conexiunea) operatiile&nbsp; <i>write</i>
+                efectuate de procesele ramase vor returna eroare. Intern, in aceasta situatie
+                va fi generat semnalul SIG_PIPE care va intrerupe apelul sistem <i>write</i>
+                respectiv. Codul de eroare (setat in variabila globala <i>errno</i>) rezultat
+                este cel corespunzator mesajului de eroare "Broken pipe".</p>
+            <p style="text-align: justify;">Operatia de scriere in <i>pipe</i> este atomica doar in cazul in care
+                numarul de octeti scrisi este mai mic decit constanta PIPE_BUF. Altfel,
+                in sirul de octeti scrisi pot fi intercalate datele scrise de un alt
+                proces in <i>pipe</i>.</p>
+            <p style="text-align: justify;">Pentru mai multe informatii despre procesul de scriere/citire din pipe
+                precum si despre limitarile existente se va consulta pagina de manual pipe(7): <i>man 7 pipe</i><br></p>
+            <p style="text-align: justify;"></p>
+            <p style="text-align: justify;">Un posibil scenariu pentru crearea unui sistem format din doua procese
+                care comunica prin pipe este urmatorul:
+            </p>
+            <ul>
+                <li>
+                    procesul parinte creeaza un <i>pipe</i></li>
+
+                <li>
+                    parintele apeleaza <i>fork( )</i> pentru a crea fiul</li>
+
+                <li>
+                    fiul inchide unul din capete (ex: capatul de citire)</li>
+
+                <li>
+                    parintele inchide celalalt capat al <i>pipe</i>-ului (cel de scriere)</li>
+
+                <li>
+                    fiul scrie date in <i>pipe</i> folosind descriptorul ramas deschis (capatul
+                    de scriere)</li>
+
+                <li>
+                    parintele citeste date din <i>pipe</i> prin capatul de citire.</li>
+            </ul>Acest scenariu poate fi implementat astfel:<p></p>
+            <pre>int main(void)<br>{<br>	int pfd[2];<br>	int pid;<br><br>	...<br>	if(pipe(pfd)&lt;0)<br>	{<br>	  perror("Eroare la crearea pipe-ului\n");<br>	  exit(1);<br>	}<br>	...<br>	if((pid=fork())&lt;0)<br>	{<br>	  perror("Eroare la fork\n");<br>	  exit(1);<br>	}<br>	if(pid==0) <br>	{<br>          /* procesul fiu */<br>	  close(pfd[0]); /* inchide capatul de citire; */<br>		         /* procesul va scrie in pipe  */<br>	  ...<br>	  write(pfd[1],buff,len); /* operatie de scriere in pipe */<br>	  ...<br>	  close(pfd[1]); /* la sfarsit inchide si capatul utilizat */<br>	  exit(0);<br>	}<br>	/* procesul parinte */	<br>	close(pfd[1]); /* inchide capatul de scriere; */<br>	      	       /* procesul va citi din pipe  */<br>	...<br>	read(pfd[0],buff,len); /* operatie de citire din pipe */<br>	...<br>	close(pfd[0]); /* la sfarsit inchide si capatul utilizat */<br><br>	<br>	return 0;<br>}<br></pre>
+            <p style="text-align: justify;">Este important de mentionat faptul ca se vor aplica aceleasi metodologii de
+                citire/scriere folosind apeluri sistem read/write ca si la fisiere. Si in cazul pipe-urilor se va citi
+                si scrie ciclic pentru a efectua operatiuni corecte si complete. Practic, din punct de vedere al
+                programatorului, exista foarte putine diferente in a efectua operatiuni de citire/scriere asupra
+                fisierelor sau a pipe-urilor. <br></p>
+            <h4>Functia fdopen()</h4>
+            <pre>FILE *fdopen(int fd, const char *mode);<br></pre>
+            <p style="text-align: justify;">Functia fdopen() asociaza un descriptor deja deschis unui flux de date
+                (stream) de tip FILE. Dupa apelul acestei functii, se poate scrie si citi formatat dintr-un descriptor
+                folosind functii din biblioteca stdio precum fprintf, fscanf, fread, fwrite, etc... De asemenea, chiar
+                daca s-a facu asocierea cu stream de tip FILE se mai pot folosi in continuare apelurile sistem de baza
+                peste descriptorul <i>fd</i>. Aceasta functie se poate folosi pentru orice tip de descriptor ce este
+                deja deshis, fie el descriptor de fisier obtinut in urma unui apel sistem <i>open() </i>fie un
+                descriptor de pipe obtinut in urma unui apel <i>pipe()</i>. (practic nu exista nici o diferenta intre
+                ei).</p>
+            <p>Dupa asocierea cu un stream de tip FILE, cand descriptorul nu mai este folosit acesta trebuie inchis.
+                Acest lucru se poate realiza atat cu functia <i>fclose()</i> asupra stream-ului de tip FILE cat si
+                folosind apelul sistem <i>close()</i> asupra descriptorului initial.</p>
+            <h4>Redirectarea descriptorilor de fisier</h4>
+            <p style="text-align: justify;">Se stie ca functia <i>open( )</i> returneaza un descriptor de fisier. Acest
+                descriptor va indica fisierul deschis cu <i>open( )</i> pana la terminarea
+                programului sau pana la inchiderea fisierului. Sistemul de operare UNIX
+                ofera, insa, posibilitatea ca un descriptor oarecare sa indice un alt fisier
+                decat cel obisnuit. Operatia se numeste <i>redirectare</i> si se foloseste
+                cel mai des in cazul descriptorilor de fisier cu valorile 0, 1 si 2 care
+                reprezinta intrarea standard, iesirea standard si, respectiv, iesirea standard
+                de eroare. De asemenea, este folosita si operatia de <i>duplicare</i> a
+                descriptorilor de fisier, care determina existenta a mai mult de un descriptor
+                pentru acelasi fisier. De fapt, redirectarea poate fi vazuta ca un caz
+                particular de duplicare.</p>
+            <p>Duplicarea si redirectarea se fac, in functie de cerinte, folosind una
+                din urmatoarele apeluri sistem:<br></p>
+            <pre>int dup(int oldfd);<br>int dup2(int oldfd, int newfd);<br></pre>
+            <p style="text-align: justify;">Functia <i>dup( )</i> realizeaza duplicarea descriptorului <i>oldfd</i>,
+                returnand noul descriptor. Aceasta inseamna ca descriptorul returnat va
+                indica acelasi fisier ca si <i>oldfd</i>, atat noul cat si vechiul descriptor
+                folosind in comun pointerul de pozitie in fisier, flag-urile fisierului
+                etc. Daca pozitia in fisier e modificata prin intermediul functiei <i>lseek(
+                    )</i> folosind unul dintre descriptori, efectul va fi observat si pentru
+                operatiile facute folosind celalalt descriptor. Descriptorul nou alocat
+                de <i>dup( )</i> este cel mai mic descriptor liber (inchis) disponibil.</p>
+            <p style="text-align: justify;">Functia <i>dup2( )</i> se comporta in mod asemanator cu <i>dup( )</i>,
+                cu deosebirea ca poate fi indicat explicit care sa fie noul descriptor.
+                Dupa apelul <i>dup2( )</i>, descriptorul <i>newfd</i> va indica acelasi
+                fisier ca si <i>oldfd</i>. Daca inainte de operatie descriptorul <i>newfd</i>
+                era deschis, fisierul indicat este mai intai inchis, dupa care se face
+                duplicarea.</p>
+            <p style="text-align: justify;">Ambele functii returneaza descriptorul nou creat (in cazul lui <i>dup2(
+                    )</i>, egal cu <i>newfd</i>) sau -1 in caz de eroare cu setarea corespunzatoare a valorii variabilei
+                errno.</p>
+            <p style="text-align: justify;">Urmatoarea secventa de cod realizeaza redirectarea iesirii standard
+                spre un fisier deschis, cu descriptorul corespunzator <i>fd</i>:</p>
+            <pre>...<br>fd=open("Fisier.txt", O_WRONLY);<br>...<br>if((newfd=dup2(fd,1))&lt;0)<br>  {<br>	perror("Eroare la dup2\n");<br>	exit(1);<br>  }<br>...<br>printf("ABCD");<br>...<br></pre>
+            <p style="text-align: justify;">In urma redirectarii, textul "ABCD" tiparit cu <i>printf( )</i> nu va fi
+                scris pe ecran, ci in fisierul cu numele "Fisier.txt".</p>
+            <p style="text-align: justify;">Redirectarile de fisiere se pastreaza chiar si dupa apelarea unei functii
+                de tip <i>exec( )</i> (care suprascrie procesul curent cu programul luat
+                de pe disc). Folosind aceasta facilitate, este posibila, de exemplu, conectarea
+                prin<i> pipe</i> a doua procese, unul din ele ruland un program executabil
+                citit de pe disc. Secventa de cod care realizeaza acest lucru este data
+                mai jos. Se considera ca parintele deschide un pipe din care va citi date,
+                iar fiul este un proces care executa un program de pe disc. Tot ce afiseaza
+                la iesirea standard procesul luat de pe disc, va fi redirectat spre capatul
+                de scriere al <i>pipe</i>-ului, astfel incat parintele poate citi datele
+                produse de acesta. Aceasta facilitate este exemplificata in urmatoarea secventa de cod in care iesirea
+                la stdout a comenzii ls va fi redirectata intr-un pipe (mai exact spre capatul de scriere a
+                pipe-ului):<br></p>
+            <pre
+                style="text-align: justify;">int main(void)<br>{<br>	int pfd[2];<br>	int pid;<br>	FILE *stream;<br><br>		...<br>	if(pipe(pfd)&lt;0)<br>	{<br>		printf("Eroare la crearea pipe-ului\n");<br>		exit(1);<br>	}<br>	...<br>	if((pid=fork())&lt;0)<br>	{<br>		printf("Eroare la fork\n");<br>		exit(1);<br>	}<br>	if(pid==0) /* procesul fiu */<br>	{<br>		close(pfd[0]); /* inchide capatul de citire; */<br>					   /* procesul va scrie in pipe  */<br>		...<br>		dup2(pfd[1],1); /* redirecteaza iesirea standard spre pipe */<br>		...<br>		execlp("ls","ls","-l",NULL); /* procesul va rula comanda ls */<br>		printf("Eroare la exec\n);<br>		/* Daca execlp s-a intors, inseamna ca programul nu a putut fi lansat in executie */<br>	}<br>	/* procesul parinte */<br>	<br>	close(pfd[1]); /* inchide capatul de scriere; */<br>	/* procesul va citi din pipe  */<br>	...<br>	stream=fdopen(pfd[0],"r");<br>	/* deschide un stream (FILE *) pentru capatul de citire */<br>	fscanf(stream,"%s",string);<br>	/* citire din pipe, folosind stream-ul asociat */<br>	...<br>	close(pfd[0]); /* la sfarsit inchide si capatul utilizat */<br>        ... <br>        return 0;<br>}<br></pre>
+        </div>
+    </div>
+</body>
+
+</html>

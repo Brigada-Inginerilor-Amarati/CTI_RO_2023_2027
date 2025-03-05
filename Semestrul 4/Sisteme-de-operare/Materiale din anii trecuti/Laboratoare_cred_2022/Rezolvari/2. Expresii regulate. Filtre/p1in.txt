@@ -1,0 +1,6 @@
+valentin.stangaciu@cs.upt.ro;192.168.4.4
+adresa@something.gov;192.168.4.3
+a++adresa@something.ro;192.168.2.2
+02adresa@something.ro;192.168.1.1
+adresa@something.ro;0.1.4.5
+adresa@something.ro;1.20.20.254

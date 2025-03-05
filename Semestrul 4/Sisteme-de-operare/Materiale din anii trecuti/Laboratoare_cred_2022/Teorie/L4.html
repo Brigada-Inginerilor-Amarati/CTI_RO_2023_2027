@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+
+<body>
+
+    <div class="no-overflow">
+        <h3>Organizarea unităților de stocare fixe (HDD, SSD)<br></h3>
+        <p style="text-align: justify;">Fiecare sistem de operare are un mod propriu de organizare și exploatare
+            a informației stocate pe suporturile de memorare fizice. Principiile, regulile și structurile care
+            realizează acest lucru compun <i>sistemul de fișiere</i>
+            caracteristic sistemului de operare respectiv. <br></p>
+        <p style="text-align: justify;">In general, din punctul de vedere al utilizatorului, sistemele de fisiere
+            prezinta o organizare bazata pe conceptele de <i>fisier</i> si <i>director
+                (catalog)</i>. Fisierele sunt entitati care incapsuleaza informatia de
+            un anumit tip, iar directoarele grupeaza in interiorul lor fisiere si alte
+            directoare. Orice fisier sau director poate fi identificat prin numele
+            sau, indicat in mod absolut, ca
+            nume de cale sau relativ, fata de directorul curent. <br></p>
+        <p style="text-align: justify;">In cazul discurilor fixe (<i>hard-disk</i>-uri) informatia se memoreaza folosind
+            proprietatile magnetice ale acestora. In cazul unitatilor fixe de tip SSD (Solid State Drive) informatiile
+            se stocheaza folosind diferite tehnologii de memorie FLASH. <br></p>
+        <p style="text-align: justify;">Hard-disk-ul contine in interior mai multe platane
+            ce pot memora informatie, iar discheta este formata dintr-un singur
+            disc flexibil (cu ambele fete magnetizate). O fata a unui disc este impartita
+            in <i>piste</i>, care sunt cercuri concentrice in care poate fi memorata
+            informatia. Pistele sunt impartite la randul lor in <i>sectoare</i>, un
+            sector memorand o cantitate fixa de informatie (de obicei 512 octeti).
+            Citirea si scrierea informatiei
+            pe un disc se face la nivel de&nbsp;<i> blocuri de date</i>. Un bloc
+            (<i>cluster)&nbsp;</i> poate fi format dintr-un singur sector (cum se intampla
+            la dischete) sau din mai multe (ca la hard-disk-uri). In cazul unitatilor SSD notiunile de piste si sectoare
+            dispar dar in continuare citirea si scrierea informatiei se face la nivel de bloc. <br></p>
+        <p style="text-align: justify;">Un hard-disk poate fi impartit de utilizator in <i>partitii</i>, fiecare
+            partitie comportandu-se, la nivel utilizator, ca un disc de sine statator.
+            Partitia memoreaza sistemul de fisiere, de unde
+            rezulta ca pe acelasi disc fizic pot fi intalnite mai multe sisteme
+            de fisiere. Pentru calculatoarele personale obisnuite (PC), informatiile
+            referitoare la partitii se memoreaza la inceputul discului, in asa-numita
+            <i>tabela
+                de partitii</i>. Aceasta contine 4 intrari in care memoreaza pozitiile,
+            dimensiunile si tipurile partitiilor de pe disc. Partitiile memorate tabela
+            de la inceputul discului se numesc <i>partitii primare</i>, care pot fi,
+            evident, cel mult 4 la numar. Este posibil, insa, ca in interiorul oricarei
+            partitii primare sa se creeze cate o noua tabela de partitii, referind
+            partitii care fizic se afla in interiorul partitiei curente si care se
+            numesc <i>partitii extinse</i>.</p>
+        <h3 style="text-align: justify;">Sistemul de fisiere UNIX<br></h3>
+        <p style="text-align: justify;">Spatiul fiecarei partitii Unix contine urmatoarele zone:</p>
+        <p style="text-align: justify;"><br>
+        </p>
+        <table>
+            <caption></caption>
+            <thead>
+                <tr>
+                    <th scope="col" style="border-width: 1px; border-style: solid;">Boot block<br>(block incarcare)<br>
+                    </th>
+                    <th scope="col" style="border-width: 1px; border-style: solid;">Superblock</th>
+                    <th scope="col" style="border-width: 1px; border-style: solid;">Zona noduri index<br></th>
+                    <th scope="col" style="border-width: 1px; border-style: solid;">Swapping</th>
+                    <th scope="col" style="border-width: 1px; border-style: solid;">Continut</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table><br>
+        <ul>
+            <li>
+                <b>Blocul de incarcare</b> (<i>boot block</i>)contine programele care realizeaza
+                incarcarea partii rezidente a sistemului de operare Unix.</li>
+
+            <li>
+                <b>Superblocul</b> contine informatii generale despre sistemul de fisiere
+                de pe disc: inceputul zonelor urmatoare, inceputul zonelor libere de pe
+                disc.</li>
+
+            <li>
+                <b>Zona de noduri index </b>are o dimensiune fixata la creareea sistemului
+                de fisiere si contine cate o intrare pentru fiecare fisier ce poate fi
+                creat pe acest suport</li>
+
+            <li>
+                <b>Zona pentru swapping</b> (daca exista) este rezervata pentru pastrarea
+                imaginilor proceselor atunci cand sunt eliminate temporar din memorie pentru
+                a face loc altor procese. De obicei, insa, pentru zona de swap se folosesc
+                partitii distincte.</li>
+
+            <li>
+                Ultima zona contine blocurile care memoreaza fisierele propriu-zise.</li>
+        </ul>
+        <p style="text-align: justify;">In UNIX directoarele sunt implementate tot prin intermediul fisierelor cu
+            proprietatea ca fisierele de tip director nu pot fi scrise de utilizator. Astfel, <i>intrarile dintr-un
+                director</i>, au o structura foarte simpla, continand doar doua compuri: numele fisierului si numarul
+            nodului index asociat fisierului</p>
+        <p style="text-align: justify;">Un nod index (<i>i-node</i>) contine informatiile esentiale despre fisierul
+            caruia ii corespunde. Exista cate un singur nod index pentru fiecare fisier.
+            Este posibil sa intalnim mai multe intrari in director indicand acelasi
+            nod index (sistemul de fisiere din Unix accepta crearea de legaturi multiple).</p>
+        <p></p>
+        <p style="text-align: justify;">Informatia din nodul index cuprinde:
+        </p>
+        <ul>
+            <li style="text-align: justify;">
+                <b>identificatorul utilizatorului</b>: <i>uid (user-id.).</i> Identifica
+                proprietarul fisierului</li>
+
+            <li style="text-align: justify;">
+                <b>identificatorul de grup al utilizatorului</b></li>
+
+            <li style="text-align: justify;">
+                <b>drepturile de acces la fisier.</b> Drepturile sunt de trei tipuri (<i><b>r</b>-read,
+                    <b>w</b>-write,
+                    <b>x</b>-execute)&nbsp;</i> si sunt grupate pe trei categorii:</li>
+
+            <ul style="text-align: justify;">
+                <li>
+                    <i>user</i> - drepturile proprietarului fisierului</li>
+
+                <li>
+                    <i>group</i> - drepturile utilizatorilor din grupul proprietarului</li>
+
+                <li>
+                    <i>others</i> - drepturile tuturor celorlalti utilizatori</li>
+            </ul>
+
+            <li style="text-align: justify;">
+                <b>timpul ultimului acces la fisier</b></li>
+
+            <li style="text-align: justify;">
+                <b>timpul ultimei actualizari a fisierului</b></li>
+
+            <li style="text-align: justify;">
+                <b>timpul ultimului acces pentru actualizarea nodului index</b></li>
+
+            <li style="text-align: justify;">
+                <b>codul fisierului (tipul fisierului).</b> Fisierele pot fi: fisiere obisnuite
+                (-), directoare (d), periferice (c) etc.</li>
+
+            <li style="text-align: justify;">
+                <b>lungimea fisierului (in octeti)</b></li>
+
+            <li style="text-align: justify;">
+                <b>contorul de legaturi al fisierului.</b> Reprezinta numarul de legaturi
+                existente spre acest nod index. Este utilizat la operatia de stergere a
+                nodului index.</li>
+
+            <li style="text-align: justify;">
+                <b>lista de blocuri</b> care contin fisierul</li>
+        </ul>Lista de blocuri de pe disc care contin fisierul se realizeaza printr-un
+        tablou cu 13 intrari. Primele 10 intrari contin direct adresele de bloc
+        (cluster) pentru primele 10 blocuri ale fisierului. A unsprezecea intrare
+        din aceasta lista este adresa unui bloc, rezervat fisierului, al carui
+        continut este, insa, interpretat ca lista de adrese de blocuri. Se spune
+        ca aceste blocuri sunt adresate prin <i>indirectare simpla</i>. Intrarea
+        a 12-a contine un bloc al carui continut consta in adrese de blocuri, care
+        <i>acestea</i>
+        contin adrese de blocuri de date (<i>indirectare dubla)</i>. In mod analog,
+        intrarea cu numarul 13 determina o <i>indirectare tripla</i>.<br>
+        <p></p>
+        <p><img src="http://labs.cs.upt.ro/labs/so/html/images/indirect.gif" width="450" height="450"></p>
+        <p></p>
+        <p style="text-align: justify;">Sistemul de fisiere din UNIX permite crearea asa-numitelor legaturi la
+            fisiere. O asemenea legatura (<i>link</i>) este vazuta de catre utilizator
+            ca un fisier cu un nume propriu, dar care in realitate refera un alt fisier
+            de pe disc. Orice operatie care se executa asupra fisierului legatura (mai
+            putin stergerea) isi va avea efectul de fapt asupra fisierului indicat
+            de legatura. Daca este solicitata stergerea, efectul depinde de tipul
+            legaturii respective.
+        </p>
+        <p>Legaturile sunt de doua tipuri:
+        </p>
+        <ul>
+            <li>
+                <b>fizice (<i>hard links</i>)</b></li>
+
+            <li>
+                <b>simbolice (<i>symbolic links</i>)</b></li>
+        </ul>
+        <div style="text-align: justify;">Legaturile din prima categorie se realizeaza prin introducerea de intrari
+            in director care pointeaza spre acelasi nod index, si anume cel al fisierului indicat. Cand spre fisier este
+            stearsa si ultima intrare in director care
+            il indica, fisierul in sine va fi sters si el. Legaturile de acest tip
+            au dezavantajul ca nu pot indica nume de directoare si nici fisiere din
+            alte partitii decat cea pe care se afla.</div>
+        <p style="text-align: justify;"></p>
+        <p style="text-align: justify;">Legaturile simbolice sunt de fapt fisiere distincte, marcate cu un cod
+            special, care au ca si continut numele complet al fisierului indicat. Stergerea
+            lor nu afecteaza fisierul. Pot referi directoare, precum si fisiere si
+            directoare din alta partitie sau alt disc, dar au dezavantajul ca pentru
+            ele (fiind fisiere) trebuie creat un nod index separat si, in plus, ocupa
+            spatiu pe disc prin continutul lor.</p>
+        <p style="text-align: justify;"></p>
+        <p style="text-align: justify;">Crearea legaturilor spre fisiere sau directoare se face cu ajutorul
+            comenzii <b>ln</b>.
+        </p>
+        <blockquote>
+            <li>
+                <b>ln <i>fisier_indicat nume_legatura</i></b> - creeaza o legatura "fizica"</li>
+
+            <li>
+                <b>ln -s <i>fisier_indicat nume_legatura</i></b> - creeaza o legatura simbolica</li>
+        </blockquote>Pe langa legaturi, in Unix exista si alte fisiere speciale. Tipul acestora
+        poate fi observat citind primul caracter afisat de comanda <b>ls -l. </b>Astfel, pot exista urmatoarele tipuri
+        de fisiere:<p></p>
+        <p></p>
+        <ol>
+            <li>
+                Fisiere obisnuite<br></li>
+
+            <li>
+                Directoare. Dupa cum am vazut, sunt fisiere care, avand un format special,
+                grupeaza fisiere<br></li>
+
+            <li>
+                Fisiere speciale care corespund unor dispozitive orientate pe caractere</li>
+
+            <li>
+                Fisiere speciale care corespund unor dispozitive orientate pe blocuri</li>
+
+            <li>
+                Fisiere FIFO</li>
+
+            <li>
+                Legaturi simbolice</li>
+        </ol>
+        <div style="text-align: justify;">Fisierele speciale evidentiate la punctele 3 si 4 reprezinta metoda prin
+            care sistemul Unix abstractizeaza dispozitivele de intrare-iesire si alte
+            dipozitive din sistemul de calcul. Toate aceste fisiere se gasesc in directorul
+            <b>/dev</b>.</div>
+        <p style="text-align: justify;"></p>
+        <p style="text-align: justify;">Spre exemplu, fiecarei unitati de disc ii corespunde cate un fisier
+            in directorul <b>/dev</b>. In Linux, primul hard-disk pe interfata SATA (sau SCSI) din system ii corespunde
+            fisierul specia <b>/dev/sda</b>, iar primei partitii din acest disc ii corespunde fisierul <b>/dev/sda1</b>.
+            A doua partitie de pe primul disc are ca si corespondent fisierul <b>/dev/sda2</b>, al doilea hard-disk SATA
+            (sau SCSI) are ca si corespondent fisierul <b>/dev/sdb</b>, ...etc. <br></p>
+        <p style="text-align: justify;"></p>
+        <p style="text-align: justify;">Fisierele speciale care indica unitati de disc sau partitii sunt folosite
+            in operatia numita <i>montare</i> a sistemelor de fisiere. Sistemul de
+            operare Unix permite montarea intr-un director a unui sistem de fisiere
+            aflat pe un disc sau o partitie. Aceasta inseamna ca, dupa montare, in
+            directorul respectiv se va afla intreaga structura de fisiere si directoare
+            de pe sistemul de fisiere respectiv. Mecanismul este deosebit de puternic,
+            deoarece ofera posibilitatea de a avea o structura de directoare unitara,
+            care grupeaza fisiere de pe mai multe partitii sau discuri. Daca se adauga
+            si sistemul de fisiere <b>NFS <i>(Network File System)</i></b>, aceasta
+            structura de directoare va putea contine si sisteme de fisiere montate
+            de la distanta (de pe alta masina)
+        </p>
+        <p>Montarea unui sistem de fisiere se face cu comanda <b>mount</b>. Data
+            fara nici un parametru, ea afiseaza sistemele de fisiere montate in momentul
+            respectiv in sistem. O alta forma a ei este urmatoarea:
+            <br></p>
+        <blockquote><b>mount <i>fisier-special director</i></b></blockquote>
+        care monteaza un disc sau o partitie intr-un director dat; sau
+        <blockquote><b>mount -t <i>tip</i> <i>fisier-special director</i></b></blockquote>
+        <p>
+            cu acelasi efect, doar ca se specifica in clar tipul sistemului de fisiere
+            care se monteaza. Diferitele variante de Unix cunosc mai multe sau mai
+            putine tipuri de sisteme de fisiere. Spre exemplu, Linux cunoaste, printre
+            altele, urmatoarele:</p>
+        <ul>
+            <li>ext2, ext3, <b>ext4</b> - sistemele caracteristice Linux</li>
+            <li>msdos - sistemul de fisiere DOS FAT16 sau FAT32</li>
+            <li>iso9660 - sistem de fisiere pentru unitatile CD-ROM</li>
+            <li>smbfs - sistem de fisiere montat la distanta prin protocol SAMBA</li>
+            <li>sshfs - sistem de fisiere montat la distanta prin protocolul SSH</li>
+        </ul>
+        <p>Pentru a afla ce sisteme de fisiere cunoaste un sistem de operare Linux instalat se poate consulta continutul
+            fisierului /proc/filesystem.</p>
+        <p></p>
+        <p>Orice sistem de fisiere montat de pe
+            o unitate de disc care permite inlaturarea discului respectiv trebuie <i>demontat</i>
+            inainte de a scoate discul. De asemenea, inainte de inchiderea sau repornirea
+            calculatorului, trebuie de-montate si sistemele de fisiere de pe discurile
+            fixe (in Linux, aceasta din urma operatie se efectueaza automat la restartarea
+            sistemului prin apasarea simultana a tastelor Ctrl+Alt+Del). De-montarea
+            fisierelor se face cu comanda
+            <br>&nbsp;
+        </p>
+        <blockquote><b>umount <i>fisier-special</i></b></blockquote>
+        sau
+        <blockquote><b>umount <i>director</i></b></blockquote>
+        (unde <i>director</i> este numele directorului in care a fost montat sistemul
+        de fisiere).<p></p>
+        <h3>Apeluri sistem si functii de biblioteca pentru lucrul cu fisiere</h3>
+        <p style="text-align: justify;">Orice sistem de operare pune la dispozitia programatorilor
+            o serie de <i>servicii</i> prin intermediul carora acestora li se ofera
+            acces la resursele hardware si software gestionate de sistem: lucrul cu
+            tastatura, cu discurile, cu dispozitivul de afisare, gestionarea fisierelor
+            si directoarelor etc. Aceste servicii se numesc <i>apeluri sistem</i>.
+            De cele mai multe ori, operatiile pe care ele le pot face asupra resurselor
+            gestionate sunt operatii simple, cu destul de putine facilitati. De aceea,
+            frecvent, se pot intalni in bibliotecile specifice limbajelor de programare
+            colectii de functii mai complicate care gestioneaza resursele respective,
+            dar oferind programatorului niveluri suplimentare de abstractizare a operatiilor
+            efectuate, precum si importante facilitati in plus. Acestea sunt <i>functiile
+                de biblioteca</i>. Trebuie subliniat faptul ca functiile de biblioteca
+            cu ajutorul carora se poate gestiona o anumita resursa sunt implementate
+            folosind chiar functiile sistem corespunzatoare, specifice sistemului de
+            operare.</p>
+        <p style="text-align: justify;">Apelurile sistem, dar si functiile de biblioteca, de obicei returneaza anumite
+            valori prin care se comunica apelantului daca acel apel s-a executat corect sau nu. Valoarea efectiv
+            returnata se poate afla in pagina de manual a functiei respective, fie ca este vorba de apel sistem sau
+            functie de biblioteca. In cazul in care un apel sistem sau functie de biblioteca s-a terminat cu eroare este
+            posibil ca toate operatiunile urmatoare efectuate de programator sa fie compromise. Din aceste motive, este
+            absolut necear sa se testeze.<br></p>
+        <p style="text-align: justify;">De asemenea, in majoritatea situatilor aceste apeluri, in caz de eroare, vor
+            seta variabila globala <b>errno </b>(declara in errno.h), mostenita de fiecare program. Aceasta varibila
+            errno, in urma aparitiei unei erori este setata cu o valoare menita sa explice situatia eronata aparuta (mai
+            multe informatii despre errno si valorile posibile se pot gasi in pagina de manual pentru errno, sectiunea 3
+            - man 3 errno). Aceste valori, de multe ori, sunt greu de a fi folosite in varianta lor initiala. Pentru a
+            facilita obtinerea erorilor aparute se pot folosi urmatoarele functii:</p>
+        <pre style="text-align: justify;">&nbsp;void perror(const char *s);<br></pre>
+        <p style="text-align: justify;">Functia perror afiseaza la iesirea standard de eroare un mesaj menit sa descrie
+            ultima eroare aparuta. Practic aceasta functie afiseaza un mesaj ce "transcrie" valoarea numerica a lui
+            <i>errno</i>. String-ul asteptat ca si parametru este afisat inainte mesajului de eroare. Se poate furniza
+            si string-ul nul "". Pagina de manual a functiei se afla in sectiunea 3 <i>(man 3 perror).</i></p>
+        <pre style="text-align: justify;">char *strerror(int errnum);<br></pre>
+        <p style="text-align: justify;">Functia strerror este asemanatoare cu functia perror dar aceasta nu afiseaza ci
+            returneaza string-ul ce l-ar afisa functia perror. Practic aceasta functie returneaza un string ce descrie
+            valoarea erorii descrise de obicei de errno dar codul numeric trebuie dat ca si parametru. Pagina de manual
+            a functiei se afla in sectiunea 3 (man 3 strerror). Un exemplu de utilizare ar putea fi urmatorul:</p>
+        <pre
+            style="text-align: justify;">#include &lt;string.h&gt;<br>#include &lt;errno.h&gt;<br>.......<br>char *error_string = strerror(errno);<br></pre>
+        <p style="text-align: justify;">Intr-un mod foare simplificat, o metoda de testare a unui apel sistem (sau
+            functie de biblioteca) ar putea fi urmatoarea:</p>
+        <pre
+            style="text-align: justify;">#include &lt;stdio.h&gt;<br><br>int main(void)<br>{<br>   .....<br>   int return_value = system_call(...);<br>   if (return_value &lt; 0)<br>   {<br>      perror("mesaj");<br>      exit(-1);<br>   }<br>   .....<br>   return 0;<br>}<br></pre>
+        <p>Apelurile sistem care vor fi discutate aici sunt caracteristice sistemului
+            de operare UNIX. Principalele operatii urmarite vor fi: deschiderea si inchiderea fisierului, citirea din
+            fisier, scrierea in fisier operatiuni de modificare a pozitiei curente in fisier, operatii de obtinere de
+            informatii suplimentare despre fisiere (structura unui i-node).</p>
+        <p style="text-align: justify;">Pentru a putea actiona asupra unui fisier, este nevoie inainte de toate
+            de o metoda de a identifica in mod unic fisierul. In cazul functiilor ce vor fi discutate,
+            identificarea fisierului se face printr-un asa-numit <i>descriptor de fisier
+                (file descriptor)</i>. Acesta este un numar intreg care este asociat fisierului
+            in momentul deschiderii acestuia. Este important de mentionat ca un descriptor de fisier asignat la
+            deschiderea fisierului identifica in mod unic acel fisier in cadrul programului respectiv. Valoarea intreaga
+            a acestui descriptor nu are nici o semnificatie pentru un alt program. Descriptorul este asignat de catre
+            nucleu pentru programul apelant.</p>
+        <h4 style="text-align: justify;">Apeluri sistem pentru deschiderea si inchiderea fisierelor</h4>
+        <p style="text-align: justify;">Deschiderea unui fisier este operatia prin care fisierul este pregatit
+            pentru a putea fi prelucrat in continuare. Prin aceasta operatiune, programul apelant primeste de la nucleu
+            descriptorul unic pentru acel fisier. Aceasta operatie se realizeaza
+            prin intermediul functiei <b>open</b>:</p>
+        <pre style="text-align: justify;">int open(const char *pathname, int oflag, [, mode_t mode]);<br></pre>
+        <p style="text-align: justify;">Pagina de manual a functiei se afla in sectiunea 2 (apeluri sistem): <i>man 2
+                open</i><br></p>
+        <p style="text-align: justify;">Functia returneaza -1 in caz de eroare si seteaza valoarea corespunzatoare a
+            variabilei <i>errno</i>.In caz contrar, functia returneaza descriptorul de fisier asociat fisierului
+            deschis. Acest descriptor va fi apoi folosit pe tot parcursul programului pentru a identifica in mod unic
+            fisierul. <br></p>
+        <p style="text-align: justify;">Argumentele functiei:</p>
+        <ul>
+            <li><b>pathname </b>- calea catre fisier (poate fi aboluta sau relativa la fisierul executabil al
+                programului)</li>
+            <li><b>oflag</b> - optiunile de deschidere a fisierului. Acest camp este in realitate
+                un sir de biti (bitfield) in care fiecare bit sau grupa de biti are o anumita semnificatie.
+                Pentru fiecare astfel de semnificatie exista definite in fisierul <i>header</i>
+                C <b>fcntl.h </b>cate o constanta. Constantele se pot combina folosind
+                operatorul '|' (<i>sau logic pe biti</i>) din C, pentru a seta mai multi
+                biti (deci a alege mai multe optiuni) in parametrul intreg <b>oflag</b>.
+                Iata cateva din aceste constante:</li>
+            <ul>
+                <li>
+                    O_RDONLY - deschidere numai pentru citire</li>
+
+                <li>
+                    O_WRONLY - deschidere numai pentru scriere</li>
+
+                <li>
+                    O_RDWR - deschidere pentru citire si scriere</li>
+
+                <li>
+                    O_APPEND - deschidere pentru adaugare la sfarsitul fisierului</li>
+
+                <li>
+                    O_CREAT - crearea fisierului, daca el nu exista deja; daca e folosita cu
+                    aceasta optiune, functia <b>open</b> trebuie sa primeasca si parametrul
+                    <i>mode</i>.</li>
+
+                <li>
+                    O_EXCL - creare "exclusiva" a fisierului: daca s-a folosit O_CREAT si fisierul
+                    exista deja, functia <b>open</b> va&nbsp; returna eroare</li>
+
+                <li>
+                    O_TRUNC - daca fisierul exista, continutul lui este sters</li>
+            </ul>
+            <li><b>mode </b>- acest argument este tot un camp de biti (bitfield) si se foloseste si are sens doar in
+                cazul in care fisierul este creat si specifica drepturile de acces asociate fisierului. Acestea se obtin
+                prin
+                combinarea unor constante folosind operatorul <i>sau</i> ('|'), la fel
+                ca si la optiunea precedenta. Constantele pot fi:</li>
+
+            <ul>
+                <li>
+                    S_IRUSR - drept de citire pentru proprietarul fisierului (<i>user</i>)</li>
+
+                <li>
+                    S_IWUSR - drept de scriere pentru proprietarul fisierului (<i>user</i>)</li>
+
+                <li>
+                    S_IXUSR - drept de executie pentru proprietarul fisierului (<i>user</i>)</li>
+
+                <li>
+                    S_IRGRP - drept de citire pentru grupul proprietar al fisierului</li>
+
+                <li>
+                    S_IWGRP - drept de scriere pentru grupul proprietar al fisierului</li>
+
+                <li>
+                    S_IXGRP - drept de executie pentru grupul proprietar al fisierului</li>
+
+                <li>
+                    S_IROTH - drept de citire pentru ceilalti utilizatori</li>
+
+                <li>
+                    S_IWOTH - drept de scriere pentru ceilalti utilizatori</li>
+
+                <li>
+                    S_IROTH - drept de executie pentru ceilalti utilizatori</li>
+            </ul>
+        </ul>
+        <p>Pentru crearea fisierelor poate fi folosita si functia <i>creat </i>care este de fapt un caz particular de
+            apel a functiei <i>open</i>:</p>
+        <pre>creat (const char *pathname, mode_t mode);</pre>
+        <p>echivalent cu:</p>
+        <pre>open(pathname, O_WRONLY | O_CREAT | O_TRUNC, mode)<br></pre>
+        <ul>
+            <ul>
+            </ul>
+        </ul>
+        <p style="text-align: justify;">Dupa utilizarea fisierului, acesta trebuie <i>inchis</i>, folosind functia
+            <i>close</i>:<br></p>
+        <pre>int close (int filedes);</pre>
+        <p style="text-align: justify;">Functia returneaza -1 in caz de eroare si seteaza variabila errno corespunzator.
+            In caz de succes functia returneaza 0. Pagina de manual pentru aceasta functie se afla tot in sectiunea 2:
+            <i>man 2 close</i>. Argumentul filedes specifica descriptorul catre fisierul ce se doreste a fi inchis.</p>
+        <p style="text-align: justify;">Este absolut necear ca un fisier odata deschis sa fie inchis de catre
+            programator. In cazul in care fisierul ramane deschis, la terminarea executiei programului, sistemul de
+            operare va inchide fortat toate fisierele deschise si este posibil sa apare corupere si pierdere de date.
+            <br></p>
+        <p style="text-align: justify;">Un aspect important de mentionat este ca in momentul in care un fisier se
+            inchide, sistemul de operare executa si operatiunea de <i>flush.</i> Prin aceasta operatiune sistemul de
+            operare scrie efectiv pe mediul de stocarea datele scrise anterior de utilizator/programator. In lipsa
+            apelului de <i>close </i>este posibil ca operatiunea de flush sa nu mai fie executata si astfel datele scrie
+            prin eventualele apeluri precedente sa nu ajunga si in mediul fizic de stocare. In caz concet, in momentul
+            in care programatorul/utilizatorul scrie ceva intr-un fisier, sistemul de operare nu scrie efectiv in fisier
+            acele date in acel moment ci acele date sunt trecute printr-o memorie tampon (prin buffer-e). In momentul in
+            care buffer-ele interne sunt pline doar atunci sistemul de operare initiaza o scriere efectia in fisier.
+            Motivele din spatele acestor operatiuni tin de eficientizarea scrierilor. Prin apelul sistem close, sistemul
+            de operare va initia scrierea tuturor datelor fizic in fisier indiferend de starea buffer-elor.</p>
+        <p style="text-align: justify;"><br></p>
+        <p style="text-align: justify;"></p>
+        <h4>Apeluri sistem pentru citirea si scrierea fisierelor</h4>
+        <p><br></p>
+        <p></p>
+        <p style="text-align: justify;">Citirea datelor dintr-un fisier deschis se face cu apelul sistem <i>read</i>:
+        </p>
+        <pre style="text-align: justify;">ssize_t read(int fd, void *buff, size_t nbytes);<br></pre>
+        <p style="text-align: justify;">Functia citeste un numar de maxim<i> </i><i>nbytes</i> octeti de la pozitia
+            curenta
+            in fisierul al carui descriptor este <i>fd</i> si ii pune in zona de memorie
+            indicata de pointerul <i>buff</i>. Functia returneaza numarul de octeti cititi. Nu este neaparat ca functia
+            sa citeasca din fisier numarul de octeti specificati prin <i>nbytes</i>. Este posibil ca in fisier sa fie de
+            citit la un moment dat mai putin
+            de <i>nbytes</i> octeti (de exemplu daca s-a ajuns spre sfarsitul fisierului),
+            astfel ca functia <i>read </i>va pune in buffer doar atatia octeti cati poate
+            citi. In cazul in care s-a ajuns la capatul fisierului functia <i>read </i>va returna 0. In caz de eroare
+            functia <i>read </i>va returna valoarea -1 si se va seta corespunzator valoarea lui <i>errno</i>. Dupa
+            fiecare citire functia incrementeaza pozitia curenta a indicatorului fisierului cu numarul de octeti cititi.
+            <br></p>
+        <p style="text-align: justify;">Este foarte important de mentionat faptul ca aceasta functie nu face nici o
+            prelucrare a datelor citite ci efectiv citeste in mod binar un numar specificati de octeti. O greseala
+            frecventa este aceea de a se considera ca daca fisierul este text si se citeste un numar de octeti, acestia
+            vor forma un string. Aceasta presupunere este total gresita din motivul ca in string este un sir de caracter
+            terminat cu octetul 0x00 ('\0'). Functia read nu adauga acest octet la sfarsit deoarece ea doar citeste din
+            fisier. <br></p>
+        <p style="text-align: justify;">De asemenea, functia este absolut gresit a se apela o singura data functia read
+            pentru intregul fisier (mai ales daca este vorba de un fisier de mari dimensiuni). De cele mai multe ori se
+            recomanda un apel ciclic al acestei functii prin care se va citi un numar limitat de octeti pana cand se
+            ajunge la sfarsitul fisierului.</p>
+        <p style="text-align: justify;">Pagina de manual a apelului <i>read </i>se gaseste in sectiunea 2 (<i>man 2
+                read</i>).<br></p>
+        <p style="text-align: justify;">Scrierea datelor in fisier se face cu apelul sistem <i>write</i>:</p>
+        <pre style="text-align: justify;">ssize_t write(int fd, void *buff, size_t nbytes);<br></pre>
+        <p style="text-align: justify;">Functia scrie in fisier primii <i>nbytes</i> octeti, la pozitia curenta, din
+            bufferul indicat
+            de <i>buff</i> in fisierul a carui descriptor este <i>fd</i>. Functia returneaza numarul de octeti ce au
+            fost scrisi in fisier. In caz de eroare functia returneaza -1 si seteaza corespunzator valoarea lui errno.
+            Dupa fiecare scriere, functia incrementeaza pozitia curenta a indicatorului fisierului cu numarul de octeti
+            scrisi.</p>
+        <p style="text-align: justify;">Pagina de manual a apelului write se gaseste in sectiunea 2 (<i>man 2
+                write</i>).</p>
+        <p style="text-align: justify;"></p>
+        <h4><br></h4>
+        <h4>Apeluri sistem pentru modificarea indicatorului pozitiei curente</h4>
+        <p><br></p>
+        <p>Operatiile de scriere si citire in si din fisier se fac la o anumita pozitie
+            in fisier, considerata pozitia curenta. Fiecare operatie de citire, de
+            exemplu, va actualiza indicatorul pozitiei curente incrementand-o cu numarul
+            de octeti cititi. Indicatorul pozitiei curente poate fi setat si in mod
+            explicit, cu ajutorul functiei <b>lseek</b>:</p>
+        <pre>off_t lseek(int fd, off_t offset, int pos);<br></pre>Functia pozitioneaza indicatorul la deplasamentul
+        <i>offset</i> in fisier,
+        astfel:
+        <ul>
+            <li>
+                daca parametrul pos ia valoarea <b>SEEK_SET</b>, pozitionarea se face relativ
+                la inceputul fisierului</li>
+
+            <li>
+                daca parametrul pos ia valoarea <b>SEEK_CUR</b>, pozitionarea se face relativ
+                la pozitia curenta</li>
+
+            <li>
+                daca parametrul pos ia valoarea <b>SEEK_END</b>, pozitionarea se face relativ
+                la sfarsitul fisierului</li>
+        </ul>Parametrul <i>offset</i> poate lua si valori negative si reprezinta deplasamentul,
+        calculat in octeti. In caz de eroare functia va retruna -1 si va seta corespunzator valoarea lui <i>errno</i>.
+        <p></p>
+        <p style="text-align: justify;"></p>
+        <h4><br></h4>
+        <h4>Apeluri sistem pentru aflarea atributelor fisierelor <br></h4>
+        <p><br></p>
+        <p>Atributele unui fisier reprezinta niste informatii aditionale ce se pot afla despre acestea, informatii ce
+            reprezinta de fapt structura i-node-ului. Pentru a se obtine atributele unui fisier se poate folosi apelul
+            sistem <i>stat</i>:</p>
+        <pre>int stat(const char *file_name, struct stat *buf);<br></pre>
+        <p>Acest apel sistem primeste ca prim parametru o cale abosoluta sau relativa la programul executabil a unui
+            fisier de pe disc. Al doilea parametru, ce poate fi considerat un parametru de iesire, reprezinta un pointer
+            spre o zona de memorie ce contine o variabila de tip <i>struct stat</i>. Aceasta zona de memorie trebuie sa
+            existe (sa fi fost alocata <b>static</b> sau dinamic) deorece functia stat va scrie in aceasta locatie.
+            Apelul stat retuneaza 0 daca apelul a decurs cu succes sau -1 in caz de eroare cu setarea corespunzatoare a
+            variabilei <i>errno</i>. Pagina de manual a acestei functii se afla in sectiunea 2 (<i>man 2 stat</i>).<br>
+        </p>
+        <p>Structura <i>struct stat</i> are urmatoarea forma:</p>
+        <pre>    struct stat {<br>               dev_t     st_dev;         /* ID of device containing file */<br>               ino_t     st_ino;         /* inode number */<br>               mode_t    st_mode;        /* file type and mode */<br>               nlink_t   st_nlink;       /* number of hard links */<br>               uid_t     st_uid;         /* user ID of owner */<br>               gid_t     st_gid;         /* group ID of owner */<br>               dev_t     st_rdev;        /* device ID (if special file) */<br>               off_t     st_size;        /* total size, in bytes */<br>               blksize_t st_blksize;     /* blocksize for filesystem I/O */<br>               blkcnt_t  st_blocks;      /* number of 512B blocks allocated */<br><br>               /* Since Linux 2.6, the kernel supports nanosecond<br>                  precision for the following timestamp fields.<br>                  For the details before Linux 2.6, see NOTES. */<br><br>               struct timespec st_atim;  /* time of last access */<br>               struct timespec st_mtim;  /* time of last modification */<br>               struct timespec st_ctim;  /* time of last status change */<br><br>           #define st_atime st_atim.tv_sec      /* Backward compatibility */<br>           #define st_mtime st_mtim.tv_sec<br>           #define st_ctime st_ctim.tv_sec<br>           };<br></pre>
+        Elementele din aceasta structura au urmatoarea semnificatie (se vor descrie doar cele mai utilizate):<p></p>
+        <ul>
+            <li>st_mode - reprezinta un bitfield ce contine tipul fisierului si drepturi de acces. Pentru a extrage
+                informatiile despre tipul fisierului din acest bitfield se rcomanda a se folosi unele macro-uri ce sunt
+                puse la dispozitie: S_ISREG(m), S_ISDIR(m), S_ISLNK(m) unde m reprezinta de fapt st_mode (pentru mai
+                multe informatii despre aceste macro-uri se recomanda consultarea paginii de manual). Pentru extragerea
+                infromatiilor despre drepturile de acces din acest bitfield se pot folosi definitiile ce contin anumite
+                masti de biti precum S_IRWXU, S_IRUSR, S_IROTH, ... etc (pentru mai multe informatii despre aceste
+                macro-uri se recomanda consultarea paginii de manual: <i>man 7 inode</i>)</li>
+            <li>st_uid - numar intreg ce reprezinta identificatorul utilizatorului owner al acestui fisier (analog cu
+                coloana 3 din iesirea comenzii ls -l)</li>
+            <li>st_gid - numar intreg ce reprezinta identificatorul grupului din care face parte fisierul (analog cu
+                coloana 4 din iesirea comenzii ls -l)</li>
+            <li>st_size - numar intreg ce reprezinta dimensiunea in bytes a fisierului <br></li>
+        </ul>
+        <p>Este important de mentionat faptul ca faca aceasta functie este apelata pentru o legatura simbolica
+            informatiile vor fi oferite pentru fisierul referentiat de legatura simbolica (target) si nu pentru insusi
+            fisierul legatura simbolica. Astfel, functia <i>lstat</i> este asemanatoare cu <i>stat</i>, cu diferenta
+            ca, daca este aplicata unei legaturi simbolice, informatiile returnate
+            se vor referi la legatura, si nu la fisierul indicat. De asemenea functia <i>lstat </i>funcioneaza identic
+            cu functia <i>stat </i>daca se aplica oricarui tip de fisier ce nu este legatura simbolica.</p>
+        <pre>int lstat(const char *file_name, struct stat *buf);<br></pre>
+        <p style="text-align: justify;">Pagina de manual a acestei functii se afla in sectiunea 2 (<i>man 2 stat</i>) si
+            in aceeasi pagina de manual cu functia <i>stat</i>.</p>
+        <pre style="text-align: justify;">int fstat(int filedes, struct stat *buf);<br></pre>
+        <p style="text-align: justify;">Functia <i>fstat</i> are acelasi efect, cu deosebirea ca ea primeste
+            ca argument un descriptor de fisier, si nu numele acestuia, deci se poate
+            aplica doar fisierelor in prealabil deschise. Pagina de manual a acestei functii se afla in sectiunea 2
+            (<i>man 2 stat</i>) si in aceeasi pagina de manual cu functia <i>stat</i>.</p>
+        <p style="text-align: justify;"><br></p>
+        <p style="text-align: justify;"></p>
+        <h4>Apeluri sistem pentru gestionarea legaturilor</h4>
+        <p><br></p>
+        <p>Asemanator comenzii ln prezentata in lucrarile de laborator anterioare, exista apeluri sistem ce pot fi
+            folosite din programe scrise in limbajul C ce pot fi folosite pentru a crea sau a sterge legaturi fizice
+            (hard links) sau legaturi simbolice (symbolic link - symlinks).<br></p>
+        <pre>int link(const char *oldpath, const char *newpath); // creeaza legaturi fixe spre fisiere<br>int symlink(const char *oldpath, const char *newpath); //&nbsp; creeaza legaturi simbolice spre fisiere sau directoare<br>int unlink(const char *pathname); // sterge o intrare in director (legatura, fisier sau director)<br></pre>
+        Paginile de manual pentru aceste apeluri se gasesc toate in sectiunea 2, acestea fiind apeluri sistem.<br>
+        <p></p>
+        <p style="text-align: justify;"><br></p><br>
+    </div>
+</body>
+
+</html>

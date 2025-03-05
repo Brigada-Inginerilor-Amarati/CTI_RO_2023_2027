@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+
+<body>
+    <div class="no-overflow">
+        <p style="text-align: justify;"><span lang="RO">În Unix, dar
+                şi, parţial, în DOS, majoritatea comenzilor folosesc aşa-numitele <i>fişiere
+                    standard de intrare</i> şi <i>fişiere standard de ieşire</i>. Acestea sunt
+                concepte abstracte care reprezintă sursa din care comenzile îşi iau datele de
+                intrare, respectiv destinaţia în care ele scriu rezultatele. Deci comenzile
+                citesc din intrarea standard (<b>STDIN</b>) şi scriu în ieşirea standard (<b>STDOUT</b>).
+                În mod normal, intrarea standard este reprezentată de tastatura calculatorului,
+                iar ieşirea standard de către dispozitivul de afişare (monitorul). Adițional,
+                există un fișier special de ieșire destinat pentru semnalarea erorilor ce apar
+                în cursul execuției programelor, anume: <i>ieșirea standard de erori </i>(<b>STDERR</b>).
+                Aceste fișiere speciale au si numere asociate (mai multe detalii în laboratorul
+                intitulat <i>Apeluri sistem pentru lucrul cu fisiere</i>), anume 0 pentru
+                STDIN, 1 pentru STDOUT și 2 pentru STDERR.</span><b><span lang="RO"><br></span></b></p>
+        <p style="text-align: justify;"><b><span lang="RO">Atenție! </span></b><span lang="RO">Informația trimisă spre
+                STDOUT este buffer-ată, pe când orice informație trimisă spre STDERR va fi afișată imediat. Pentru a
+                evita conglomerarea informațiilor pe STDOUT se recomandă introducerea secvențelor speciale de final de
+                linie la scriere, respectiv folosirea comenzilor de tip <i>flush</i>.</span><b><span lang="RO">
+                    <br></span></b></p>
+        <p style="text-align: justify;"><b><span lang="RO">Exemplu</span><span lang="RO">:</span></b><span lang="RO">
+                comanda <b>sort</b> (existentă
+                atât&nbsp; în DOS cât şi în UNIX) funcţionează după principiul enunţat. Dacă
+                este apelată fără nici un parametru, ea va aştepta introducerea liniilor de
+                text de la tastatură (<i>intrarea standard</i>), până la introducerea
+                caracterului <b>^Z</b> urmat de <b>Enter </b>în MS-DOS, sau a caracterului <b>^D</b>,
+                în Unix, după care va sorta liniile şi le va afişa în ordine pe ecran (<i>ieşirea
+                    standard</i>).</span></p>
+        <p style="text-align: justify;"><br><span lang="RO"></span><span lang="RO"></span></p>
+
+
+
+        <h3><b><span lang="RO">Redirectări</span></b></h3>
+
+        <p style="text-align: justify;"><span lang="RO">Intrarea şi
+                ieşirea standard pot fi schimbate folosind operatorii de <b><i>redirectare</i></b>.
+                Redirectarea "conectează" intrarea sau ieşirea comenzilor la un
+                fişier dat. Pentru redirectarea intrării se foloseşte operatorul<b> '&lt;'</b>, iar
+                pentru redirectarea ieşirii operatorul <b>'&gt;'</b>.</span><b><span lang="RO"><br></span></b></p>
+        <p style="text-align: justify;"><b><span lang="RO">Exemplu:</span></b><span lang="RO"> comanda următoare preia
+                liniile care
+                trebuie sortate din fişierul <b>date.txt</b>, iar rezultatele vor fi afişate pe
+                ecran. Se redirectează, deci, numai intrarea standard: </span>
+
+        </p>
+        <pre><span class="" style="color: rgb(51, 51, 51);" lang="RO">sort &lt; date.txt</span></pre>
+
+        <p style="text-align: justify;"><span lang="RO">Pentru a redirecta
+                numai ieşirea, adică liniile de text să fie citite de la tastatură, dar
+                rezultatul să fie scris într-un fişier, se foloseşte următoarea formă: </span></p>
+
+        <pre><span class="" style="color: rgb(51, 51, 51);" lang="RO">sort &gt; ordonat.txt</span></pre>
+
+        <p style="text-align: justify;"><span lang="RO">Redirectările
+                se pot combina, astfel încât liniile să fie citite dintr-un fişier, iar
+                rezultatul să fie scris în altul: </span></p>
+
+        <pre><span class="" style="color: rgb(51, 51, 51);" lang="RO">sort &lt; date.txt &gt; ordonat.txt</span></pre>
+
+        <p style="text-align: justify;"><span lang="RO">Pentru
+                redirectarea ieșirii standard de erori însă trebuie să folosim operatorul
+                într-o formă ușor modificată ce integrează și numărul asociat acestui fișier
+                special:</span></p>
+
+        <pre><span class="" style="color: rgb(51, 51, 51);" lang="RO">sort 2&gt; erori.txt</span></pre>
+
+        <p style="text-align: justify;"><span lang="RO">Fișierele spre
+                care facem redirectări pot conține informații stocate anterior. Dacă se dorește
+                păstrarea lor și adăugarea de informații adiționale prin rularea unei comenzi,
+                se poate folosi operatorul <b>'&gt;&gt;'</b> (append). <b>Exemplu:</b></span></p>
+
+        <pre><span class="" style="color: rgb(51, 51, 51);" lang="RO">sort &gt;&gt; ordonat.txt</span></pre>
+
+        <p><span lang="RO">În acest caz, informațiile
+                furnizate de comanda <i>sort </i>se vor adăuga la finalul fișierului <i>ordonat.txt</i>
+                fără a suprascrie informațiile deja stochate în fișier.</span></p>
+
+        <p><b><span lang="RO">Atenție</span></b><span lang="RO"><b>!</b> Redirectările se fac înainte de
+                executarea comenzilor.</span><b><span lang="RO"><br></span></b></p>
+        <p><b><span lang="RO"><br></span></b></p>
+        <h3><b><span lang="RO">Interpretoare de comenzi</span></b></h3>
+        <p style="text-align: justify;"><span lang="RO">În sistemul de
+                operare Unix există mai multe interpretoare de comenzi, selectabile de către
+                utilizator. Fiecare interpretor accepta un limbaj specific, astfel ca fișierele
+                de comenzi care pot fi scrise diferă în funcție de acest limbaj. Interpretorul
+                de comenzi "standard" este <b>sh</b>, dar foarte folosite sunt şi <b>bash</b>,<b>
+                    tcsh</b>, <b>ksh</b>, <b>csh</b>. În sistemele Linux interpretorul de comenzi
+                cel mai folosit este <b>bash</b>. În continuare, ne vom referi la comenzile și
+                directivele specifice interpretoarelor <i>sh </i>și <i>bash</i>, pentru detalii
+                referitoare la celelalte variante putând fi consultate paginile de manual
+                corespunzătoare.</span></p>
+
+        <p style="text-align: justify;"><span lang="RO">Ca
+                terminologie, în limba engleză interpretorul de comenzi mai este numit <b><i>shell</i></b>,
+                iar un program (fișier de comenzi) scris în limbajul recunoscut de acesta se
+                numește <b><i>shell script</i></b>. </span></p>
+
+        <p style="text-align: justify;"><span lang="RO">Lansarea în
+                execuție a unui fișier de comenzi se face fie tastând direct numele acestuia
+                (el trebuie să aibă dreptul de execuție setat): <br></span></p>
+
+        <pre><span lang="RO"><span class="" style="color: rgb(125, 159, 211);">petra@staff:~$</span> <span class="" style="color: rgb(51, 51, 51);">ls -l script.sh</span><br><i><span class="" style="color: rgb(125, 159, 211);">-rw-r--r--&nbsp; 1 petra staffcs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1028 Mar 13&nbsp; 2018 script.sh</span></i><br><br><span class="" style="color: rgb(125, 159, 211);">petra@staff:~$</span> <span class="" style="color: rgb(51, 51, 51);">chmod +x script.sh</span><br><br><span class="" style="color: rgb(125, 159, 211);">petra@staff:~$</span> <span class="" style="color: rgb(51, 51, 51);">ls -l script.sh</span><br><i><span class="" style="color: rgb(125, 159, 211);">-rwxr-xr-x&nbsp; 1 petra staffcs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1028 Mar 13&nbsp; 2018 script.sh</span></i><br>
+            <span class="" style="color: rgb(125, 159, 211);">petra@staff:~$</span> <span class="" style="color: rgb(51, 51, 51);">./script.sh</span></span></pre>
+
+        <p style="text-align: justify;"><span lang="RO">sau apelând
+                interpretorul de comenzi cu un parametru reprezentând numele fișierului de
+                comenzi:</span></p>
+
+        <pre><span lang="RO"><span class="" style="color: rgb(125, 159, 211);">petra@staff:~$</span> <span class="" style="color: rgb(51, 51, 51);">sh script.sh</span></span></pre>
+
+        <p><span lang="RO">sau</span></p>
+
+        <pre><span lang="RO"><span class="" style="color: rgb(125, 159, 211);">petra@staff:~$</span> <span class="" style="color: rgb(51, 51, 51);">bash script.sh</span></span></pre>
+
+
+
+        <p style="text-align: justify;"><b><span lang="RO">Atenție</span></b><span lang="RO"><b>!</b> În UNIX nu există
+                o
+                "extensie" dedicată care să identifice fișierele de comenzi, așa că
+                numele lor pot fi alese liber. </span></p>
+
+        <p style="text-align: justify;"><span lang="RO">O comandă poate
+                fi lansată și în fundal (în <i>background</i>), adică execuția ei se va desfășura
+                în paralel cu cea a interpretorului de comenzi, acesta afișând promptul imediat
+                ce a lansat-o, fără să-i mai aștepte terminarea. Acest lucru se realizează
+                adăugând caracterul '<b>&amp;</b>' la sfârșitul liniei care conține comanda
+                respectivă. <b>Exemplu:</b></span><span class="" style="color: rgb(239, 69, 64);" lang="RO"> <br></span>
+        </p>
+        <pre style="text-align: justify;"><span class="" style="color: rgb(51, 51, 51);" lang="RO">emacs fișier.c &amp;</span>
+            </pre>
+        <p>În mod convențional, scripturile încep cu o directivă de interpretor, care este practic un comentariu mai
+            special, numit <b>shebang</b>. Acesta este folosit pentru selecția interpretorului dacă sistemul pune la
+            dispoziția utilizatorilor mai multe.
+            De exemplu, dacă dorim ca scriptul nostru să fie interpretat de bash, vom folosi:<br></p>
+        <pre>#!/bin/bash<br></pre>
+        <h3><br><b><span lang="RO"></span></b></h3>
+        <h3><b><span lang="RO">Înlănțuirea comenzilor</span></b></h3>
+
+        <p style="text-align: justify;"><span lang="RO">Comenzile se
+                pot şi <i>înlănţui</i>, în sensul că ieşirea generată de una devine intrare
+                pentru alta. Pentru aceasta, se foloseşte operatorul <b>'|'</b>, numit uneori
+                operatorul <i>pipe</i> (conductă). </span></p>
+
+        <p><b><span lang="RO">Exemplu:</span></b><span lang="RO"> Comanda <b>more</b> realizează
+                afişarea pagină cu pagină a datelor citite din intrarea standard. O construcţie
+                de forma: </span></p>
+
+        <pre><span class="" style="color: rgb(51, 51, 51);" lang="RO">ls | more</span></pre>
+
+        <p style="text-align: justify;"><span lang="RO">face ca ieşirea
+                lui <b>ls </b>să fie legată la intrarea lui <b>more</b>, astfel încât, efectul
+                va fi afişarea pagină cu pagină a fişierelor din directorul curent. </span></p>
+
+        <p style="text-align: justify;"><span lang="RO">Se pot înlănţui
+                oricâte comenzi şi, prin urmare, pentru afişarea pagină cu pagină, ordonate
+                alfabetic, a numelor tuturor fişierelor din directorul curent, se foloseşte
+                comanda:</span></p>
+
+        <pre><span class="" style="color: rgb(51, 51, 51);" lang="RO">ls | sort | more</span></pre>
+
+
+
+        <p style="text-align: justify;"><span lang="RO">Comenzile UNIX
+                pot fi grupate în liste de comenzi trimise spre execuție intepretorului. Ele
+                vor fi executate pe rând, o comandă fiind lansată în execuție numai după ce
+                comanda anterioara s-a terminat. Listele se formează scriind un șir de comenzi
+                separate prin caracterul<b> ';'</b>. <b>Exemplu:</b></span></p>
+
+        <pre><span class="" style="color: rgb(51, 51, 51);" lang="RO">cd exemplu; ls –al</span></pre>
+
+        <p style="text-align: justify;"><span lang="RO">Dacă într-o
+                listă, în loc de separatorul '<b>;</b>' se folosește separatorul '<b>&amp;&amp;</b>',
+                atunci o comandă nu va fi executată decât în cazul în care precedenta s-a
+                terminat cu cod de succes (codul 0).</span></p>
+
+
+
+        <pre><span class="" style="color: rgb(51, 51, 51);" lang="RO">ls -l dir &amp;&amp; echo "mere"</span></pre>
+
+
+
+        <p style="text-align: justify;"><span lang="RO">În exemplul de
+                mai sus, dacă utilizatorul are suficiente drepturi să obțină informații despre
+                directorul <i>dir,</i> comanda <i>ls </i>va fi executată cu succes și se va
+                trece la executarea următoarei comenzi, anume <i>echo</i>, ceea ce rezultă în
+                afișarea cuvântului "mere" după informațiile despre conținutul
+                directorului <i>dir</i>:</span></p>
+
+
+
+        <pre><span class="" style="color: rgb(125, 159, 211);" lang="RO">drwxr-xr-x&nbsp; 1 petra staffcs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4096 Mar 11 10:10 .
+            drwxr-xr-x&nbsp; 4 root root&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4096 Mar 11 09:23 ..
+            drwxr-xr-x&nbsp; 2 petra staffcs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4096 Oct 25&nbsp; 2016 Desktop
+            -rwxr-xr-x&nbsp; 1 petra staffcs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 7083 Dec 12&nbsp; 2017 a.out
+            -rwxr-xr--&nbsp; 1 petra staffcs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 597 Oct&nbsp; 8 09:14 a.sh
+            mere</span></pre>
+
+        <p style="text-align: justify;"><span lang="RO">Dacă se
+                folosește operatorul <b>'||',</b> atunci condiția este ca precedenta să se fi
+                terminat cu cod de eroare (cod diferit de 0).</span></p>
+
+
+
+        <pre><span class="" style="color: rgb(51, 51, 51);" lang="RO">ls -l dir || echo "mere"</span></pre>
+
+        <p style="text-align: justify;"><span lang="RO">În acest
+                exemplu, dacă utilizatorul are suficiente drepturi, iar comanda <i>ls </i>se
+                execută cu succes, se vor afișa la ieșirea standard doar informațiile rezultate
+                în urma execuției primei comenzi, a doua fiind ignorată. Dacă în schimb,
+                utilizatorul nu are suficiente drepturi, comanda <i>ls </i>nu se va termina cu
+                un cod de succes și se va executa comanda <i>echo</i>, rezultând doar în
+                afișarea cuvântului&nbsp;"mere".</span></p>
+
+        <pre><span class="" style="color: rgb(51, 51, 51);" lang="RO">true || echo aaa &amp;&amp; echo bbb</span></pre>
+
+        <p style="text-align: justify;"><span lang="RO">Când avem o
+                listă mai complexă ce include mai multe comenzi înlănțuite de mai mulți
+                operatori, gruparea acestora se face de la dreapta la stânga.</span></p>
+
+
+
+        <pre><span class="" style="color: rgb(51, 51, 51);" lang="RO">(true || echo aaa) &amp;&amp; (echo bbb)</span></pre>
+
+
+
+        <p style="text-align: justify;"><span lang="RO">Operatorul <i>'&amp;&amp;'
+                </i>ne obligă să evaluăm prima dată partea stângă. Cele două comenzi fiind
+                înlânțuite prin <i>'||', </i>vom incerca să executăm prima comandă, anume <i>true</i>,
+                ceea ce se întoarce imediat cu succes; prin urmare se va ignora instrucțiunea<i>
+                    echo aaa</i>. Prima paranteză se termină cu succes și se trece într-un final la
+                evaluarea comenzii <i>echo bbb</i>, rezultând în afișarea cuvântului <i>bbb </i>la
+                ieșirea standard.</span></p>
+
+        <p style="text-align: justify;"><b><span lang="RO">Atenție</span></b><span lang="RO"><b>!</b> Atunci când
+                comenzile se înlănțuie
+                prin caracterul '<b>|</b>' (pipe) ele vor fi executate în paralel.</span></p>
+
+        <p><b><span lang="RO">&nbsp;</span></b></p>
+
+        <h3><b><span lang="RO">Variabile de mediu</span></b></h3>
+
+        <p style="text-align: justify;"><span lang="RO">Variabilele de
+                mediu pot să conțină ca valoare un șir de caractere. Atribuirea de valori se
+                face astfel: </span></p>
+
+        <pre><span lang="RO"><span class="" style="color: rgb(51, 51, 51);">variabilă=valoare </span><br></span></pre>
+
+        <p><span lang="RO">De exemplu: </span></p>
+
+        <pre><span lang="RO"><span class="" style="color: rgb(51, 51, 51);">var=ABCD </span><br></span></pre>
+
+        <p style="text-align: justify;"><span lang="RO">va asigna
+                variabilei cu numele <i>var</i> șirul "ABCD". Dacă șirul asignat
+                conține și spații, el trebuie încadrat între ghilimele. </span></p>
+
+
+
+        <p style="text-align: justify;"><b><span lang="RO">Atenție!</span><span lang="RO"> </span></b><span lang="RO">Nu
+                se pune spațiu între numele
+                variabilei și semnul egal (și nici după semnul egal)! Altfel, interpretorul de
+                comenzi va considera că este vorba de o comandă numită <i>var </i>cu parametrii
+                <i>= </i>și <i>ABCD </i>și nu de o atribuire. </span></p>
+
+        <p style="text-align: justify;"><span lang="RO">Referirea unei
+                variabile se face prin numele ei, precedat de<i> simbolul $</i>. De exemplu:</span></p>
+
+        <pre><span class="" style="color: rgb(51, 51, 51);" lang="RO">echo $var</span></pre>
+
+
+
+        <p><span lang="RO">va determina
+                afișarea textului ABCD. </span></p>
+
+        <p style="text-align: justify;"><span lang="RO">În UNIX există
+                câteva variabile predefinite: &nbsp; </span></p>
+
+        <p style="text-align: justify;">
+            <!--[if !supportLists]--><span lang="RO">1.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
+            <!--[endif]--><span lang="RO">variabile <i>read-only</i>, actualizate
+                de interpretor:</span></p>
+
+        <ul style="text-align: justify;">
+            <li><span lang="RO"></span><span lang="RO"><b>$?</b> - codul
+                    returnat de ultima comandă executată</span><span lang="RO"></span></li>
+            <li><span lang="RO"></span><span lang="RO"><b>$$ </b>-
+                    identificatorul de proces al interpretorului de comenzi</span><span lang="RO"></span></li>
+            <li><span lang="RO"></span><span lang="RO"><b>$! </b>-
+                    identificatorul ultimului proces lansat în paralel</span><span lang="RO"></span></li>
+            <li><span lang="RO"></span><span lang="RO"><b>$#</b> -
+                    numărul de argumente cu care a fost apelat fișierul de comenzi curent</span><span lang="RO"></span>
+            </li>
+            <li><span lang="RO"></span><span lang="RO"><b>$0</b> -
+                    conține numele comenzii executate de interpretor</span><span lang="RO"></span></li>
+            <li><span lang="RO"></span><span lang="RO"><b>$1, $2</b> ... - argumentele cu
+                    care a fost apelat fișierul de comenzi care se află în execuție</span>
+
+            </li>
+        </ul>
+        <p style="text-align: justify;">
+            <!--[if !supportLists]--><span lang="RO">2.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
+            <!--[endif]--><span lang="RO">variabile inițializate la intrarea în
+                sesiune: </span></p>
+
+        <ul style="text-align: justify;">
+            <li><span lang="RO"></span><span lang="RO"><b>$HOME </b>-
+                    numele directorului "home" afectat utilizatorului;</span><span lang="RO"></span></li>
+            <li><span lang="RO"></span><span lang="RO"><b>$PATH </b>-
+                    căile de căutare a programelor;</span><span lang="RO"></span></li>
+            <li><span lang="RO"></span><span lang="RO"><b>$PS1</b> -
+                    prompter-ul pe care îl afișează interpretorul atunci când așteaptă o comandă;</span><span
+                    lang="RO"></span></li>
+            <li><span lang="RO"></span><span lang="RO"><b>$PS2 </b>- al
+                    doilea prompter;</span><span lang="RO"></span></li>
+            <li><span lang="RO"></span><span lang="RO"><b>$TERM </b>- tipul terminalului
+                    pe care se lucrează. </span></li>
+        </ul>
+
+        <p><b><span lang="RO">&nbsp;</span></b></p>
+
+        <h3><b><span lang="RO">Directive de control</span></b></h3>
+
+        <h4><b><span lang="RO">Instrucțiuni de decizie</span></b></h4>
+
+        <h5><b><span lang="RO">1. Instrucțiunea if</span></b></h5>
+
+        <p style="text-align: justify;"><span lang="RO">O comandă
+                returnează o valoare la terminarea ei. În general, dacă o comandă s-a terminat
+                cu succes, ea va returna 0, altfel va returna un cod de eroare nenul. </span></p>
+
+        <p style="text-align: justify;"><span lang="RO">În prima formă
+                a comenzii <b>if</b>, se execută <i>lista1</i>, iar dacă <i>și </i>ultima
+                instructiune din listă returnează codul 0 (succes), se execută <i>lista2</i>,
+                altfel se execută <i>lista3</i>.</span></p>
+
+        <pre><b><span lang="RO">if </span></b><i><span lang="RO">lista1</span></i><b><span lang="RO"><br>then </span></b><i><span lang="RO">lista2</span></i><b><span lang="RO"><br>else </span></b><i><span lang="RO">lista3</span></i><b><span lang="RO"><br>fi</span></b></pre>
+
+        <p style="text-align: justify;"><span lang="RO">În a doua formă
+                se pot testa mai multe condiții: dacă <i>lista1</i> se termină cu succes, se va
+                executa <i>lista2</i>, altfel se execută <i>lista3</i>. Dacă aceasta se termină
+                cu succes se execută <i>lista4</i>, altfel se execută <i>lista5.</i></span></p>
+
+        <pre><b><span lang="RO">if</span></b><span lang="RO"> <i>lista1</i><br><b>then </b><i>lista2</i><br><b>elif </b><i>lista3</i><br><b>then </b><i>lista4</i><br><b>else </b><i>lista5</i><br><b>fi</b></span></pre>
+        <span lang="RO">&nbsp;</span>
+
+        <h5><b><span lang="RO">2. Instrucțiunea case</span></b></h5>
+
+        <p style="text-align: justify;"><span lang="RO">Această
+                instrucțiune implementează decizia multiplă. Șablonul <i>tipar</i> este o
+                construcție care poate conține simbolurile ? și *, similară celor folosite la
+                specificarea generică a numelor de fișiere. Comanda expandează (evaluează)
+                șirul <i>cuvânt</i> și încearcă să îl potrivească pe unul din tipare. Va fi
+                executată lista de comenzi pentru care această potrivire poate fi făcută.</span></p>
+
+        <pre><b><span lang="RO">case</span></b><span lang="RO"> <i>cuvânt</i> <b>in</b><i><br>tipar1</i>) <i>lista1</i>;;</span><i><span lang="RO"><br>tipar2</span></i><span lang="RO">) <i>lista2</i>;;</span>
+            <span lang="RO">...</span><b><span lang="RO"><br>esac</span></b><span lang="RO"></span></pre>
+
+        <p><b>Exemplu:</b></p>
+        <p><span lang="RO"><span lang="RO"></span></span>
+        </p>
+        <pre><span lang="RO">var="lorem ipsum"</span><span lang="RO"><br>case "$var" in</span><span lang="RO"><br>"lorem ipsum") echo "bla";;</span><span lang="RO"><br>"util") echo "whoooohooo";;</span><span lang="RO"><br>esac</span></pre>
+        <p></p>
+        <h5><br><b><span lang="RO"></span></b></h5>
+        <h5><b><span lang="RO">3. Instrucțiuni de testare</span></b></h5>
+        <p></p>
+        <p style="text-align: justify;"><span lang="RO">O comandă ce se
+                folosește adesea într-o construcție decizională este <b>test</b>. Se poate
+                folosi pentru comparații aritmetice simple, comparații mai complexe între
+                string-uri și verificarea unor atribute specifice fișierelor. În paragrafele
+                următoare vom da câteva exemple din fiecare clasă. Pentru <i>informații adiționale</i> consultați
+                <i>pagina de manual pentru comanda test.</i><br></span></p>
+
+        <p style="text-align: justify;"><span lang="RO">Din categoria
+                operațiilor de comparație aritmetică ce ne sunt puse la dispoziție amintim: <b>-eq</b>
+                (equal), <b>-ne</b> (not equal), <b>-lt</b> (less than), <b>-gt</b> (greater
+                than), <b>-le</b> (less or equal) și <b>-ge</b> (greater or equal).</span></p>
+
+        <p><b><span lang="RO">Exemplu: </span></b><span lang="RO"><br>
+                <!--[endif]--></span></p>
+
+        <p></p>
+        <pre><span class="" style="color: rgb(51, 51, 51);" lang="RO">if test "$var" -eq 2 </span><span class="" style="color: rgb(51, 51, 51);" lang="RO"><br>then
+            &nbsp;&nbsp;&nbsp; echo "var conține numărul 2"
+            else
+            &nbsp;&nbsp;&nbsp; echo "var conține un alt număr"
+            fi</span></pre>
+        <p>
+
+        </p>
+        <p><span lang="RO">sau în mod
+                echivalent:</span></p>
+
+        <pre><span class="" style="color: rgb(51, 51, 51);" lang="RO">test "$var" -eq 2 &amp;&amp; </span><span class="" style="color: rgb(51, 51, 51);" lang="RO">echo "var conține numărul 2" || echo "var conține un alt număr"</span></pre>
+        <p>Pentru string-uri ne putem folosi de: <b>= </b>(equal), <b>!=</b> (not equal),<b> \&lt;</b> și <b>\&gt;</b>
+            pentru comparații lexicografice, <b>-z</b> (zero - empty string) și <b>-n</b> (non-zero - not empty
+            string).<br></p>
+        <p></p><span lang="RO"></span>
+        <p><b>Exemplul 1:</b></p>
+        <p></p>
+        <pre><span class="" style="color: rgb(51, 51, 51);" lang="RO">if test -z "$raspuns" </span><span class="" style="color: rgb(239, 69, 64);" lang="RO"><span class="" style="color: rgb(51, 51, 51);">
+            then
+            &nbsp;&nbsp;&nbsp; echo "raspunsul este gol"
+            else
+            &nbsp;&nbsp;&nbsp; echo "am primit raspuns :)"
+            fi</span><br></span></pre>
+        <p></p>
+        <p><span class="" style="color: rgb(239, 69, 64);" lang="RO"></span></p>
+        <p><b><span class="" style="color: rgb(51, 51, 51);">Exemplul 2:</span></b></p>
+        <p></p>
+        <p style="text-align: justify;"></p>
+        <p><span lang="RO"></span></p>
+        <pre><span lang="RO">if test "$var1" \&lt; "$var2" </span><span lang="RO">
+            then
+            &nbsp;&nbsp;&nbsp; echo "var1 este primul alfabetic"
+            else
+            &nbsp;&nbsp;&nbsp; echo "var2 este primul alfabetic"
+            fi</span></pre>
+        <p></p>
+        <div style="text-align: justify;">Pentru a verifica diferite informații despre fișiere putem folosi: <b>-e</b>
+            (exists), <b>-f</b> (fișier obișnuit - regular), <b>-d</b> (director), <b>-h</b> sau <b>-L</b> (legătură
+            simbolică), <b>-r</b> (are permisiune de citire pentru user-ul curent),
+            <b>-w</b> (are permisiune de scriere pentru user-ul curent) și <b>-x</b> (are permisiune de execuție pentru
+            user-ul curent).<br></div>
+        <p></p>
+        <p></p>
+        <p><b>Exemplu:</b></p>
+        <pre><span class="" style="color: rgb(51, 51, 51);" lang="RO">if test -f "$cale" </span><span class="" style="color: rgb(51, 51, 51);" lang="RO">
+            then
+            &nbsp;&nbsp;&nbsp; echo "Fișier obișnuit!"
+            fi</span></pre>
+        <div style="text-align: justify;">O metodă echivalentă este folosirea parantezelor drepte: <b>[</b> și <b>]</b>
+            în jurul expresiilor, înlocuind cuvântul cheie <i>test, </i>în construcțiile decizionale:</div>
+        <p></p>
+        <pre><span class="" style="color: rgb(239, 69, 64);"><span class="" style="color: rgb(51, 51, 51);">if test </span><i><span class="" style="color: rgb(51, 51, 51);">expresie </span></i></span><br></pre>
+        <p>este echivalent cu:</p>
+        <pre><span class="" style="color: rgb(239, 69, 64);"><span class="" style="color: rgb(51, 51, 51);">if [ </span><i><span class="" style="color: rgb(51, 51, 51);">expresie </span></i><span class="" style="color: rgb(51, 51, 51);">]</span></span><br></pre>
+
+        <p style="text-align: justify;"><b>Atenție! </b>În jurul parantezelor drepte <b>[</b> și <b>] </b>trebuie pus
+            spațiu; în caz contrar vor apărea erori la execuție!</p>
+        <p style="text-align: justify;"></p>
+        <p><b>Exemplu:</b></p>
+        <pre><span lang="RO">if [ -f "$cale" </span><span lang="RO">]
+            then
+            &nbsp;&nbsp;&nbsp; echo "Fișier obișnuit!"
+            fi</span></pre><br>
+        <p></p>
+        <p style="text-align: justify;"><b>Atenție! În Bash </b>există comenzi și construcții adiționale precum<b> [[
+                ... ]], (( ... )) </b>și<b> let ... , </b>însă acestea <b>nu sunt incluse în standardul POSIX </b>și
+            prin urmare <b>nu există garanții legate de portabilitate. </b>Există
+            o serie de diferențe între comenzile integrate prezentate anterior și cele adiționale din Bash; noi vom
+            aminti doar câteva în cele ce urmează, iar pentru informații complete se recomandă consultarea paginilor de
+            manual aferente.<br></p>
+        <p style="text-align: justify;">Începând cu versiunea 2.02 pentru Bash, s-a adăugat <b>[[ ... ]]</b>,<b>
+            </b>numită și <i>comanda test extinsă</i>, introducând o sintaxă mai apropiată de alte limbaje de
+            programare. Această construcție permite utilizarea operatorilor &amp;&amp;,
+            ||, &lt; și &gt; în interiorul său fără a genera erori precum se întâmplă în cazul [ ... ]. De asemenea, în
+            cazul comparațiilor între string-uri, dacă se folosește [[ ... ]]<b> </b>nu mai este nevoie să cităm
+            operatorii &lt; și &gt;. Nu în ultimul
+            rând, această comandă se poate folosi și pentru a verifica expresii regulate.</p><br>
+        <h4><b><span lang="RO">Instrucțiuni de ciclare</span></b></h4>
+
+        <h5><b><span lang="RO">1. Instrucțiunea while</span></b></h5>
+
+        <p style="text-align: justify;"><span lang="RO">Se execută
+                comenzile din <i>lista2</i> în mod repetat, cât timp lista de comenzi <i>lista1</i>
+                se încheie cu cod de succes.</span></p>
+
+        <pre><b><span lang="RO">while</span></b><span lang="RO"> <i>lista1</i></span><b><span lang="RO"><br>do</span></b><span lang="RO"> <i>lista2</i></span>
+            <b><span lang="RO">done</span></b><span lang="RO"></span></pre>
+
+        <p><b><span lang="RO">Exemplu:</span></b></p>
+        <pre><span lang="RO">numar=1<br>while test $numar -le 5<br>do<br>&nbsp;&nbsp;&nbsp; echo $numar<br>&nbsp;&nbsp;&nbsp; numar=`expr $numar + 1`<br>done</span><b><span lang="RO"><br></span></b></pre>
+        <p><b><span lang="RO"><br></span></b></p>
+
+        <h5><b><span lang="RO">2. Instrucțiunea until</span></b></h5>
+
+        <p style="text-align: justify;"><span lang="RO">Se execută
+                comenzile din <i>lista2</i> în mod repetat, până când lista de comenzi <i>lista1</i>
+                se încheie cu cod de succes.</span></p>
+
+        <pre><b><span lang="RO">until</span></b><span lang="RO"> <i>lista1</i></span><b><span lang="RO"><br>do</span></b><span lang="RO"> <i>lista2</i></span>
+            <b><span lang="RO">done</span></b><span lang="RO"></span></pre>
+
+        <p><b><span lang="RO">Exemplu:</span></b></p>
+        <p><span lang="RO"></span></p>
+        <pre><span lang="RO"><blockquote><tt>until test -r fisier</tt>
+            <tt>do sleep 5</tt><p><span lang="RO"><tt>done</tt></span></p></blockquote></span></pre><b></b><br><b><span
+                lang="RO"></span></b>
+        <p></p>
+        <h5><b><span lang="RO">3. Instrucțiunea for</span></b></h5>
+
+        <p style="text-align: justify;"><span lang="RO">Se execută
+                lista de comenzi în mod repetat, variabila luând pe rând valorile <i>val1,
+                    val2,</i> ... Dacă lipsește cuvântul cheie <b>in</b>, valorile pe care le va
+                lua pe rând <i>variabila</i> vor fi parametrii din linia de comandă pe care i-a
+                primit fișierul de comenzi atunci când a fost lansat în execuție.</span></p>
+
+        <pre><b><span lang="RO">for</span></b><span lang="RO"> <i>variabila</i> [<b>in</b> <i>val1 val2</i> ...]</span><b><span lang="RO"><br>do </span></b><i><span lang="RO">lista</span></i><span lang="RO"></span>
+            <b><span lang="RO">done</span></b><span lang="RO"></span></pre>
+
+        <p><b><span lang="RO">Exemplul 1:</span></b></p>
+        <pre><span lang="RO">for arg in "$@"<br>do<br>&nbsp;&nbsp;&nbsp; echo "$arg"<br>done<br></span></pre>
+        <p><b><span lang="RO">Exemplul 2:</span></b></p>
+        <p><span lang="RO"></span></p>
+        <pre><code data-lang="sh">for element in abc def ghi jkl
+            do
+              echo "Element: $element"
+            done</code></pre>
+        <p></p>
+        <p><span lang="RO">&nbsp;</span></p>
+
+        <h3><b><span lang="RO">Alte instrucțiuni utile</span></b></h3>
+
+        <ul type="disc">
+            <li style="text-align: justify;"><b><span lang="RO">break</span></b><span lang="RO"> - permite
+                    ieșirea din ciclu înainte de îndeplinirea condiției;</span></li>
+            <li style="text-align: justify;"><b><span lang="RO">continue</span></b><span lang="RO"> - permite
+                    reluarea ciclului cu următoarea iterație, înainte de terminarea iterației
+                    curente;</span></li>
+            <li style="text-align: justify;"><b><span lang="RO">exec</span></b><span lang="RO"> <i>cmd</i>
+                    - comenzile specificate ca argumente sunt executate de interpretorul de
+                    comenzi în loc să se creeze procese separate de execuție; dacă se dorește
+                    rularea comenzilor în procese separate ele se scriu direct, așa cum se
+                    scriu și în linia de comandă</span></li>
+            <li style="text-align: justify;"><b><span lang="RO">shift</span></b><span lang="RO"> -
+                    realizează deplasarea argumentelor cu o pozitie la stânga ($2$1, $3$2,
+                    etc.);</span></li>
+            <li style="text-align: justify;"><b><span lang="RO">wait</span></b><span lang="RO"> [<i>pid</i>]
+                    - permite sincronizarea unui proces cu sfârșitul procesului cu pid-ul
+                    indicat sau cu sfârșitul tuturor proceselor "fii";</span></li>
+            <li style="text-align: justify;"><b><span lang="RO">expr</span></b><span lang="RO"> <i>expresie</i>
+                    - permite evaluarea unei expresii; această comandă așteaptă 3 argumente: primul operand, urmat de
+                    operator și la final cel de-al doilea operand (argumentele trebuie să fie separate de
+                    spații)<br></span></li>
+        </ul>
+
+        <p><b><span lang="RO">&nbsp;</span></b></p>
+
+        <h3><b><span lang="RO">Substituții</span></b></h3>
+
+        <p style="text-align: justify;"><span lang="RO">Atunci când
+                într-un <i>shell script</i> o comandă este încadrată de caractere <b>`</b>
+                (accent grav), interpretorul de comenzi va executa comanda, după care
+                rezultatul acesteia (textul) va substitui locul comenzii în program. De exemplu,
+                comanda:</span></p>
+
+        <pre><span class="" style="color: rgb(51, 51, 51);" lang="RO">director=`pwd`</span></pre>
+
+        <p style="text-align: justify;"><span lang="RO">va
+                atribui variabilei <i>director</i> rezultatul execuției comenzii <b>pwd</b>,
+                adică șirul de caractere ce conține numele directorului curent. <br></span></p>
+        <p style="text-align: justify;"><span lang="RO">Un exemplu de
+                utilizare a substituției este construirea de expresii aritmetice: </span></p>
+
+        <pre><span lang="RO"><span class="" style="color: rgb(51, 51, 51);">contor=1</span><br><span class="" style="color: rgb(51, 51, 51);">contor=`expr $contor + 1`</span></span></pre>
+
+        <p style="text-align: justify;"><span lang="RO">Această
+                secvență inițializează o variabilă <i>contor</i> la valoarea 1 (șir de
+                caractere !) și apoi o "incrementează", în sensul că la sfârșit, ea
+                va conține șirul de caractere "2". </span></p>
+
+        <p style="text-align: justify;"><span lang="RO"><b>Atenție!</b>
+                Operatorii și operanzii sunt argumente diferite ale comenzii, prin urmare,
+                comanda: </span></p>
+
+        <pre><span class="" style="color: rgb(51, 51, 51);" lang="RO">expr 1+2</span></pre>
+
+        <p><span lang="RO">este greșită.
+                Corect este: </span></p>
+
+        <pre><span class="" style="color: rgb(51, 51, 51);" lang="RO">expr 1 + 2</span></pre>
+
+        <p><span lang="RO"></span></p>
+        <p><br></p>
+        <p>Parantezele duble <b>(( ... ))</b>, o extensie regăsită în <i>ksh</i>, <i>zsh </i>și <i>bash</i>, ne permit
+            să efectuăm operații aritmetice și manipulări de variabile folosind operatorii întâlniți în limbajul C
+            (incrementare, decrementare, &lt;=,
+            &gt;=, etc.).</p>
+        <p><b>Exemplul 1:</b><br></p>
+        <pre><span class="" style="color: rgb(51, 51, 51);">var=1</span><br><span class="" style="color: rgb(51, 51, 51);">(( var++ ))</span><br><span class="" style="color: rgb(51, 51, 51);">echo "Rezultat: $var"</span><br></pre>
+        <p><b>Exemplul 2:</b><br></p>
+        <pre><span class="" style="color: rgb(51, 51, 51);">for (( c=5; c&gt;0; c-- ))<br>do  <br>   echo "$c secunde"<br>done</span><span class="" style="color: rgb(51, 51, 51);"></span><br></pre>
+        <p><b>Atenție!</b> Construcția (( ... )) va efectua toate calculele în cadrul expresiei, însă nu va returna
+            rezultatul final ale acestora. Pentru a obține rezultatul final, se recomandă folosirea construcției <b>$((
+                ... ))</b>. <b><br></b></p>
+        <p><b>Exemplu:</b></p>
+        <pre><span class="" style="color: rgb(51, 51, 51);">var=$((1+2))</span><br><span class="" style="color: rgb(51, 51, 51);">echo "Rezultat: $var"</span></pre>
+        <p></p>
+        <p><span lang="RO"><br></span></p>
+        <p style="text-align: justify;"><span lang="RO">Parantezele simple <b>( ... )</b> ne permit să rulăm comenzile
+                regăsite în interiorul lor într-un subshell. Când se termină execuția lor, se returnează un cod de
+                ieșire, însă nu și informațiile trimise spre STDOUT. Pentru a capta aceste informații, se recomandă
+                construcția <nobr><b>$( ... )</b></nobr>,<b> </b>care se poate considera o versiune alternativă pentru
+                <span lang="RO"><b>` ... <span lang="RO"><b>`</b></span></b>
+                </span>. În general, se recurge la o astfel de construcție pentru a limita efectele secundare ale
+                diferitelor comenzi (de exemplu: modificări în valorile variabilelor). Dacă o astfel de construcție se
+                regăsește pe o linie cu mai multe comenzi, se va
+                evalua prima dată construcția $( ... ) și apoi se va trece la evaluarea restului.<br></span>
+        </p>
+        <p><b><span lang="RO">Exemplul 1:</span></b></p>
+        <p></p>
+        <pre><span>echo "Azi: $(date) este o zi frumoasă!"</span></pre><span lang="RO">
+            <p><b><span lang="RO">Exemplul 2:</span></b>
+            </p>
+            <p></p>
+            <pre><span>var=2<br>(var=4)<br>echo $var<br></span></pre>
+            <p></p><br>
+        </span>
+        <p></p>
+        <p><span lang="RO">Acoladele <b>{ ... }</b> ne permit să tratăm un set de comenzi ca și un grup compact.</span>
+        </p>
+        <p><span lang="RO"></span></p>
+        <p><b><span lang="RO">Exemplu:</span></b></p>
+        <p></p>
+        <pre>true &amp;&amp; { var=5; echo "bla"; echo "$var"; exit 1; }<span><br></span></pre>
+        <p></p>Dacă acoladele sunt precedate de semnul <b>$</b>, construcția va returna valoarea variabilei
+        cuprinse.<br>
+        <p></p>
+        <p><span lang="RO"><span lang="RO"></span></span>
+        </p>
+        <p><b><span lang="RO">Exemplu:</span></b></p>
+        <p></p>
+        <pre>var="./dir/dir2"<br>echo ${var}/fisier.txt<br><span></span></pre><br>
+        <p></p>
+        <p style="text-align: justify;"><span lang="RO"><span lang="RO"><b>Atenție!</b> Diferite mecanisme de citare duc
+                    la rezultate total diferite. Ghilimelele duble <b><span lang="RO"><span lang="RO">'' ...
+                                ''</span></span>
+                    </b> păstrează valoarea literală a caracterelor, însă vor permite substituții în cazul elementelor
+                    precedate de <b>$, </b><b>` </b>și <b>\</b>.&nbsp;<b> </b></span>
+            </span><span lang="RO"><span lang="RO">Ghilimelele simple <span lang="RO"><span lang="RO"> <b>' ... '</b>
+                        </span></span>în schimb mențin nealterată informația regăsită în interior.<br></span>
+            </span>
+        </p>
+        <p><b><span lang="RO"><span lang="RO"></span> Exemplu:</span></b></p>
+        <pre><span class="" style="color: rgb(51, 51, 51);" lang="RO">var=5</span><span lang="RO"><br><span class="" style="color: rgb(239, 69, 64);"><span class="" style="color: rgb(51, 51, 51);">echo "variabila var: $var"</span>&nbsp;</span>&nbsp;&nbsp;&nbsp; <span class="" style="color: rgb(125, 159, 211);">-&gt;</span> <span class="" style="color: rgb(125, 159, 211);">variabila var: 5</span></span><span lang="RO"><br><span class="" style="color: rgb(51, 51, 51);">echo 'variabila var: $var'</span>&nbsp;&nbsp;&nbsp;&nbsp; <span class="" style="color: rgb(125, 159, 211);">-&gt;</span> <span class="" style="color: rgb(125, 159, 211);">variabila var: $var</span><br></span></pre>
+
+        <p style="text-align: justify;"><b><span lang="RO">Atenție! </span></b><span lang="RO">Când se lucrează cu
+                string-uri ce conțin spații, se recomandă încadrarea lor între ghilimele pentru a evita interpretarea
+                lor ca și invocare de comandă. <b>Exemplu:</b></span></p>
+        <pre>var="ana are mere"<br><br>if test -n $var       <span lang="RO"><span class="" style="color: rgb(125, 159, 211);">-&gt; </span><span class="" style="color: rgb(125, 159, 211);">se generează eroare: <i>test: too many arguments</i></span></span><span lang="RO"></span><br>then<br>    echo "$var"<span lang="RO"></span><br>fi<br><br>if test -n "$var"<br>then<br>    echo "$var"      <span class="" style="color: rgb(125, 159, 211);"> </span><span lang="RO"><span class="" style="color: rgb(125, 159, 211);">-&gt;</span> <span class="" style="color: rgb(125, 159, 211);">se afișează: ana are mere</span></span><span lang="RO"><br></span><br>fi</pre>
+        <p><br></p>
+        <h3><b>Metode de citire</b><br></h3>
+        <p style="text-align: justify;">Există numeroase metode pentru a citi date de la tastatură sau dintr-un fișier
+            transmis la runtime. În exemplele următoare, vom prezenta secvențe de cod ce ne permit procesări linie cu
+            linie.</p>
+        <p></p>
+        <p><b>Exemplul 1:</b></p>
+        <p></p>
+        <div>
+            <div>
+                <pre><div><div>while read linie</div><div>do</div><div>  echo $linie</div><div>done</div></div></pre>
+            </div>
+        </div>
+        <p></p>
+        <p></p>
+        <p style="text-align: justify;">Această secvență va încerca să preia informația introdusă de către utilizator
+            linie cu linie. Informația poate proveni în urma redirectării unui fișier sau a introducerii directe de la
+            tastatură, caz în care se va marca finalizarea prin apăsarea combinației
+            <i>CTRL+D</i> în terminal.<br></p>
+        <p><b>Exemplul 2:</b></p>
+        <p></p>
+        <div>
+            <div>
+                <pre><div><div>while read linie</div><div>do</div><div>  echo $linie</div><div>done &lt; fisier.txt</div></div></pre>
+            </div>
+        </div>
+        <p style="text-align: justify;">În acest caz, observăm o <i>redirectare </i>la nivelul buclei <i>while</i>.
+            Aceasta ne permite să preluăm din <i>fisier.txt</i> informația stocată, linie cu linie, și să o afișăm la
+            <i>STDOUT</i>. <br></p><br>
+        <p style="text-align: justify;"><b>IFS</b> (Internal Field Separator) este o variabilă specială folosită de
+            către comanda <i>read </i>pentru a împărți informația pe linii, respectiv cuvinte. Valoarea implicită a
+            variabilei este <b>spațiu ; tab ; linie-nouă</b>, însemnând că ori
+            de câte ori se va întâlni unul dintre aceste caractere în cadrul textului, se va considera acel punct ca și
+            început de linie nouă. Acest lucru creează probleme când avem de-a face cu fișiere text normale și dorim să
+            îl procesăm linie cu linie
+            folosind o comandă precum <i>cat</i>. Dacă fișierul de intrare conține:</p>
+        <pre>ana are mere *<br>banane<br></pre>
+        <p>cu valoarea implicită pentru IFS se va afișa:</p>
+        <pre>ana<br>are<br>mere<br><i>fisier.txt<br>main.sh</i><br>banane<br></pre>
+        <p style="text-align: justify;">Se observă că se execută și interpretări ale informației citite, caracterul *
+            fiind expandat la lista fișierelor din directorul curent (<i>glob expansion</i>). Pentru a evita acest
+            lucru, vom șterge conținutul implicit al variabilei IFS. În acest
+            caz, vom obține rezultatul așteptat, prevenind împărțiri si expansiuni nedorite:</p>
+        <p></p>
+
+        <div>
+            <div>
+                <pre><div><div>IFS=""</div></div>for linie in `cat fisier.txt`<br>do<br>&nbsp; echo $linie<br>done</pre>
+            </div>
+        </div><br>
+        <p></p><span lang="RO"></span><b><span lang="RO"></span></b>
+        <p></p>
+
+        <h3><b><span lang="RO">Funcții</span></b></h3>
+
+        <p><span lang="RO">Se pot crea și funcții folosind sintaxa:</span></p>
+        <p><span lang="RO"></span></p>
+        <pre><var>nume</var> () { <var>listă-de-instrucțiuni</var> } [ <var>redirectări</var> ]</pre>sau
+        <p></p>
+        <p><span lang="RO"><span lang="RO"></span></span>
+        </p>
+        <pre><var>function nume</var> [()] { <var>listă-de-instrucțiuni</var> } [ <var>redirectări</var> ]</pre>
+        <p style="text-align: justify;">Entitățile trecute între paranteze drepte se consideră <i>opționale</i>. Dacă se
+            folosește cuvântul cheie <i>function</i>, nu mai este obligatoriu să se pună parantezele rotunde după numele
+            funcției. <br></p>
+        <p style="text-align: justify;">Observăm că nu există o listă de parametri, precum în alte limbaje de
+            programare, imediat după numele funcției. În cazul funcțiilor de shell, argumentele transmise după numele
+            funcției la apel devin parametri poziționali ca și în cazul scriptului
+            în sine și pot fi referențiati prin $1, $2, etc. La fel ca și în alte limbaje de programare există conceptul
+            de vizibilitate pentru variabile: dacă există mai multe variabile cu același nume, cea referită va fi mereu
+            cea cu vizibilitatea cea mai
+            locală. Prin urmare când scriem $1 într-o funcție vom accesa mereu primul argument al funcției și nu primul
+            argument al scriptului. <br></p>
+        <p style="text-align: justify;"><b>Exemplu:</b></p>
+        <p style="text-align: justify;"></p>
+        <div>
+            <div>
+                <pre><i><span class="" style="color: rgb(51, 51, 51);">#apel script: myscript ana are mere</span></i><br><div><div><br></div><div>#!/bin/sh</div></div>functiamea()<br>{<br>&nbsp;&nbsp;&nbsp;&nbsp;  echo "Primul arg: $1"       <span class="" style="color: rgb(125, 159, 211);">-&gt; Primul arg: 1</span><br>&nbsp;&nbsp;&nbsp;&nbsp;  echo "Al doilea arg: $2"    <span class="" style="color: rgb(125, 159, 211);">-&gt; Al doilea arg: 2</span><br>&nbsp;&nbsp;&nbsp;&nbsp;  var="altceva"<br>}<br><br><i><span class="" style="color: rgb(51, 51, 51);">#scriptul se execută începând de aici</span></i><br>var="ceva"<br>functiamea 1 2<br>echo "Primul arg: $1"              <span class="" style="color: rgb(125, 159, 211);">-&gt; Primul arg: ana</span><br>echo "Al doilea arg: $2"<span class="" style="color: rgb(125, 159, 211);">           </span><span class="" style="color: rgb(125, 159, 211);">-&gt; Al doilea arg: are</span><br>echo $var<span class="" style="color: rgb(125, 159, 211);">                          </span><span class="" style="color: rgb(125, 159, 211);">-&gt; altceva</span><br></pre>
+            </div>
+        </div>
+        <div style="text-align: justify;"><span lang="RO">De asemenea codul de ieșire pentru o funcție este codul
+                returnat de ultima comandă din corpul funcției.</span><br><span lang="RO"></span></div>
+        <p></p>
+        <p><b><span lang="RO"><br></span></b></p>
+
+        <h3><b><span lang="RO">Recursivitate</span></b></h3>
+        <p style="text-align: justify;">Este posibil să apelăm scripturi din interiorul altor scripturi, inclusiv
+            scriptul curent. Apelul scripturilor se poate face cum am descris anterior, ca și cum am face apelul din
+            terminal. Putem interoga codul de ieșire al scriptului apelat folosind
+            variabila <b>$?</b>. Pentru a seta un cod de ieșire putem folosi comanda <b>exit </b>urmată de valoare. <br>
+        </p>
+        <p><b>Exemplu:</b><br></p>
+        <div>
+            <div>
+                <pre>factorial=1<br>if [ $1 -ne 0 -a $1 -ne 1 ]<br>then<br>&nbsp;&nbsp;&nbsp;&nbsp;  nou=`expr $1 - 1`<br>&nbsp;&nbsp;&nbsp;&nbsp;  bash main.sh $nou&nbsp;&nbsp;&nbsp;&nbsp;  <br>      factorial=`expr $1 \* $?`  <br>fi<br>exit $factorial</pre>
+            </div>
+        </div>
+        <div style="text-align: justify;">Scriptul de mai sus calculează valoarea factorialului pentru numărul transmis
+            ca și prin argument. Pentru a vedea rezultatul final, din terminal putem invoca <i>echo </i>având ca și
+            <i>argument $?</i>.</div>
+        <div style="text-align: justify;"><br></div>
+        <div style="text-align: justify;">
+            <h3>Alte comenzi utile</h3>
+            <p><span></span></p>
+            <p>În continuare vom da o scurtă descriere pentru câteva comenzi mai des
+                folosite pentru procesarea de informații: <br></p>
+            <ul>
+                <li><b><i>cat</i></b><br>
+                    <div>
+                        scrie fiecare linie de la intrarea standard (sau din fișiere ale căror
+                        nume sunt date ca argumente) la ieșirea standard, fără modificări.</div>
+                </li>
+                <li><b><i>head</i></b><br>
+                    <div> scrie primele maxim 10 linii (10 este
+                        implicit; se poate specifica numărul de linii cu argumentul <i>-n</i>, sau se
+                        poate preciza un număr de octeți cu argumentul <i>-c</i>) de la intrare către
+                        ieșirea standard.
+                    </div>
+                </li>
+                <li><b><i>tail</i></b><br>
+                    similară cu comanda <b><i>head</i></b>, scrie ultimele 10 linii.
+                    <br>
+                    <div><b>Observație: </b>Această comandă
+                        este obligată să citească întreg
+                        fișierul înainte de a scrie ceva la ieșire, astfel fiind un impediment
+                        în pipeline-izare. Se recomandă să fie folosită ultima, dacă este
+                        posibil, într-un lanț de comenzi.
+                    </div>
+                </li>
+                <li><b><i>sort</i></b><br>
+                    <div>
+                        afișează liniile citite în mod ordonat lexicografic, <i>implicit </i>ordinea
+                        fiind <i>crescătoare</i>. Comanda are o serie de argumente utile. Citiți pagina
+                        de manual <b>sort(1)</b>!
+                    </div>
+                </li>
+                <li><b><i>uniq</i></b><br>
+                    <div>
+                        elimină liniile succesive identice dintre cele de la intrarea standard.
+                        <b>Atenție</b>: două linii identice, dar care nu sunt citite una după alta nu
+                        vor fi depistate!
+                    </div>
+                </li>
+                <li><b><i>cut</i></b><br>
+                    <div>
+                        tipărește porțiuni din liniile citite. Aceste secțiuni pot fi intervale
+                        de octeți, caractere sau câmpuri, în funcție de unul din argumentele <i>-b</i>, <i>-c</i>
+                        respectiv <i>-f</i>. În ultimul caz se vor tipări acele câmpuri delimitate de
+                        un caracter (<i>implicit TAB</i>, se poate preciza cu argumentul <i>-d</i>) care sunt
+                        specificate folosind argumentul -f în forma<i>: lista[,lista]....</i> O <i>listă</i>
+                        poate fi un simplu număr reprezentând câmpul dorit, sau poate fi de
+                        forma <i>N-M</i>, unde <i>N </i>și <i>M </i>sunt numere reprezentând primul, respectiv ultimul
+                        câmp ce trebuie afișat. Sau N sau M poate lipsi, în locul lor
+                        subînțelegându-se primul, respectiv ultimul câmp din linie. Aceeași
+                        notație folosită cu <i>-b</i> sau <i>-c</i> seminifică intervalul de octeți sau
+                        caractere ce se vor afișa. <b>Exemplu:
+                        </b></div>
+                    <pre>ls -l | cut -f 1 -d ' '
+            </pre>
+                    va tipari doar lista de permisiuni a fișierelor din directorul curent.
+
+                </li>
+                <li><b><i>tr</i></b><br>
+                    <div>
+                        translatează sau șterge caractere. <b><i>tr</i></b> implicit
+                        translatează, caz în care trebuie date ca argumente două șiruri de
+                        caractere reprezentând două seturi. Caracterele din primul set vor fi
+                        translatate în caracterele din al doilea. Dacă numărul de caractere din
+                        seturile date nu este același, caracterele excedentare dintr-al doilea se
+                        ignoră dacă acesta e mai lung, sau se repetă ultimul caracter din al
+                        doilea set (dacă acesta e mai scurt) până la lungimea primului set. În
+                        cazul argumentului <i>-d</i> se dă un singur set de caractere, care vor fi eliminate la scrierea
+                        la ieșirea standard. Argumentul <i>-s</i>
+                        (<i>squeeze</i>) realizează "contracția" caracterelor din setul dat ca
+                        parametru: în cazul în care la intrare filtrul citește două sau mai
+                        multe caractere identice, din set, va fi tipărit la ieșire doar unul
+                        singur. <b>Exemplu</b><b>:
+                        </b></div>
+                    <pre>ps -x | tr -s ' ' | cut -f 2,6 -d ' '
+            </pre>
+                    <div>
+                        Comanda <i>ps -x</i> afișează lista proceselor utilizatorului care o invocă. Cu ajutorul lui
+                        <i>tr -s ' '</i> se șterg spațiile dintre coloanele afișate, iar <i>cut -f 2,6 -d ' '</i>
+                        face să apară la ieșire doar coloana corespunzătoare identificatorilor
+                        de proces (coloana 2) și cea a numelui comenzii corespunzătoare
+                        procesului (coloana 6).
+
+                    </div>
+                </li>
+            </ul><br>
+            <p></p>
+        </div>
+        <div style="text-align: justify;"><br></div>
+    </div>
+</body>
+
+</html>

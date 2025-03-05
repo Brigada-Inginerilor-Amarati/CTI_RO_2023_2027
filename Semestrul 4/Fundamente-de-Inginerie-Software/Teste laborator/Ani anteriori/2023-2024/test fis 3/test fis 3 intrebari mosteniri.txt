@@ -1,0 +1,63 @@
+1)
+Care din urmatoarele afirmatii legate de Build Tools sunt FALSE?
+a a. In Gradle, termenul de task reprezinta o unitate de executie, care poate fi executata folosind comanda "gradle numele taskului".
+f b. In Gradle, termenul de goal reprezinta o unitate de executie, iar termenul de plugin reprezinta o colectie de goal-uri.
+f c. In Gradle, termenul de task reprezinta o unitate de executie, care poate fi executata folosind comanda "gradle numele pluginului:numele taskului".
+f a. In Gradle, termenul de goal reprezinta o unitate de executie, care poate fi executata folosind comanda "gradle numele goalului".
+f e. In Gradle, termenul de goal reprezinta o unitate de executie, care poate fi executata folosind comanda "gradle numele pluginului:numele goalului".
+2)
+Care din urmatoarele afirmatii legate de executia comenzii mvn package, in maven, sunt FALSE?
+a a. Va executa toate goal-urile care sunt asignate tuturor fazelor care preced faza de package (inclusiv a celor din faza package)
+f b. Apeleaza un goal numit package
+f C. Printeaza toate pachetele gasite in proiect
+f d. Va executa task-ul package si toate task-urile de care acesta depinde
+f e. Va executa doar faza package din "default lifecycle"
+3)
+Care din urmatoarele afirmatii legate de Build Tools sunt FALSE?
+f a. Un proiect NU poate contine atat un fisier pom.xml cat si un fisier build.gradle, deoarece acestea ar duce la conflicte in momentul build-urilor.
+a b. Un proiect poate contine atat un fisier pom.xml cat si un fisier build.gradle, si poate fi build-uit atat cu Maven, cat si cu Gradle, deoarece atat input-urile, cat si output-urile tool-urilor sunt complet distincte.
+f c. Un proiect NU poate contine atat un fisier pom.xml cat si un fisier build.gradle, si poate fi build-uit atat cu Maven, cat si cu Gradle, deoarece chiar daca input-urile sunt distincte, folder-ul de output este acelasi,
+f d. Un proiect poate contine atat un fisier pom.xml cat si un fisier build.gradle, deoarece fisierul pom.xml contine informatii legate doar de compilare, iar cel build.gradle informatii doar despre testare.
+f e. Un proiect NU poate contine atat un fisier pom.xml cat si un fisier build.gradle, deoarece nu putem genera decat un wrapper intr-un proiect.
+4)
+Care din urmatoarele afirmatii legate de Build Tools sunt ADEVARATE?
+f a. In Gradle, termenul de goal reprezinta o unitate de executie, care poate fi executata folosind comanda "gradle numele_pluginului:numele goalului.
+f b. In Gradle, un plugin poate fi executat folosind sintaxa "gradle numele pluginului"
+f c. In Gradle, termenul de task reprezinta o unitate de executie, care poate fi executata folosind comanda "gradle numele pluginului:numele taskului".
+a d. In Gradle, termenul de task reprezinta o unitate de executie, iar termenul de plugin reprezinta o colectie de task-uri.
+a e. In Gradle, termenul de task reprezinta o unitate de executie, care poate fi executata folosind comanda "gradle numele taskului".
+5)
+Care din urmatoarele afirmatii legate de Build Tools sunt FALSE?
+f a. Gradle nu poate creea artefacte de maven, ci pentru a face acest lucru, are nevoie de un plugin, numit Maven.
+a b. Un artefact de Maven contine minim 3 elemente: groupld, artifactID si version.
+a c. Spre deosebire de Maven, Gradle nu suporta dependente trazitive.
+a d. Comanda mvn install creeaza un jar, un artefact de maven si ii face deploy in repository- ul Maven Central.
+a e. Gradle nu poate folosi ca dependente artefacte care au fost "build-uite" cu Maven.
+6)
+Care din urmatoarele afirmatii legate de executia comenzii mvn package, in maven, sunt ADEVARATE?
+f a. Apeleaza un goal numit package
+a b. Toate variantele sunt false
+f c. Va executa task-ul package si toate task-urile de care acesta depinde
+f d. Va executa doar faza package din "default lifecycle"
+f e. Executa plugin-ul numit package
+7)
+Care din urmatoarele afirmatii legate de executia comenzii gradle build, in gradle, sunt ADEVARATE?
+f a. Executa un task numit build
+f b. Va executa task-ul build si toate task-urile de care acesta depinde
+f c. Apeleaza un goal numit build
+a d. Va executa faza build din "default lifecylce"
+f e. Executa plugin-ul numit build
+8)
+Care din urmatoarele afirmatii legate de executia comenzii mvn package, in maven, sunt ADEVARATE?
+f a. Va executa task-ul package si toate task-urile de care acesta depinde
+a b. Va executa toate goal-urile care sunt asignate tuturor fazelor care preced faza de package (inclusiv a celor din faza package)
+f c. Va executa doar faza package din "default lifecycle
+f d. Executa plugin-ul numit package
+f e. Printeaza toate pachetele gasite in proiect
+10)
+Care din urmatoarele afirmatii legate de Build Tools sunt ADEVARATE?
+a. Un proiect NU poate contine atat un fisier pom.xml cat si un fisier build.gradle, deoarece nu putem genera decat un wrapper intr-un proiect.
+b. Un proiect NU poate contine atat un fisier pom.xml cat si un fisier build.gradle, deoarece acestea ar duce la conflicte in momentul build-urilor.
+c. Un proiect NU poate contine atat un fisier pom.xml cat si un fisier build.gradle, si poate fi build-uit atat cu Maven, cat si cu Gradle, deoarece chiar daca input-urile sunt distincte, folder-ul de output este acelasi.
+d. Un proiect poate contine atat un fisier pom.xml cat si un fisier build.gradle, deoarece fisierul pom.xml contine informatii legate doar de compilare, iar cel build.gradle informatii doar despre testare.
+e. Un proiect poate contine atat un fisier pom.xml cat si un fisier build.gradle, si poate fi build-uit atat cu Maven, cat si cu Gradle, deoarece atat input-urile, cat si output-urile tool-urilor sunt complet distincte.

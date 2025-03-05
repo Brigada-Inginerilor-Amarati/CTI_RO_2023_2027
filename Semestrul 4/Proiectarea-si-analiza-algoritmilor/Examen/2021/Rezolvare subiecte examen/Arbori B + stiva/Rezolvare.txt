@@ -1,0 +1,142 @@
+Pagina* suprima(Pagina *pag, TipCheie x, Nod *nod)
+{
+    int i, s, d, mij;
+    Pagina *q, *r;
+
+    //daca nu exista cheia in arbore
+    if (pag == NULL || pag->m == 0)
+        return NULL;
+
+    s = 1;
+    d = pag->m;
+    while (s <= d) //cautare binara
+    {
+        mij = (s + d) / 2;
+        if (x == pag->e[mij].cheie)
+            break;
+        if (x < pag->e[mij].cheie)
+            d = mij - 1;
+        else
+            s = mij + 1;
+    }
+
+    /*se suprima cu ajutorul nodului, cu cheie maxima,
+    mai mica decat cheia nodului curent*/
+    if (x == pag->e[mij].cheie)
+    {
+        if(pag->e[mij].contor>1)
+            pag->e[mij].contor--;
+        else
+        {
+        if (pag->p0 == NULL) //pagina curenta este pagina terminala
+        {
+            /*daca se elimina un nod dintr-o pagina neterminala,
+            se schimba continutul nodurilor, dar se pastreaza legatura*/
+            if (nod)
+            {
+                q = nod->p;
+                *nod = pag->e[pag->m];
+                nod->p = q;
+            }
+            for (i = mij; i < pag->m; i++)
+                pag->e[i] = pag->e[i + 1];
+            pag->m--;
+
+            //pagina terminala curenta s-a golit => arborele scade in inaltime
+            //posibil doar pentru N == 1
+            for (q = pag; pag && pag->m == 0; free(q), q = pag)
+                pag = pag->p0;
+
+            return pag;
+        }
+        /*dupa mutarea cheii intr-o pagina terminala,
+        se trece la eliminarea ei, prin repetarea pasului curent;
+        se presupune ca cheia de sters este mai mica cu o unitate*/
+        return suprima(pag, x - 1, &pag->e[mij]);
+    }
+    }
+
+    if (d == 0)
+        q = pag->p0;
+    else
+        q = pag->e[d].p;
+    r = suprima(q, x, nod); //se incearca eliminarea cheii din subarborele corespunzator
+
+    //conditia (r == NULL) garanteaza ca este pagina terminala
+    /*daca nu exista cheia aleasa sa inlocuiasca cheia de sters
+    se repeta pasul de stergere folosind cheia cu cea mai mare valoare*/
+    if (r == NULL)
+    {
+        if (nod)
+            return suprima(pag, pag->e[d].cheie, nod);
+        else //daca nu exista cheia in subarbore
+            return pag;
+    }
+
+    if (r->m < N) //subdepasire => imprumut sau contopire
+    {
+        Pagina *st, *dr;
+        if (d == 1)
+            st = pag->p0;
+        else
+            st = pag->e[d - 1].p;
+        dr = pag->e[d + 1].p;
+
+        if (r == pag->p0) //cel mai din stanga nod
+            vecinDrept(pag, dr, r, d);
+        else if (d == pag->m) //cel mai din dreapta nod
+            vecinStang(pag, st, r, d);
+        else //are 2 vecini
+        {
+            /*
+            se imprumuta de la vecinul cu nr maxim de noduri in pagina sau se contopesc 2 pagini;
+            cum nu pot exista simultan 2 pagini cu mai putin de N elemente =>
+            oricare pagina poate fi aleasa pentru contopire, daca este cazul
+            */
+
+            //se imprumuta de la vecinul drept
+            if (dr->m > st->m)
+                vecinDrept(pag, dr, r, d);
+            //se imprumuta (sau contopeste) de la (cu) vecinul stang
+            else
+                vecinStang(pag, st, r, d);
+        }
+    
+
+    //radacina subarborelui curent s-a golit => arborele scade in inaltime
+    for (q = pag; pag && pag->m == 0; free(q), q = pag)
+        pag = pag->p0;
+    }
+    
+    return pag;
+        
+}
+
+
+Pagina *radacina;
+
+
+int main()
+{
+    int i, n = 5;
+
+    radacina = NULL;
+    for (i = 1; i <= n; i++)
+        radacina = insereaza(radacina, i, NULL);
+    radacina = insereaza(radacina, 2, NULL);
+    radacina = insereaza(radacina, 2, NULL);
+    radacina = insereaza(radacina, 3, NULL);
+    radacina = insereaza(radacina, 4, NULL);
+    
+    
+
+    printf("Arborele-B initial:\n");
+    afisare(radacina, 1);
+    printf("\n\n");
+
+    radacina = suprima(radacina, 2, NULL);
+    radacina = suprima(radacina, 3, NULL);
+    //radacina = suprima(radacina, 3, NULL);
+    afisare(radacina, 1);
+    return 0;
+}

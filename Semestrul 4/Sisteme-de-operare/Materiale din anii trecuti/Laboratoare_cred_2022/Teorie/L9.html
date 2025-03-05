@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+
+<body>
+    <div class="box py-3 generalbox center clearfix">
+        <div class="no-overflow">
+            <h3>Concepte de baza</h3>
+            <p style="text-align: justify;">Intr-o lucrare de laborator anterioara au fost introduse elementele de
+                baza referitoare la <i>procese</i>. Recapituland pe scurt, un proces era
+                vazut ca fiind format dintr-o zona de cod, o zona de date, stiva si registri
+                ai procesorului (Program Counter si altii). In consecinta, fiecare proces
+                aparea ca o entitate distincta, independenta de celelalte procese aflate
+                in executie la un moment dat. De asemenea, a fost remarcat faptul ca, avand
+                in vedere ca procesorul poate rula la un moment dat un singur proces, procesele
+                sunt executate pe rand, dupa un anumit algoritm de planificare, astfel
+                incat, la nivelul aplicatiilor, acestea par ca se executa in paralel. <br></p>
+            <p style="text-align: justify;">Se desprind, astfel, doua idei importante referitoare la procese: <br></p>
+            <ul>
+                <li>ruleaza independent, avand zone de cod, stiva si date distincte</li>
+                <li>trebuie planificate la executie, astfel incat ele sa ruleze aparent in paralel</li>
+            </ul>
+            <p style="text-align: justify;">Executia planificata a proceselor presupune ca, la momente de timp
+                determinate
+                de algoritmul folosit, procesorul sa fie "luat" de la procesul care tocmai
+                se executa si sa fie "dat" unui alt proces. Aceasta comutare intre procese
+                (<i>process switching</i>) este o operatie consumatoare de timp, deoarece
+                trebuie "comutate" toate resursele care apartin proceselor: trebuie salvati
+                si restaurati toti registrii procesor, trebuie (re)mapate zonele de memorie
+                care apartin de noul proces etc.</p>
+            <p style="text-align: justify;">Un concept interesant care se regaseste in toate sistemele de operare
+                moderne este acela de <i>fir de executie </i>(<i>thread</i>) in interiorul
+                unui proces.
+                Firele de executie sunt uneori numite <i>procese usoare</i> (<i>lightweight
+                    processes</i>), sugerandu-se asemanarea lor cu procesele, dar si, intr-un
+                anume sens,&nbsp; deosebirile dintre ele.</p>
+            <p style="text-align: justify;">Un fir de executie trebuie vazut ca un flux de instructiuni care se
+                executa <i>in interiorul unui proces</i>. Un proces poate sa fie format
+                din mai multe asemenea fire, care se executa in paralel, <i>avand, insa,
+                    in comun toate resursele principale caracteristice procesului</i>. Prin
+                urmare, in interiorul unui proces, firele de executie sunt entitati care
+                ruleaza in paralel, impartind intre ele zona de date si executand portiuni
+                distincte din acelasi cod. Deoarece zona de date este comuna, toate variabilele
+                procesului vor fi vazute la fel de catre toate firele de executie, orice
+                modificare facuta de catre un fir devenind vizibila pentru toate celelalte.
+                Generalizand, un proces, asa cum era el perceput in lucrarile de laborator
+                precedente, este de fapt un proces format dintr-un singur fir de executie.<br></p>
+            <p style="text-align: justify;">La nivelul sistemului de operare, executia in paralel a firelor de executie
+                este obtinuta in mod asemanator cu cea a proceselor, realizandu-se o comutare
+                intre fire, conform unui algoritm de planificare. Spre deosebire de cazul
+                proceselor, insa, aici comutarea poate fi facuta mult mai rapid, deoarece
+                informatiile memorate de catre sistem pentru fiecare fir de executie sunt
+                mult mai putine decat in cazul proceselor, datorita faptului ca firele
+                de executie au foarte putine resurse proprii. Practic, un fir de executie
+                poate fi vazut ca un numarator de program, o stiva si un set de registri,
+                toate celelalte resurse (zona de date, identificatori de fisier etc) apartinand
+                procesului in care ruleaza si fiind exploatate in comun.
+                &nbsp; <br></p>
+            <h3 style="text-align: justify;">Implementarea firelor de executie in Linux</h3>
+            <p>Linux implementeaza firele de executie oferind, la nivel scazut, apelul
+                sistem <i>clone( )</i>:</p>
+            <pre>pid_t clone(void *sp, unsigned long flags);<br></pre>
+            <p style="text-align: justify;">Apelul sistem <i>clone( )</i> este o interfata alternativa la functia sistem
+                <i>fork( )</i>, ea avand ca efect crearea unui proces fiu, oferind, insa,
+                mai multe optiuni la creare. <br></p>
+            <p style="text-align: justify;">Daca <i>sp</i> este diferit de zero, procesul fiu va folosi sp ca indicator
+                al stivei sale, permitandu-se astfel programatorului sa aleaga stiva noului
+                proces.<br></p>
+            <p></p>
+            <p style="text-align: justify;">Argumentul<i> flags</i> este un sir de biti continand diferite optiuni
+                pentru crearea procesului fiu. Octetul inferior din <i>flags</i> contine
+                semnalul care va fi trimis la parinte in momentul terminarii fiului nou
+                creat. Alte optiuni care pot fi introduse in cuvantul <i>flags</i> sunt:
+                COPYVM si COPYFD. Daca este setat COPYVM, paginile de memorie al fiului
+                vor fi copii fidele ale paginilor de memori ale parintelui, ca la functia<i>
+                    fork( )</i>. Daca COPYVM nu este setat, fiul va imparti cu parintele paginile
+                de memorie ale acestuia. Cand COPYFD este setat, fiul va primi descriptorii
+                de fisier ai parintelui ca si copii distincte, iar daca nu este setat,
+                fiul va imparti descriptorii de fisier cu parintele.
+            </p>
+            <p style="text-align: justify;">Functia returneaza PID-ul fiului in parinte si zero in fiu. Pentru mai multe
+                detalii ale acestui apel se recomanda consultarea paginii de manual din sectiunea 2 (man 2 clone)<br>
+            </p>
+            <p style="text-align: justify;">Prin urmare, apelul sistem <i>fork( )</i> este echivalent cu:</p>
+            <pre style="text-align: justify;">clone(0, SIGCLD | COPYVM);<br></pre>
+            <p style="text-align: justify;">Se observa ca functia <i>clone( )</i> ofera suficiente facilitati pentru
+                a putea crea primitive de tip fire de executie.</p>
+            <p style="text-align: justify;">Pentru un exemplu concret se recomanda consultarea fisierului clone.c (autor
+                Linux Torvalds) pus la dispozitie pe pagina principala a cursului la sectiunea Fire de executie (in
+                aceeasi sectiune cu acesta pagina).</p>
+            <h3 style="text-align: justify;">Utilizarea firelor de executie folosind bilioteca LinuxThreads<br></h3>
+            <div style="text-align: justify;">In programe este indicat sa nu se foloseasca direct functia <i>clone(
+                    )</i>,
+                in primul rand din cauza ca ea nu este portabila (fiind specifica Linux)
+                si apoi pentru ca utilizarea ei este intrucatva greoaie.<br></div>
+            <div style="text-align: justify;"><br></div>
+            <div style="text-align: justify;">Standardul POSIX 1003.1c, adoptat de catre IEEE ca parte a standardelor
+                POSIX, defineste o interfata de programare pentru utilizarea firelor de
+                executie, numita <i>pthread</i>. Interfata este implementata pe multe arhitecturi;
+                mai mult, sistemele de operare care contineau biblioteci proprii de fire
+                de executie (cum este SOLARIS) introduc suport pentru acest standard. <br></div>
+            <div style="text-align: justify;"><br></div>
+            <div style="text-align: justify;">In Linux exista o biblioteca numita <i>LinuxThreads</i>, care
+                implementeaza
+                versiunea finala a standardului POSIX 1003.1c si utilizeaza functia <i>clone()</i>
+                ca instrument de creare a firelor de executie. In continuare, ne vom referi
+                la aceasta biblioteca de functii si vom trece in revista o parte din primitivele
+                introduse de catre ea. <br></div>
+            <div style="text-align: justify;"><br></div>
+            <div style="text-align: justify;">
+                <h4>Aspecte de compilare privind biblioteca Linux Threads</h4>
+            </div>
+            <div style="text-align: justify;"><br></div>
+            <div style="text-align: justify;">
+                <div style="text-align: justify;">Biblioteca LinuxThreads este disponibila automat in toate
+                    distributiile moderne de Linux (presupunand ca au fost instalate
+                    pachetele de development).
+                </div>
+                <p style="text-align: justify;">Pentru a putea utiliza fire de executie, este
+                    necesar ca programele sa fie compilate
+                    folosind comanda:
+
+                </p>
+                <pre>gcc -Wall -o &lt;executabil&gt; -D_REENTRANT -lpthread &lt;fisier.c&gt;<br></pre>
+            </div>
+            <p style="text-align: justify;">Se observa ca este necesara definirea constantei _REENTRANT (din
+                considerente
+                legate de executia paralela a firelor) si ca trebuie inclusa explicit biblioteca
+                <i>pthread</i> (numele sub care se regaseste LinuxThreads, conform POSIX). Biblioteca <i>pthread
+                </i>este un <i>shared object</i> in Linux si va fi link-editata dinamic cu programul ce o foloseste. Ea
+                exista in sistem in general intr-un fisier de tip <i>shared object</i> cu numele <i>libpthread.so</i>.
+                <br></p>
+            <h4>Crearea firelor de executie</h4>
+            <p>Un fir de executie se creeaza folosind functia:</p>
+            <pre>int&nbsp; pthread_create(pthread_t *thread, pthread_attr_t *attr, void *(*start_routine)(void *), void *arg);</pre>
+            <p style="text-align: justify;">Functia creeaza un <i>thread</i> care se va executa in paralel cu
+                <i>thread</i>-ul
+                creator. Noul fir de executie va fi format de functia <i>start_routine</i>
+                care trebuie definita in program avand un singur argument de tip&nbsp;<b>
+                    (void *)</b>. Parametrul <i>arg</i> este argumentul care va fi transmis
+                acestei functii. Parametrul <i>attr</i> este un cuvant care specifica diferite
+                optiuni de creare a firului de executie. In mod obisnuit, acesta este dat
+                ca NULL, acceptand optiunile implicite. Firul de executie creat va primi
+                un identificator care va fi returnat in variabila indicata de parametrul
+                <i>thread</i>. Functia returneaza 0 daca crearea a avut succes si un numar
+                diferit de zero in caz contrar ce reprezinta eroarea (cu aceleasi valori ca si cele ale variabilei
+                <i>errno</i>). Atentie, in acest caz <b>nu</b> se seteaza corespunzator valoarea lui <i>errno </i>ci se
+                returneaza aceasta valoare. Pentru a se obtine un text ce reprezinta eroarea se recomanda folosirea
+                functiei <i>strerror()</i>.<br></p>
+            <p style="text-align: justify;"><i>Thread</i>-ul va consta in executia functiei date ca argument, iar
+                terminarea lui se va face ori apeland explicit functia <i>pthread_exit(
+                    )</i>, ori implicit, prin iesirea din functia <i>start_routine</i>.
+
+                <br></p>
+            <p style="text-align: justify;"></p>
+            <p>Identificatorul de thread returnat de functie prin primul argument se numeste Thread ID (TID). Un proces
+                ce are un singur fir de executia va avea PID-ul sau egal cu TID-ul thread-ului principal.</p>
+            <h4>Terminarea firelor de executie</h4>
+            <p>Un fir de executie se poate termina apeland:</p>
+            <pre>void pthread_exit(void *retval);</pre>
+            <p style="text-align: justify;">De asemenea, un thread se poate termina si prin iesirea normala din functie
+                referentiata de <i>start_routine </i>(valoare returnata de tip void*).</p>
+            <p style="text-align: justify;">Valoarea <i>retval</i> este valoarea pe care <i>thread</i>-ul o returneaza
+                la terminare. Starea returnata de firele de executie poate fi preluata
+                de catre <i><u>oricare</u></i> din <i>thread</i>-urile aceluiasi proces (ce au acces la identificatorul
+                thread-ului),
+                folosind functia :</p>
+            <pre>int pthread_join(pthread_t th, void **thread_return);<br></pre>
+            <p style="text-align: justify;">Aceasta intrerupe firul de executie care o apeleaza pana cand firul de
+                executie cu identificatorul <i>th</i> se termina, moment in care starea
+                lui va fi returnata la adresa data de parametrul <i>thread_return</i>. <br></p>
+            <p style="text-align: justify;">Demn de observat este faptul ca <i>nu pentru toate firele de executie
+                    poate fi preluata starea de iesire</i>. De fapt, conform standardului POSIX,
+                firele de executie se impart in doua categorii:
+                <br></p>
+            <ul>
+                <li>joinable - ale caror stari pot fi preluate de catre celelalte fire din proces</li>
+                <li>detached - ale caror stari nu pot fi preluate</li>
+            </ul>
+            <p>In cazul <i>thread</i>-urilor <i>joinable</i>, in momentul terminarii acestora,
+                resursele lor nu sunt complet dezalocate, asteptandu-se un viitor <i>pthread_join</i>
+                pentru ele. Firele de executie <i>detached</i> se dezaloca in intregime,
+                starea lor devenind nedisponibila pentru alte fire de executie. <br></p>
+            <p>Tipul unui fir de executie poate fi specificat la crearea acestuia,
+                folosind optiunile din argumentul <i>attr </i>(implicit este <i>joinable</i>).
+                De asemenea, un fir de executie <i>joinable</i> poate fi "detasat" mai
+                tarziu, folosind functia <i>pthread_detach( )</i>.
+                &nbsp; <br></p>
+            <p>Observatii:</p>
+            <ul>
+                <li>Un proces, imediat ce a fost creat, este format dintr-un singur fir de
+                    executie, numit fir de executie principal (initial).</li>
+                <li>Toate firele de executie din cadrul unui proces se vor executa in paralel.</li>
+                <li>Datorita faptului ca impart aceeasi zona de date, firele de executie ale
+                    unui proces vor folosi in comun toate variabilele globale. De aceea, se
+                    recomanda ca in programe firele de executie sa utilizeze numai variabilele
+                    locale, definite in functiile care implementeaza firul, in afara de cazurile
+                    in care se doreste partajarea explicita a unor resurse.</li>
+                <li>Daca un proces format din mai multe fire de executie se termina, toate firele de executie ale sale
+                    se vor termina.</li>
+                <li>Daca un fir de executie apeleaza functia <i>exit( )</i>, efectul va fi
+                    terminarea <i>intregului</i> proces, cu toate firele de executie din interior.</li>
+                <li>Functiile <i>sleep()</i> si <i>usleep()</i> vor afecta doar thread-ul apelant.</li>
+            </ul>
+            <h4>Sincronizarea firelor de executie</h4>
+            <p style="text-align: justify;">Dupa cum s-a explicat anterior, toate firele de executie din cadrul unui
+                proces au acces la aceeasi zona de memorie globala. Asadar, orice fir de executie va putea accesa
+                oricand prin scriere sau citire orice variabila globala. TInand cont ca, din punct de vedere al
+                programatorului, firele de executie ruleaza in paralel, accesarea datelor fara nici un mecanism de
+                protectie si sincronizarea poate duce la hazarde de date.</p>
+            <p style="text-align: justify;">Hazardele de date pot fi (si se considera 2 threaduri th1, si th2):</p>
+            <ul>
+                <li>read after write (RAW) - apare atunci cand thread-ul th2 incearca sa citeasca o resursa inainte ca
+                    th1 sa o scrie. In acest caz este posibil ca thread-ul th2 sa citeasca o resursa "veche"</li>
+                <li>write after read (WAR) - apare atunci cand thread-ul th2 incearca sa scrie o resursa inainte sa fie
+                    citita de thread-ul th1)</li>
+                <li>write after write (WAW) - apare atunci cand thread-ul th2 incearca sa scrie o resursa inainte sa fie
+                    scrisa de thread-ul th1.</li>
+            </ul>
+            <p style="text-align: justify;">In momentul aparitiei oricarui unui astfel de hazard datele pot fi corupte
+                sau thread-urile pot citi date "prea vechi" sau "prea noi" astfel pierzand valori/ evenimente.</p>
+            <p style="text-align: justify;">Unul din mecanismele puse la dispozitie de bilioteca pthread pentru
+                sincronizarea firelor de executie este reprezentat de mutex (lacat)</p>
+            <p style="text-align: justify;">Lacatele (locks sau mutexes) sunt un mecanism de sincronizare asemanator
+                semafoarelor. Ele sunt folosite pentru excludere mutuala - de unde numele de mutex. Lacatele au o stare
+                cu doua valori posibile (locked si unlocked) si doua operatii (lock sau acquire si unlock sau release).
+                <br></p>
+            <p style="text-align: justify;">La creare, un lacat este in starea "deschis". Operatia <i>lock</i> pe
+                un lacat deschis va face ca lacatul sa treaca in starea "inchis" iar
+                firul care inchide lacatul se spune ca il detine. Operatia <i>lock</i>
+                efectuata asupra unui lacat inchis va bloca firul apelant.<br></p>
+            <p></p>
+            <p style="text-align: justify;">
+                Operatia <i>unlock</i> efectuata asupra unui lacat inchis, <b>apelata de
+                    firul ce detine lacatul</b>, va debloca unul din firele de executie
+                blocate in asteptare in urma unui <i>lock</i> pe acel lacat. Firul
+                deblocat va fi cel care detine lacatul in continuare. Daca nu
+                exista fire in asteptare, lacatul va fi trecut in
+                starea <i>unlocked</i> si nici un fir nu va mai detine lacatul.
+            </p>
+            <p style="text-align: justify;">
+                Daca un fir de executie efectueaza operatia <i>unlock</i> pe un lacat
+                deschis sau detinut de alt fir, ea va returna eroare. De asemenea,
+                operatia <i>lock</i> efectuata asupra unui lacat deja inchis si
+                detinut de firul apelant va returna eroare.
+            </p>
+            <p style="text-align: justify;">
+                In Linux (si alte citeva sisteme asemanatoare UNIX), exista trei
+                tipuri de lacate: "fast", "error checking" si "recursive". Descrierea
+                de mai sus se refera la tipul "error checking" pe care il vom
+                utiliza. Cititi paginile de manual pentru o descriere completa. <br></p>
+            <p style="text-align: justify;">Principalele functii din biblioteca pthread ce gestioneaza un mutex ar fi
+                urmatoarele:</p>
+            <pre
+                style="text-align: justify;">int pthread_mutex_init(pthread_mutex_t *mutex, const pthread_mutexattr_t *mutexattr);<br>int pthread_mutex_lock(pthread_mutex_t *mutex);<br>int pthread_mutex_unlock(pthread_mutex_t *mutex);<br>int pthread_mutex_destroy(pthread_mutex_t *mutex);<br></pre>
+            Pentru informatii despre cum functioneaza aceste functii se recomanda consultarea paginilor de manual din
+            sectiunea 3.<p></p>
+            <p>Un exemplu de sincronizare a proceselor folosind mutex se afla in sectiunea Fire de executie de pagina
+                acestui curs.<br></p>
+            <p><br></p>
+            <p><br></p>
+            <p>asdasdasdasd<br></p>
+        </div>
+    </div>
+</body>
+
+</html>

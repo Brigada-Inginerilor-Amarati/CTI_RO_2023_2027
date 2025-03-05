@@ -1,0 +1,6 @@
+http://www.google.ro;00:11:22:33:44:55
+https://www.yahoo.com;66:77:88:99:AA:BB
+http://www.cs.upt.ro;CC:DD:EE:FF:00:YY
+ftp://nosite_.tk;00:11:22:33:44:00
+http://aaaaa.rr;00:11:22:33:44:00
+http://www.google.ro;00:11:22:33:443:55

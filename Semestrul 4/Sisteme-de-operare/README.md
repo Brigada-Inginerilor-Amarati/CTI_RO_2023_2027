@@ -1,0 +1,2 @@
+# Sisteme de operare
+ 

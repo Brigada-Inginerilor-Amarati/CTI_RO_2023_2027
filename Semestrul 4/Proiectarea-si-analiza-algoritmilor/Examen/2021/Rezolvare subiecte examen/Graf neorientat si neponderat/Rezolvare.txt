@@ -1,0 +1,30 @@
+void cuprindere(int start, int cnt) //start=ID, fct pt primire sugestii de prietenie, 
+cnt max 3 sugestii dintre prietenii prietenilor
+{
+ int k, st, dr;
+ st = 1;
+ dr = 1;
+ coada[1] = start;
+ viz[start] = 1;
+ //bfs[cnt] = start;
+ //cnt++;
+ while (st <= dr) { //parcurgere de la stanga la dreapta cat sunt elemente in coada
+ k = coada[st];
+ for (int i = 1; i <= g->nr_noduri; i++)
+ if (viz[i] == 0 && g->Arce[k][i] == 1) {
+ if (g->Arce[start][i] == 0) { //daca nu este deja prieten
+ if (cnt >= 3) break; //daca nu a primit inca 3 sugestii
+ sugestii[cntSugestii] = g->Noduri[i];
+printf("%d %s \n", g->Noduri[i].ID, g->Noduri[i].nume);
+ cnt++;
+cntSugestii++;
+ }
+ viz[i] = 1;
+ //bfs[cnt] = i;
+ //cnt++;
+ dr++; //daca am gasit un nod spre care exista arc si nu a fost inca 
+vizitat, se incrementeaza dr coada[dr] = i;
+ }
+ st++;
+ }
+}

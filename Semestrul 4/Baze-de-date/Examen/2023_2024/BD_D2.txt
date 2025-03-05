@@ -1,0 +1,76 @@
+1.Care dintre următoarele afirmații nu este adevărată despre subinterogări?
+c. O subinterogare poate fi inclusă într-o clauză ORDER BY. 
+
+
+2.Pentru un tabel care conține un singur rând cu toate atributele cu excepția PK care conține valori NULL, 
+tabelul SELECT COUNT(*) FROM;
+va reveni:
+
+c. 1
+
+3.Costul planului de execuție a interogării nu depinde de:
+
+b. Numărul de atribute ale relațiilor de intrare
+
+4.Luând în considerare baza de date Harbour utilizată pe curs și următoarea interogare:
+SELECT DISTINCT s.sid, s.name
+FROM Sailors s, Boats b, Reserves r
+WHERE s.sid=r.sid AND r.bid=b.bid AND b.color='Blue' AND
+s.sid IN
+(SELECT s1.sid
+FROM Sailors s1, Boats b1, Reserves r1
+WHERE s1.sid=r1.sid AND r1.bid=b1.bid
+AND b1.color='Green')
+care dintre următoarele afirmații este falsă:
+
+b. Interogările sunt corelate.
+
+5.Lista de proiecție a unei interogări SELECT poate conține un atribut de tabel și o funcție de agregare SQL numai dacă:
+A. Atributul este inclus în clauza GROUP by.
+
+6.O subinterogare folosită ca operand al operatorului IN trebuie să revină ca:
+d. Un set de valori scalare.
+
+7.
+Pentru a fi compatibile cu uniunea, două relații trebuie să aibă:
+
+b. Același număr de atribute cu tipuri corespunzătoare în aceeași ordine.
+
+8.
+O funcție de agregare SQL nu poate fi utilizată direct în:
+
+b. O clauză WHERE.
+
+9.
+Un index hash pe cheia <x1, x2, x3, x4> poate fi folosit pentru a potrivi selecția:
+
+c. x1= 6 și x2 = 9 și x3 = 2 și x4 = 25
+
+10.
+Criteriile multiple din lista de parametri sunt interpretate ierarhic în:
+
+b. ORDER BY, dar nu în GROUP BY.
+
+11.Parametrul DISTINCT nu va avea niciun efect doar pentru una dintre următoarele funcții de agregare SQL:
+
+C. MAX
+
+12.Operația de îmbinare completă poate fi implementată folosind următorul operator:
+
+c. UNIUNE
+
+DACA VEZI RASPUNSU ASTA UNDEVA, PUNE-L ;)
+
+-->Clauza WHERE a interogării principale.
+
+13.
+Pentru a fi compatibile cu uniunea, două relații trebuie să aibă:
+A. Același număr de atribute cu tipuri corespunzătoare în aceeași ordine.
+
+14.
+
+Care dintre următoarele nu reprezintă un mecanism de autentificare suportat de Oracle:
+
+d. DIAMETRU.
+
+

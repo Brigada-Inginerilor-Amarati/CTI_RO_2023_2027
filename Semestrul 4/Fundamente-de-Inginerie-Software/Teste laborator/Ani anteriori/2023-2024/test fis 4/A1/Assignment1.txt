@@ -1,0 +1,5 @@
+ASSIGNMENT 1
+
+1. Draw in StarUML the class diagram (with all the details) for all the classes from the attached code
+
+2. For the class diagram from the attached folder, write the corresponding Java code skeleton

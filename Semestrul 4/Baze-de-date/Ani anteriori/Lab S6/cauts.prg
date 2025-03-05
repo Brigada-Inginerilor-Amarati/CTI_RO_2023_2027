@@ -1,0 +1,10 @@
+SET TALK OFF
+CLEAR
+USE Angajat
+VNUME = ACCEPT ('CodAngajat')
+VNUME = TRIM(VNUME)
+DISP FOR CodAngajat = VNume
+USE
+RETURN
+
+ 
