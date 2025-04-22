@@ -1,0 +1,43 @@
+module dff_rst_tb;
+
+reg clk;  
+reg d;  
+reg rst;   
+  
+    dff_rst uut(.d(d), .rst(rst),.clk (clk),.q (q));  
+  
+initial begin 
+	clk = 1'b0;
+
+	forever #10 clk = ~clk;  
+
+end 
+    
+initial begin   
+        d <= 0;  
+        rst <= 0; 
+
+	#15 d <= 1;  
+        #10 rst <= 1; 
+
+	#15 d <= 0;  
+        #10 rst <= 1;
+
+
+	#15 d <= 1;  
+        #10 rst <=0;
+
+	#15 d <= 0;  
+        #10 rst <= 0;
+
+	#15 d <= 1;  
+        #10 rst <= 0;
+
+	#15 d <= 1;  
+        #10 rst <= 1;
+
+	#20
+	$stop;
+  
+        end 
+endmodule  

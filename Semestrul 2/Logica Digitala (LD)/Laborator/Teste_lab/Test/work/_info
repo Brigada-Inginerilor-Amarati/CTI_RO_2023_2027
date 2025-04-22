@@ -1,0 +1,30 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dD:/Facultate/Anul 1/Semestrul 2/LD/Model_sim/Test
+vex1
+!s110 1712594640
+!i10b 1
+!s100 neW6K8Og:lzBI;Be`2caT1
+ID:K[:`=8z`PkaI:jX>QBJ2
+VDg1SIo80bB@j0V0VzS_@n1
+R0
+w1712594340
+8ex1.v
+Fex1.v
+L0 1
+OV;L;10.5b;63
+r1
+!s85 0
+31
+!s108 1712594640.000000
+!s107 ex1_tb.v|ex1.v|
+!s90 -reportprogress|300|ex1.v|ex1_tb.v|
+!i113 1
+tCvgOpt 0

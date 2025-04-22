@@ -1,0 +1,55 @@
+`timescale 1ns /100 ps
+
+`define s0 2'b00
+`define s1 2'b01
+`define s2 2'b10
+
+module automat(
+	input clk,
+	input rst,
+	input enable,
+	output [1:0] current_state,
+	output reg [2:0] out
+);
+
+reg [2:0] state_reg, state_next;
+
+always @(posedge clk or posedge rst)
+	if (rst)
+		state_reg <= `s0;
+	else
+		state_reg <= state_next;
+
+always @(*) begin
+	state_next = state_reg;
+	out = 3'b000;
+
+	case(state_reg)
+		`s0 : begin
+			out = 3'b000;
+			if (enable)
+				state_next = `s1;
+			else
+				state_next = `s0;												
+		end
+		`s1 : begin 
+			out = 3'b010;
+			if (enable)
+				state_next = `s2;
+			else
+				state_next = `s1;
+		end
+		`s2 : begin
+			out = 3'b100;
+			if(enable)
+				state_next = `s0;
+			else
+				state_next = `s2;
+		end
+	endcase
+
+end
+
+assign current_state = state_reg;
+
+endmodule

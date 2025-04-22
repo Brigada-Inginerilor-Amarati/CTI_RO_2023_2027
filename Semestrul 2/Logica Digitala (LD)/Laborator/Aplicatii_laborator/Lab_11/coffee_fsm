@@ -1,0 +1,61 @@
+`define init 3'b000
+`define c05 3'b001
+`define c10 3'b010
+`define c15 3'b011
+`define c20 3'b100
+`define expr 3'b101
+`define latte 3'b110
+`define capp 3'b111
+
+module coffee_fsm(
+	input clk, rst, credit5, credit10,
+input [1:0]coff,
+output [2:0] coff_out);
+
+reg [2:0] state_reg, state_nxt;
+
+always @(posedge clk or posedge rst)
+if(rst) state_reg<=0;
+else state_nxt<=state_nxt;
+
+always @(*)begin
+state_nxt=state_reg;
+coff_out=0;
+case(state_reg)
+init:begin
+if(credit5) state_nxt=c05;
+if(credit10) state_nxt=c10;
+end
+co5:begin
+if(credit5) state_nxt=c10;
+if(credit10) state_nxt=c15;
+end
+co10:begin
+if(credit5) state_nxt=c15;
+if(credit10) state_nxt=c20;
+end
+co15:begin
+if(credit5) state_nxt=c20;
+if(credit10) state_nxt=c20;
+end
+co20:begin
+if(coff==1) state_nxt=expr;
+if(coff==2) state_nxt=latte;
+if(coff=3) state_nxt=capp;
+end
+expr:begin
+coff_out=3'b001;
+state_nxt=init;
+end
+latte:begin
+coff_out=3'b010;
+state_nxt=init;
+end
+capp:begin
+coff_out=3'b100;
+state_nxt=init;
+end
+endcase
+end
+
+endmodule

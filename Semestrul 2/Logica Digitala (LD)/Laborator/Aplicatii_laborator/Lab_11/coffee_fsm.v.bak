@@ -1,0 +1,112 @@
+`define INIT 3'b000
+`define C05 3'b001
+`define C10 3'b010
+`define C15 3'b011
+`define C20 3'b100
+`define ESPR 3'b101
+`define ESPR_L 3'b110
+`define CAPP 3'b111
+
+module coffee_fsm(input clk, rst,
+    input credit05, credit10,
+    input [1:0] coffee,
+    output [2:0] current_state,
+    output reg espr, espr_l, capp);
+    
+  reg [2:0] state_nxt, state_reg;
+  
+  always @(posedge clk or posedge rst)
+  begin
+    if (rst)
+      state_reg <= 0;
+    else
+      state_reg <= state_nxt;
+  end
+  
+  always @(state_reg, coffee, credit05, credit10)
+  begin
+    
+    state_nxt = state_reg;
+    espr = 0;
+    espr_l = 0;
+    capp = 0;
+    
+    case (state_reg)
+      `INIT: begin
+        state_nxt = `INIT;
+        espr = 0;
+        espr_l = 0;
+        capp = 0;
+        if (credit05)
+          state_nxt = `C05;
+        if (credit10)
+          state_nxt = `C10;
+        end
+      `C05: begin
+        state_nxt = `C05;
+        espr = 0;
+        espr_l = 0;
+        capp = 0;
+        if (credit05)
+          state_nxt = `C10;
+        if (credit10)
+          state_nxt = `C15;
+        end
+      `C10: begin
+        state_nxt = `C10;
+        espr = 0;
+        espr_l = 0;
+        capp = 0;
+        if (credit05)
+          state_nxt = `C15;
+        if (credit10)
+          state_nxt = `C20;
+        end
+      `C15: begin
+        state_nxt = `C15;
+        espr = 0;
+        espr_l = 0;
+        capp = 0;
+        if (credit05)
+          state_nxt = `C20;
+        if (credit10)
+          state_nxt = `C20;
+        end
+      `C20: begin
+        state_nxt = `C20;
+        espr = 0;
+        espr_l = 0;
+        capp = 0;
+        if (coffee == 2'b00)
+          state_nxt = `C20;
+        if (coffee == 2'b01)
+          state_nxt = `ESPR;
+        if (coffee == 2'b10)
+          state_nxt = `ESPR_L;
+        if (coffee == 2'b11)
+          state_nxt = `CAPP;
+        end
+      `ESPR: begin
+        state_nxt = `INIT;
+        espr = 1;
+        espr_l = 0;
+        capp = 0;
+        end
+      `ESPR_L: begin
+        state_nxt = `INIT;
+        espr = 0;
+        espr_l = 1;
+        capp = 0;
+        end
+      `CAPP: begin
+        state_nxt = `INIT;
+        espr = 0;
+        espr_l = 0;
+        capp = 1;
+        end
+    endcase
+  
+  end
+  assign current_state = state_reg;
+  
+endmodule

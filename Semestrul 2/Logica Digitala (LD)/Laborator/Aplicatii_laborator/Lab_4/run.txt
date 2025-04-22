@@ -1,0 +1,30 @@
+# add all your source files to the sourcefiles list
+# add the files separated by spaces
+# Example:-----------------------------------------
+# set sourcefiles {mux_1s.v mux_2s.v mux2s_tb.v}
+set sourcefiles {gates.v gates_tb.v rca.v}
+
+# set name of the top module in variable topmodule
+# Example:-----------------------------------------
+# set topmodule mux2s_tb
+set topmodule gates_tb
+
+###################################################
+#####DO NOT MODIFY THE SCRIPT BELLOW THIS LINE#####
+###################################################
+
+# quit current simulation if any
+quit -sim
+
+# empty the work library if present
+if [file exists "work"] {vdel -all}
+#create a new work library
+vlib work
+
+# run the compiler
+if [catch "eval vlog $sourcefiles"] {
+    puts "correct the compilation errors"
+    return
+}
+
+vsim -voptargs=+acc $topmodule

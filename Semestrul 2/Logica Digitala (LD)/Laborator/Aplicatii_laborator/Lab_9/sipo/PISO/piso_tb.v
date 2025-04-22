@@ -1,0 +1,47 @@
+module piso_tb;
+
+reg clk, rst, ld;
+reg [3:0] d;
+wire [0:3] q;
+
+piso uut (
+    .clk(clk),
+    .rst(rst),
+    .d(d),
+    .ld(ld),
+    .q(q)
+);
+
+initial begin
+    clk = 0;
+    forever #5 clk = ~clk;
+end
+
+
+initial begin
+    
+    rst = 1;
+    ld = 0;
+    d = 4'b0000;
+
+    #10 rst = 0;
+
+    
+    #20 ld = 1;
+    #30 d = 4'b1010;
+    #40 ld = 0;
+    #50 ld = 1; 
+    #60 d = 4'b1100;
+    #70 ld = 0;
+    #80 ld = 1;
+    #90 d = 4'b0110;
+    #100 ld = 0;
+    #110 ld = 1;
+    #120 d = 4'b0001;
+    #130 ld = 0;
+$stop;
+
+end
+
+
+endmodule

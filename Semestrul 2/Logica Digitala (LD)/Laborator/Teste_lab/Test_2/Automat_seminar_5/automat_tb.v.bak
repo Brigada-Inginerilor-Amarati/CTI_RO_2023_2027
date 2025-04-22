@@ -1,0 +1,36 @@
+`timescale 1ns / 100ps
+
+module automat_tb;
+
+reg clk, rst, enable;
+
+wire [1:0] current_state;
+
+wire [2:0] out;
+
+automat uut( .clk(clk), .rst(rst), .enable(enable), .current_state(current_state), .out(out) );
+
+initial begin
+	forever #20 clk = ~clk;
+end
+
+initial begin
+	clk = 0;
+	rst = 1;
+	enable = 0;
+	#20 rst = 0;
+
+	#200
+	enable = 1;
+	#50
+	enable = 0;
+	#50
+	enable = 1;
+	#50
+	enable = 1;
+	#50
+	enable = 0;
+	#300
+	$stop;
+end
+endmodule

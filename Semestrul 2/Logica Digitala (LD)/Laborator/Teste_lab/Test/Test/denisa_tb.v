@@ -1,0 +1,17 @@
+module circuit_tb;
+	reg a,b,c,d;
+	wire f;
+	initial begin
+		a=0;
+		b=0;
+		c=0;
+		d=0;
+		#100;
+	end
+	always begin
+		#20 a=~a;
+		#40 b=~b;
+		#60 c=~c;
+		#80 d=~d;
+	end
+endmodule

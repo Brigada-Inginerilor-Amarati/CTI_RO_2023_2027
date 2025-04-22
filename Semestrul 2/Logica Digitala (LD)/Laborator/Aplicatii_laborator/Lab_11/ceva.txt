@@ -1,0 +1,2 @@
+#4 biti de intrare ->butoane
+#5 biti de iesire -> hex ->led

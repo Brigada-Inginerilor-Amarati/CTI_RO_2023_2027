@@ -1,0 +1,52 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dD:/Facultate/Anul 1/Semestrul 2/LD/Model_sim/Test/Test
+vcircuit
+!s110 1712751520
+!i10b 1
+!s100 d?I@<hUQc[=DHzM7OiQ[i2
+I11E?N<P2LXSS`_4CibZbn0
+Z1 VDg1SIo80bB@j0V0VzS_@n1
+R0
+w1712751501
+8D:/Facultate/Anul 1/Semestrul 2/LD/Model_sim/Test/Test/denisa.v
+FD:/Facultate/Anul 1/Semestrul 2/LD/Model_sim/Test/Test/denisa.v
+L0 1
+Z2 OV;L;10.5b;63
+r1
+!s85 0
+31
+!s108 1712751520.000000
+!s107 D:/Facultate/Anul 1/Semestrul 2/LD/Model_sim/Test/Test/denisa.v|
+!s90 -reportprogress|300|-work|work|-stats=none|D:/Facultate/Anul 1/Semestrul 2/LD/Model_sim/Test/Test/denisa.v|
+!i113 1
+Z3 o-work work
+Z4 tCvgOpt 0
+vcircuit_tb
+!s110 1712751818
+!i10b 1
+!s100 k5c^13hdl0QDaLcb=jHm82
+ICN_fUjoKc>=bKL0zE`>1G3
+R1
+R0
+w1712751814
+8D:/Facultate/Anul 1/Semestrul 2/LD/Model_sim/Test/Test/denisa_tb.v
+FD:/Facultate/Anul 1/Semestrul 2/LD/Model_sim/Test/Test/denisa_tb.v
+L0 1
+R2
+r1
+!s85 0
+31
+!s108 1712751818.000000
+!s107 D:/Facultate/Anul 1/Semestrul 2/LD/Model_sim/Test/Test/denisa_tb.v|
+!s90 -reportprogress|300|-work|work|-stats=none|D:/Facultate/Anul 1/Semestrul 2/LD/Model_sim/Test/Test/denisa_tb.v|
+!i113 1
+R3
+R4

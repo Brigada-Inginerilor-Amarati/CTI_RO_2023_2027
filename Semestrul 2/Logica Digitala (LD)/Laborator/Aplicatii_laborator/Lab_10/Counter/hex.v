@@ -1,0 +1,21 @@
+module hex (
+    input wire [7:0] time_in_seconds,
+    output reg [6:0] hex_output
+);
+
+always @ (time_in_seconds)
+    case (time_in_seconds)
+        8'd0: hex_output = 7'b0000001; // 0
+        8'd1: hex_output = 7'b1001111; // 1
+        8'd2: hex_output = 7'b0010010; // 2
+        8'd3: hex_output = 7'b0000110; // 3
+        8'd4: hex_output = 7'b1001100; // 4
+        8'd5: hex_output = 7'b0100100; // 5
+        8'd6: hex_output = 7'b0100000; // 6
+        8'd7: hex_output = 7'b0001111; // 7
+        8'd8: hex_output = 7'b0000000; // 8
+        8'd9: hex_output = 7'b0000100; // 9
+        default: hex_output = 7'b1111111; 
+    endcase
+
+endmodule

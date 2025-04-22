@@ -1,0 +1,15 @@
+{D:/Facultate/Anul 1/Semestrul 2/LD/Model_sim/Test/Test/denisa_tb.v} {1 {vlog -work work -stats=none {D:/Facultate/Anul 1/Semestrul 2/LD/Model_sim/Test/Test/denisa_tb.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module circuit_tb
+
+Top level modules:
+	circuit_tb
+
+} {} {}} {D:/Facultate/Anul 1/Semestrul 2/LD/Model_sim/Test/Test/denisa.v} {1 {vlog -work work -stats=none {D:/Facultate/Anul 1/Semestrul 2/LD/Model_sim/Test/Test/denisa.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module circuit
+
+Top level modules:
+	circuit
+
+} {} {}}

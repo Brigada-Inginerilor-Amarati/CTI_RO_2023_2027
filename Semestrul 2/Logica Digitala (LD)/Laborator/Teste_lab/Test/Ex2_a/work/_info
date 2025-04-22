@@ -1,0 +1,50 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dD:/Facultate/Anul 1/Semestrul 2/LD/Model_sim/Test/Ex2_a
+vex2a
+Z1 !s110 1712596466
+!i10b 1
+!s100 Kb_SBJzXQd>l[d7:2;:Vc1
+I?TLR9HE=7g>G<X1[d`LeN1
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+R0
+w1712596206
+8ex2a.v
+Fex2a.v
+L0 1
+Z3 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z4 !s108 1712596466.000000
+Z5 !s107 ex2a_tb.v|ex2a.v|
+Z6 !s90 -reportprogress|300|ex2a.v|ex2a_tb.v|
+!i113 1
+Z7 tCvgOpt 0
+vex2a_tb
+R1
+!i10b 1
+!s100 UM21Cn=YkD@L<z:4:2@4<1
+IJ1:^YY9P;GcIOVF`CPgoC0
+R2
+R0
+w1712596463
+8ex2a_tb.v
+Fex2a_tb.v
+L0 1
+R3
+r1
+!s85 0
+31
+R4
+R5
+R6
+!i113 1
+R7

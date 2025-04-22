@@ -1,0 +1,50 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dD:/Facultate/Anul 1/Semestrul 2/LD/Model_sim/Lab_11
+vcoffee_fsm
+Z1 !s110 1716219349
+!i10b 1
+!s100 kL_541mblLSDoPbH6XKnN3
+I@^K8RHkhBHh^]1F^m]TZ`3
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+R0
+w1716219240
+8coffee_fsm.v
+Fcoffee_fsm.v
+L0 10
+Z3 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z4 !s108 1716219349.000000
+Z5 !s107 coffee_fsm_tb.v|coffee_fsm.v|
+Z6 !s90 -reportprogress|300|coffee_fsm.v|coffee_fsm_tb.v|
+!i113 1
+Z7 tCvgOpt 0
+vcoffee_fsm_tb
+R1
+!i10b 1
+!s100 IN<4R>Cec:TRIC^cG8`ik3
+Ihf`g0=B?l`:HVP0CPXOHW2
+R2
+R0
+w1716219312
+8coffee_fsm_tb.v
+Fcoffee_fsm_tb.v
+L0 3
+R3
+r1
+!s85 0
+31
+R4
+R5
+R6
+!i113 1
+R7

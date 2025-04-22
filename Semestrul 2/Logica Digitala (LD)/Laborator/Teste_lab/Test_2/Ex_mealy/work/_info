@@ -1,0 +1,50 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dD:/Facultate/Anul 1/Semestrul 2/LD/Model_sim/Test_2/Ex_mealy
+vautomat
+Z1 !s110 1716328947
+!i10b 1
+!s100 _inWI8G:^0A6zaoEfMnAj1
+IH?6:0M8k[?N]VC@R0e39h3
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+R0
+w1716232677
+8automat.v
+Fautomat.v
+L0 8
+Z3 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z4 !s108 1716328947.000000
+Z5 !s107 automat_tb.v|automat.v|
+Z6 !s90 -reportprogress|300|automat.v|automat_tb.v|
+!i113 1
+Z7 tCvgOpt 0
+vautomat_tb
+R1
+!i10b 1
+!s100 c=NQ^HbSJHCdd3>bM93l^1
+IbBJB>cMh>M4:4mQbY>PlV3
+R2
+R0
+w1716232406
+8automat_tb.v
+Fautomat_tb.v
+L0 3
+R3
+r1
+!s85 0
+31
+R4
+R5
+R6
+!i113 1
+R7

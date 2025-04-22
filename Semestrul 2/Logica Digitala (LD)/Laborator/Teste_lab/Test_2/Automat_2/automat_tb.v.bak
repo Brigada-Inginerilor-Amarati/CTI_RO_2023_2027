@@ -1,0 +1,46 @@
+`timescale 1ns / 100ps
+
+module automat_tb;
+
+reg clk, rst, sel, rd;
+
+wire [1:0] current_state;
+
+wire [1:0] out;
+
+automat uut( .clk(clk), .rst(rst), .sel(sel), .rd(rd), .current_state(current_state), .out(out) );
+
+initial begin
+	forever #20 clk = ~clk;
+end
+
+initial begin
+	clk = 0;
+	rst = 1;
+	sel = 0;
+	rd = 0;
+	#10 rst = 0;
+
+	#200
+	sel = 1;
+	rd = 0;
+	#40
+	sel = 0;
+	rd = 1;
+	#40
+	sel = 1;
+	rd = 1;
+	#40
+	sel = 0;
+	rd = 1;
+	#40
+	sel = 0;
+	rd = 0;
+	#40
+	sel = 1;
+	rd = 1;
+	#40
+	#300
+	$stop;
+end
+endmodule
