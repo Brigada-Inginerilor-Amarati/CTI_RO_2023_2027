@@ -6,6 +6,24 @@
 ## INFO
 -Materialele din anul curent(anul 2) vor fi urcate mai intai pe Repo-uri separate(se pot gasi pe profil), iar la final de semestru/an si aici
 
+## Baze de date 
+- https://github.com/Daria-1303/Baze-de-date
+
+## Fundamente de inginerie software
+- https://github.com/Daria-1303/Fundamente-de-Inginerie-Software
+
+## Calculatoare numerice
+- https://github.com/Daria-1303/Calculatoare-numerice
+
+## Sisteme de operare
+- https://github.com/Daria-1303/Sisteme-de-operare
+
+## Proiectarea si analiza algoritmilor
+- https://github.com/Daria-1303/Proiectarea-si-analiza-algoritmilor
+
+## Comunicare
+- https://github.com/Daria-1303/Comunicare
+
 ## Electronica Digitala
 - https://github.com/Daria-1303/Electronica-Digitala
 
