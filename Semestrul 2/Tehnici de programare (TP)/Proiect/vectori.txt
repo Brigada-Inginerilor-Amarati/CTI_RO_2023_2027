@@ -1,0 +1,54 @@
+Vectorul cu numere pseudo aleatoare : 
+v[0] = 114223109 
+v[1] = 1129464305 
+v[2] = 2002083502 
+v[3] = 1516697126 
+v[4] = 928206960 
+v[5] = 1665005400 
+v[6] = 1162803139 
+v[7] = 1553322893 
+v[8] = 1461104796 
+v[9] = 923195211 
+
+
+ 
+Vectorul cu numere pseudo aleatoare intre 0 si 100: 
+v[0] = 68 
+v[1] = 23 
+v[2] = 81 
+v[3] = 1 
+v[4] = 29 
+v[5] = 33 
+v[6] = 4 
+v[7] = 39 
+v[8] = 38 
+v[9] = 48 
+
+
+ 
+Vectorul cu numere pseudo aleatoare in ordine crescatoare: 
+v[0] = 996 
+v[1] = 1582 
+v[2] = 2293 
+v[3] = 3141 
+v[4] = 3633 
+v[5] = 3912 
+v[6] = 4872 
+v[7] = 5549 
+v[8] = 6315 
+v[9] = 6913 
+
+
+ 
+Vectorul cu numere pseudo aleatoare in ordine descrescatoare: 
+v[0] = 353 
+v[1] = -522 
+v[2] = -777 
+v[3] = -997 
+v[4] = -1350 
+v[5] = -1566 
+v[6] = -2539 
+v[7] = -3032 
+v[8] = -3493 
+v[9] = -3614 
+
