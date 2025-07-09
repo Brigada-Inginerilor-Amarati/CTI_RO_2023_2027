@@ -1,0 +1,13 @@
+6
+0 1 1 0 0 0
+1 0 1 1 1 0
+1 1 0 0 0 1
+0 1 0 0 0 0
+0 1 0 0 0 0
+0 0 1 0 0 0
+Daria 0 0 Severin
+Anisia 0 1 Severin
+Dan 1 2 Herculane
+Ileana 0 3 Herculane
+Tudor 1 4 Timisoara
+Messi 1 5 Barcelona

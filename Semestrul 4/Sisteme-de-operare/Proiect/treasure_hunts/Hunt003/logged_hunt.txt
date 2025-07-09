@@ -1,0 +1,16 @@
+Added treasure with ID student1 to hunt Hunt003
+Added treasure with ID st to hunt Hunt003
+Treasure with ID st was removed in hunt Hunt003
+Listed all treasures in hunt Hunt003
+Listed all treasures in hunt Hunt003
+Listed all treasures in hunt Hunt003
+Listed all treasures in hunt Hunt003
+Listed all treasures in hunt Hunt003
+Listed all treasures in hunt Hunt003
+Listed all treasures in hunt Hunt003
+Listed all treasures in hunt Hunt003
+Listed all treasures in hunt Hunt003
+Listed all treasures in hunt Hunt003
+Listed all treasures in hunt Hunt003
+Listed all treasures in hunt Hunt003
+Listed all treasures in hunt Hunt003

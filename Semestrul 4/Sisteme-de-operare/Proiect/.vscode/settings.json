@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "string.h": "c",
+        "treasure_manager.h": "c",
+        "signal_handler.h": "c"
+    }
+}

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35913.81 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ArboreBinar", "ArboreBinar.vcxproj", "{5F4C9C13-73AE-46F3-81A3-B50F2C331057}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5F4C9C13-73AE-46F3-81A3-B50F2C331057}.Debug|x64.ActiveCfg = Debug|x64
+		{5F4C9C13-73AE-46F3-81A3-B50F2C331057}.Debug|x64.Build.0 = Debug|x64
+		{5F4C9C13-73AE-46F3-81A3-B50F2C331057}.Debug|x86.ActiveCfg = Debug|Win32
+		{5F4C9C13-73AE-46F3-81A3-B50F2C331057}.Debug|x86.Build.0 = Debug|Win32
+		{5F4C9C13-73AE-46F3-81A3-B50F2C331057}.Release|x64.ActiveCfg = Release|x64
+		{5F4C9C13-73AE-46F3-81A3-B50F2C331057}.Release|x64.Build.0 = Release|x64
+		{5F4C9C13-73AE-46F3-81A3-B50F2C331057}.Release|x86.ActiveCfg = Release|Win32
+		{5F4C9C13-73AE-46F3-81A3-B50F2C331057}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DE13861E-48A9-4583-93C7-638DF6065797}
+	EndGlobalSection
+EndGlobal

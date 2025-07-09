@@ -1,0 +1,1 @@
+calculate_score Hunt001
