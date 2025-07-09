@@ -1,0 +1,9 @@
+Digital is an easy-to-use digital logic designer and circuit simulator designed for educational purposes.
+
+https://github.com/hneemann/Digital
+
+
+
+MIPS & ISA
+
+https://docs.google.com/presentation/d/1J_UxmLEQpdYuUbTGCig6rBeuRzepKPip/edit?slide=id.p4#slide=id.p4
