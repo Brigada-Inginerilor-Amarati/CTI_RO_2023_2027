@@ -1,0 +1,65 @@
+Laborator 3 FIS
+
+	AGILE
+
+-> La fiecare 3/4 saptamani clientul poate veni si sa spuna daca e ok sau nu implementarea a ceea ce a fost
+
+Multe modalitati de a implementa AGILE
+
+-> iteratii de o luna, o saptamana, o zi
+
+
+SCRUM
+
+-> workflow agile ( poate ccel mai popular)
+-> in orice echipa se lucreaza, in principiu, in felul acesta
+
+SPRINT
+-> subset de task pe care vrei sa il indeplinesti intr-un anumit itmp
+-> limitat in timp( de ex 2 sapt) -> si task urile trebuie facute atunci
+-> prioritatea este decisa de product owner
+-> scrum master -> participa la Meeting uri si se asigura ca toata lumea stie ce are de facut, ca nu e nmn blocat, ca presiunea nu ajunge pe developeri -> se asigura ca totul e on track, nu e developer, e tampon intre developeri si client
+
+Ce se intampla daca avem 4/5 task uri complete la final de Sprint?
+-> se muta in urmatorul sprint sau da delay la sprint pana se termina task urile
+SCRUM zice ca iteratia e fixa cu toate feature urile care s-au putut dezvolta pana la momentul respectiv
+-> tot ce e gata se realease uie ce nu e, se amana
+-> burndown chart -> arata cat se lucreaza -> estimarile initiale poate nu s corecte(intervine scrum master daca crede ca e cazul)
+
+ESTIMARI
+-> se pun in niste box uri (2, 4, 8 ? XS, S, M, L -> tot asa)
+
+PRDUCT BACKLOG
+-> lista cu toate feature urile care ar trebui sa fie implementate
+-> se mai sparge si in realease backlog
+
+BACKLOG JIRA
+
+-> as a (si zice aici ce rol are fiecare)
+-> se face cate un backstory pentru fiecare rol care este dorit
+-> story urile au titlul cu as a role i want to actiune
+-> se acopera toate use case urile inclusiv detaliile(orice extensie, tot scenariul principal de succes)
+-> product backlog slide 11
+
+-> daca se da click pe ele-> ne arata proiectul si id-ul "Initiale nume proiect - nr"
+-> se estimeaza story ul afisat (XS, S, M, L)
+-> pe slide sunt 3 tipuri de estimari
+-> story points : se ia cel mai simplu task, i se da un story point, la task ul ala se ia nr din seria Fibonacci si i se asignuieste la asta
+-> poti avea oricate tipuri de estimari, dar nu folositi mai multe
+-> pe baza estimarilor se genereaza burndown chart
+
+-> cel mai imp detaliu slide 12 -> descrierea si impartirea in subtask uri
+-> toate chestiile afisate vor fi sparte mereu in task uri mai mici(cele cu albastru jos) -> frontend/ backend
+-> fiecare din subtask va fi asignat unui developer(assignee), reporter e cel care a facut ticket ul
+-> se poate actualiza
+-> to do, in progress, in review, done (in review -> se uita toata echipa)
+-> se pot pune in jira snippet uri de cod, comentarii, se poate da tag pentru mail, o gramada de tool uri de comunicare, jira, github actions, etc
+-> lucreaza cu git ul -> ne arata cate branch uri are, commit uri , pull request uri
+
+
+Ce este un usecase, actori, relatii de extends, include, cm gasesti usecase si le separi de detalii
+cum legam use cse de jira_. se leaga de titlu ala cu as a nuj ce i want to
+detaliile merg in descrierea 
+un user story nu contine task urile tehnice ci trb sa l spargi in subtaksk urile tehnice si astea sunt asginate unui dev ( poate sa ia si tot user story ul daca e mic)
+
+fiecare rol din echipa, ce e un sprint, ce e daily scrum etc
