@@ -1,0 +1,278 @@
+# Libraries
+import simpy
+import random
+import matplotlib.pyplot as plt
+
+# --- Station class ---------------------------------------------------------
+class Station:
+    def __init__(self, env, name, capacity, init_bikes):
+        self.env = env
+        self.name = name
+        self.capacity = capacity
+        self.bikes = simpy.Container(env, init=init_bikes, capacity=capacity)
+
+# --- Global parameters & counters ------------------------------------------
+MIN_PER_DAY = 1440
+BREAKDOWN_PROB = 0.01
+REPAIR_TIME = 30
+
+# prefer a simple integer with explicit global usage
+current_broken_bike = 0
+bikes_under_repair = []    # list of (time, count) for plotting
+
+# --- Repair process --------------------------------------------------------
+def repair_bike_process(env, from_station, to_station, repair_time):
+    """
+    Repair process: assume this is started when a bike breaks.
+    This increments a global counter while the bike is 'in repair'
+    and then returns the bike to a chosen station (here: `to_station`)
+    after repair_time.
+    """
+    global current_broken_bike
+    current_broken_bike += 1
+    print(f"Time {env.now}: Bike broke between {from_station.name} -> {to_station.name} (under repair)")
+    yield env.timeout(repair_time)
+    # after repair, return bike to the 'to' station if space exists; otherwise return to from_station
+    if to_station.bikes.level < to_station.capacity:
+        yield to_station.bikes.put(1)
+        print(f"Time {env.now}: Repaired bike returned to {to_station.name}")
+    else:
+        # fallback: return to origin if destination full
+        if from_station.bikes.level < from_station.capacity:
+            yield from_station.bikes.put(1)
+            print(f"Time {env.now}: Repaired bike returned to {from_station.name}")
+        else:
+            # both full: drop to a 'maintenance depot' (not modeled) -- we simply increment/decrement counter
+            print(f"Time {env.now}: Repaired bike couldn't be placed (both full).")
+    current_broken_bike -= 1
+
+# --- Bike trip process -----------------------------------------------------
+def bike_trip(env, from_station, to_station, trip_duration, breakdown_prob=BREAKDOWN_PROB, repair_time=REPAIR_TIME):
+    """
+    Attempt to take a bike from from_station, simulate trip, handle breakdowns.
+    If a breakdown occurs, do NOT put the bike into destination immediately;
+    instead schedule a repair process that will return it after repair_time.
+    """
+    # Try to get a bike
+    if from_station.bikes.level <= 0:
+        print(f"Time {env.now}: No bikes at {from_station.name} -> trip cancelled")
+        return
+
+    yield from_station.bikes.get(1)
+    print(f"Time {env.now}: Bike taken from {from_station.name}")
+
+    # trip time
+    yield env.timeout(trip_duration)
+
+    # breakdown check (done once here)
+    if random.random() < breakdown_prob:
+        # schedule repair process; bike is currently 'out' (not available)
+        env.process(repair_bike_process(env, from_station, to_station, repair_time))
+        return
+
+    # normal return
+    if to_station.bikes.level < to_station.capacity:
+        yield to_station.bikes.put(1)
+        print(f"Time {env.now}: Bike returned to {to_station.name}")
+    else:
+        # destination full -> try to return to origin after short wait
+        print(f"Time {env.now}: Destination {to_station.name} full, attempting to return to {from_station.name}")
+        yield env.timeout(trip_duration)  # simulate extra travel/backoff
+        if from_station.bikes.level < from_station.capacity:
+            yield from_station.bikes.put(1)
+            print(f"Time {env.now}: Bike returned to {from_station.name} (fallback)")
+        else:
+            print(f"Time {env.now}: Both stations full -> bike lost (model simplification)")
+
+# --- Trip generation (time-aware) -----------------------------------------
+def generate_trips(env, time_slots_fn, stations):
+    """
+    Continuously generate trips using the time-dependent probability matrix.
+    time_slots_fn(env.now) must return a dict mapping (from_station, to_station) -> probability.
+    """
+    while True:
+        prob_matrix = time_slots_fn(env.now)
+        for (from_s, to_s), prob in prob_matrix.items():
+            # small optimization: skip zero/negative probs
+            if prob <= 0:
+                continue
+            if random.random() < prob:
+                # random trip length for realism
+                trip_duration = random.randint(3, 7)
+                env.process(bike_trip(env, from_s, to_s, trip_duration))
+        yield env.timeout(1)  # check every simulated minute
+
+# --- Monitors ---------------------------------------------------------------
+def monitor_stations(env, stations, bike_levels, sample_interval=1):
+    while True:
+        for station in stations:
+            bike_levels[station.name].append((env.now, station.bikes.level))
+        yield env.timeout(sample_interval)
+
+def monitor_broken_bikes(env, bikes_under_repair_log, sample_interval=1):
+    while True:
+        # snapshot the numeric value (global int)
+        count = int(current_broken_bike)
+        print(f"Time {env.now}: Bikes under repair: {count}")
+        bikes_under_repair_log.append((env.now, count))
+        yield env.timeout(sample_interval)
+
+# --- Rebalancing (percentage-based, simple) -------------------------------
+def rebalance_process(env, stations, check_interval=30, threshold_pct=30, max_move=3):
+    """
+    Simple percentage-based rebalancing:
+      - compute fill% = bikes / capacity * 100
+      - if difference between fullest and emptiest > threshold_pct, move up to `max_move`
+        bikes from the fullest to the emptiest (subject to availability/space).
+    """
+    while True:
+        percents = [(station.bikes.level / station.capacity * 100, station) for station in stations]
+        percents.sort(key=lambda x: x[0])  # lowest first
+        emptiest_pct, emptiest = percents[0]
+        fullest_pct, fullest = percents[-1]
+
+        if (fullest_pct - emptiest_pct) > threshold_pct:
+            # compute feasible move
+            available = int(fullest.bikes.level - max(0, 0.4 * fullest.capacity))  # keep min 40%
+            space = int(emptiest.capacity - emptiest.bikes.level)
+            to_move = min(max_move, max(0, available), max(0, space))
+            if to_move > 0:
+                print(f"Time {env.now}: Rebalancing {to_move} bikes from {fullest.name} ({fullest_pct:.1f}%) -> {emptiest.name} ({emptiest_pct:.1f}%)")
+                for _ in range(to_move):
+                    env.process(bike_trip(env, fullest, emptiest, trip_duration=2, breakdown_prob=0, repair_time=0))
+        yield env.timeout(check_interval)
+
+# --- Plotting helpers ------------------------------------------------------
+def plot_station_levels(bike_levels):
+    plt.figure(figsize=(12,5))
+    for name, series in bike_levels.items():
+        if not series:
+            continue
+        times, counts = zip(*series)
+        times_h = [t/60 for t in times]
+        plt.plot(times_h, counts, label=name, linewidth=1.5)
+    plt.xlabel('Time (hours)')
+    plt.ylabel('Number of bikes')
+    plt.title('Bike levels over time')
+    plt.grid(alpha=0.5)
+    plt.legend(bbox_to_anchor=(1.02,1), loc='upper left')
+    plt.tight_layout()
+    plt.show()
+
+def plot_broken_bikes(bikes_under_repair_log):
+    if not bikes_under_repair_log:
+        print("No data recorded for broken bikes.")
+        return
+    times, counts = zip(*bikes_under_repair_log)
+    times_h = [t/60 for t in times]
+    plt.figure(figsize=(10,3))
+    plt.plot(times_h, counts, '-o', color='red', markersize=3)
+    plt.xlabel('Time (hours)')
+    plt.ylabel('Bikes under repair')
+    plt.title('Bikes under repair over time')
+    plt.grid(alpha=0.4)
+    plt.tight_layout()
+    plt.show()
+
+
+# --- Simulation setup ------------------------------------------------------
+env = simpy.Environment()
+stationOne = Station(env, "Station One", 20, 10)
+stationTwo = Station(env, "Station Two", 15, 5)
+stationThree = Station(env, "Station Three", 25, 10)
+stationFour = Station(env, "Station Four", 30, 15)
+stations = [stationOne, stationTwo, stationThree, stationFour]
+# Time-slot specific probability matrices
+time_slots = [
+    {
+        'name': 'morning_start',
+        'start': 0,
+        'end': 240,
+        'prob_matrix': {
+            (stationOne, stationTwo): 0.4,
+            (stationTwo, stationOne): 0.3,
+            (stationOne, stationThree): 0.2,
+            (stationThree, stationOne): 0.3,
+            (stationTwo, stationThree): 0.25,
+            (stationThree, stationTwo): 0.2,
+            (stationOne, stationFour): 0.3,
+            (stationFour, stationOne): 0.2,
+            (stationTwo, stationFour): 0.2,
+            (stationFour, stationTwo): 0.25,
+            (stationThree, stationFour): 0.3,
+            (stationFour, stationThree): 0.35
+        }
+    },
+    {
+        'name': 'midday',
+        'start': 240,
+        'end': 600,
+        'prob_matrix': {
+            (stationOne, stationTwo): 0.2,
+            (stationTwo, stationOne): 0.25,
+            (stationOne, stationThree): 0.15,
+            (stationThree, stationOne): 0.2,
+            (stationTwo, stationThree): 0.2,
+            (stationThree, stationTwo): 0.15,
+            (stationOne, stationFour): 0.25,
+            (stationFour, stationOne): 0.2,
+            (stationTwo, stationFour): 0.15,
+            (stationFour, stationTwo): 0.2,
+            (stationThree, stationFour): 0.2,
+            (stationFour, stationThree): 0.25
+        }
+    },
+    {
+        'name': 'evening',
+        'start': 720,
+        'end': 960,
+        'prob_matrix': {
+            (stationOne, stationTwo): 0.35,
+            (stationTwo, stationOne): 0.3,
+            (stationOne, stationThree): 0.25,
+            (stationThree, stationOne): 0.3,
+            (stationTwo, stationThree): 0.3,
+            (stationThree, stationTwo): 0.25,
+            (stationOne, stationFour): 0.2,
+            (stationFour, stationOne): 0.35,
+            (stationTwo, stationFour): 0.3,
+            (stationFour, stationTwo): 0.25,
+            (stationThree, stationFour): 0.2,
+            (stationFour, stationThree): 0.3
+        }
+    }
+]
+
+def get_current_prob_matrix(current_time):
+    time_in_day = current_time % MIN_PER_DAY
+    for slot in time_slots:
+        if slot['start'] <= time_in_day < slot['end']:
+            return slot['prob_matrix']
+    # default low probabilities if no slot matches
+    return {
+        (stationOne, stationTwo): 0.1,
+        (stationTwo, stationOne): 0.1,
+        (stationOne, stationThree): 0.1,
+        (stationThree, stationOne): 0.1,
+        (stationTwo, stationThree): 0.1,
+        (stationThree, stationTwo): 0.1,
+        (stationOne, stationFour): 0.1,
+        (stationFour, stationOne): 0.1,
+        (stationTwo, stationFour): 0.1,
+        (stationFour, stationTwo): 0.1,
+        (stationThree, stationFour): 0.1,
+        (stationFour, stationThree): 0.1
+    }
+
+# Data structures for monitoring
+bike_levels = {station.name: [] for station in stations}
+# Start processes
+env.process(generate_trips(env, get_current_prob_matrix, stations))
+env.process(monitor_stations(env, stations, bike_levels))
+env.process(rebalance_process(env, stations))
+env.process(monitor_broken_bikes(env, bikes_under_repair))
+# Run simulation
+env.run(until=(MIN_PER_DAY * 1))  # 1 day
+# Plot results
+plot_station_levels(bike_levels)
+plot_broken_bikes(bikes_under_repair)
