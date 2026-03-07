@@ -1,0 +1,5 @@
+Salut123! Acesta este un TEST... 
+Sa vedem cum functioneaza filtrarea.
+1234567890
+@#$%^&*()
+End of file.

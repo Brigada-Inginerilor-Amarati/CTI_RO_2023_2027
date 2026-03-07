@@ -1,0 +1,5 @@
+This is a test file.
+It contains some random characters like: !@#$%^&*()_+
+And numbers: 1234567890
+New line.
+Another line.
