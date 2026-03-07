@@ -1,0 +1,2 @@
+javac Laborator\Daria\Laborator_10\decorator\*.java
+java Laborator.Daria.Laborator_10.decorator.Main
