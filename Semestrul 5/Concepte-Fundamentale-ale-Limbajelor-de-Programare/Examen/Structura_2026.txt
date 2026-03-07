@@ -1,0 +1,37 @@
+Fcpl exam
+1.Piece of code
+
+2.client server model
+How threads work
+
+3.write an AST
+Writing semantical action on grammar
+Write translate code from high level instruction to low level instruction 
+Generate post condition , weakest pre condition
+
+4.diffrence btw translation compilation
+Know all phases of compilation(small piece of code)
+
+5.code, ask what the value of a variable
+
+6.code, compute the values of variables + mechanism is known
+
+7.C, java, C#, C++, Python, Js - data types
+Create data structures
+
+8.c, python - typing system 
+
+9.
+
+10.the concepts and how to implement them -OOP
+
+11.C# and js - Oop
+
+12.how to trigger an exception 
+
+13.reduction of expression, Boolean Expression compute logical value
+
+14.write comprehension, memory efficient, paranthesis 
+
+From C# - link features from C#
+code for a design pattern

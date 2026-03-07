@@ -1,0 +1,21 @@
+ID,Make,Model,Year,Price,Mileage,FuelType
+1,Toyota,Corolla,2015,12000,75000,Petrol
+2,Honda,Civic,2018,18000,50000,Petrol
+3,Ford,Focus,2012,8500,95000,Diesel
+4,Tesla,Model 3,2020,35000,10000,Electric
+5,BMW,3 Series,2016,24000,60000,Diesel
+6,Chevrolet,Malibu,2017,15000,70000,Petrol
+7,Nissan,Leaf,2019,17000,30000,Electric
+8,Audi,A4,2014,20000,80000,Diesel
+9,Kia,Soul,2013,9000,85000,Petrol
+10,Volkswagen,Golf,2018,19000,40000,Diesel
+11,Hyundai,Elantra,2016,14000,65000,Petrol
+12,Ford,Fusion,2015,13000,72000,Hybrid
+13,Subaru,Impreza,2017,16000,55000,Petrol
+14,Mercedes-Benz,C-Class,2019,32000,20000,Diesel
+15,Toyota,Prius,2020,27000,15000,Hybrid
+16,Chevrolet,Bolt,2021,31000,8000,Electric
+17,Volkswagen,Passat,2016,18000,61000,Diesel
+18,Honda,Accord,2018,22000,47000,Petrol
+19,Nissan,Altima,2014,12500,81000,Petrol
+20,Tesla,Model S,2021,85000,5000,Electric

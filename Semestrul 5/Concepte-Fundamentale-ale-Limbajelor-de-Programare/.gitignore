@@ -1,0 +1,12 @@
+# IDE
+.vs
+.idea
+.vscode
+
+# Build
+bin/
+obj/
+
+# OS
+.DS_Store
+.config

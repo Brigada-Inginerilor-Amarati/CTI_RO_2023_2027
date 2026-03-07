@@ -1,0 +1,5 @@
+enum AccountType
+{
+    Person,
+    Business,
+}
